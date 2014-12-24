@@ -6,9 +6,9 @@ namespace code_watchdog
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine ("Hello World!");
-
             Watchdog wd = new Watchdog();
+
+            // TODO: Check if arg is present
 
             wd.Check(args[0]);
 
