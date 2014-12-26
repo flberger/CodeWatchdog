@@ -13,6 +13,7 @@ namespace code_watchdog
         char START_BLOCK_DELIMITER = char.Parse("{");
         char END_BLOCK_DELIMITER = char.Parse("}");
         List<char> STRING_DELIMITERS = new List<char>() {char.Parse("\"")};
+        char STRING_ESCAPE = char.Parse("\\");
 
         public void Check(string filepath)
         {
@@ -22,10 +23,14 @@ namespace code_watchdog
 
             bool stringRunning = false;
 
+            Nullable<char> previousChar = null;
+
             int character = sr.Read();
 
             while (character != -1)
             {
+                //Console.WriteLine(string.Format("Parsing char '{0}'", (char)character));
+
                 if ((char)character == STATEMENT_DELIMTER && !stringRunning)
                 {
                     Console.WriteLine(string.Format("Found statement: '{0}'", sb));
@@ -54,26 +59,33 @@ namespace code_watchdog
                 }
                 else if (STRING_DELIMITERS.Contains((char)character))
                 {
-                    Console.WriteLine(string.Format("Found string delimiter: '{0}'", (char)character));
-
                     if (!stringRunning)
                     {
-                        Console.WriteLine(string.Format("Starting string"));
+                        Console.WriteLine(string.Format("Starting string with: '{0}'", (char)character));
 
                         stringRunning = true;
                     }
-                    else
+                    else if (previousChar != STRING_ESCAPE)
                     {
-                        Console.WriteLine(string.Format("Ending string: '{0}'", sb));
+                        Console.WriteLine(string.Format("Ending string: with: '{0}'", (char)character));
 
                         stringRunning = false;
-
-                        sb.Clear();
                     }
+
+                    sb.Append((char)character);
                 }
                 else
                 {
                     sb.Append((char)character);
+                }
+
+                if ((char)character == STRING_ESCAPE && previousChar == STRING_ESCAPE)
+                {
+                    previousChar = null;
+                }
+                else
+                {
+                    previousChar = (char)character;
                 }
 
                 character = sr.Read();
