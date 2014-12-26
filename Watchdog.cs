@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 
-namespace code_watchdog
+namespace CodeWatchdog
 {
     public class Watchdog
     {
@@ -14,6 +14,12 @@ namespace code_watchdog
         char END_BLOCK_DELIMITER = char.Parse("}");
         List<char> STRING_DELIMITERS = new List<char>() {char.Parse("\"")};
         char STRING_ESCAPE = char.Parse("\\");
+
+        // TODO: PascalCase for identifiers
+
+        // TODO: camelCase for parameters
+
+        // TODO: No underscore, hyphens etc. in identifiers
 
         public void Check(string filepath)
         {

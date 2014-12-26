@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "code_watchdog", "code_watchdog.csproj", "{F57AA012-A5E6-485C-8D3D-D0313DBE79E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWatchdog", "CodeWatchdog.csproj", "{F57AA012-A5E6-485C-8D3D-D0313DBE79E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,7 +15,7 @@ Global
 		{F57AA012-A5E6-485C-8D3D-D0313DBE79E7}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = code_watchdog.csproj
+		StartupItem = CodeWatchdog.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
 		$1.inheritsSet = null

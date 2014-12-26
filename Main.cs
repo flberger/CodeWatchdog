@@ -1,6 +1,6 @@
 using System;
 
-namespace code_watchdog
+namespace CodeWatchdog
 {
     class MainClass
     {

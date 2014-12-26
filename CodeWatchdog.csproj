@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F57AA012-A5E6-485C-8D3D-D0313DBE79E7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>code_watchdog</RootNamespace>
-    <AssemblyName>code_watchdog</AssemblyName>
+    <RootNamespace>CodeWatchdog</RootNamespace>
+    <AssemblyName>CodeWatchdog</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
