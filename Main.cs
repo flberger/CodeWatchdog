@@ -33,11 +33,13 @@ namespace CodeWatchdog
     {
         public static void Main(string[] args)
         {
-            Watchdog wd = new Watchdog();
+            CSharpWatchdog cswd = new CSharpWatchdog();
+            
+            cswd.Init();
 
             // TODO: Check if arg is present
 
-            wd.Check(args[0]);
+            cswd.Check(args[0]);
 
             return;
         }

@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="Watchdog.cs" />
+    <Compile Include="CSharpWatchdog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
