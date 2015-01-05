@@ -71,6 +71,11 @@ namespace CodeWatchdog
             
             // TODO: Use var for common types and new statements.
             
+            if (statement.Contains("\t"))
+            {
+                throw new Woff("Using tabs for indentation");
+            }
+            
             return;
         }
     }

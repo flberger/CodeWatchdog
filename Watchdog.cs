@@ -127,4 +127,13 @@ namespace CodeWatchdog
             return;
         }
     }
+    
+    // TODO: Remove exceptions because of possible external code
+    //
+    public class Woff: System.Exception
+    {
+        public Woff(string message): base(message)
+        {
+        }
+    }
 }
