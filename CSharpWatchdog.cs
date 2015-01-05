@@ -32,13 +32,6 @@ namespace CodeWatchdog
 {
     public class CSharpWatchdog: Watchdog
     {
-        // TODO: PascalCase for identifiers
-        // TODO: camelCase for parameters
-        // TODO: No underscore, hyphens etc. in identifiers
-        
-        // TODO: 4-character indents
-        // TODO: No tabs
-        // TODO: One statement per line
         // TODO: Parentheses for if, while, foreach, for
         
         // TODO: Comments on separate line, not at the end of a line
@@ -46,8 +39,6 @@ namespace CodeWatchdog
         // TODO: End comment with a period.
         // TODO: One space between comment delimiter and text
         
-        // TODO: Use var for common types and new statements.
-        // TODO: Identifiers should not contain common types.
         // TODO: Use implicit typing with var in for, foreach
         
         // TODO: Prefer 'using' to 'try ... finally' for cleanups
@@ -63,6 +54,24 @@ namespace CodeWatchdog
             END_BLOCK_DELIMITER = char.Parse("}");
             STRING_DELIMITERS = new List<char>() {char.Parse("\"")};
             STRING_ESCAPE = char.Parse("\\");
+            
+            StatementHandler += CheckStatement;
+        }
+        
+        void CheckStatement(string statement)
+        {
+            // TODO: PascalCase for identifiers
+            // TODO: camelCase for parameters
+            // TODO: No underscore, hyphens etc. in identifiers
+            // TODO: Identifiers should not contain common types.
+            
+            // TODO: 4-character indents
+            // TODO: No tabs
+            // TODO: One statement per line
+            
+            // TODO: Use var for common types and new statements.
+            
+            return;
         }
     }
 }

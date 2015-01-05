@@ -34,11 +34,17 @@ namespace CodeWatchdog
 {
     public class Watchdog
     {
+        // TODO: Check for and handle comments
+        
         protected char STATEMENT_DELIMTER;
         protected char START_BLOCK_DELIMITER;
         protected char END_BLOCK_DELIMITER;
         protected List<char> STRING_DELIMITERS;
         protected char STRING_ESCAPE;
+        
+        protected delegate void FragementHandler(string statement);
+        
+        protected FragementHandler StatementHandler;
 
         public void Check(string filepath)
         {
@@ -60,7 +66,7 @@ namespace CodeWatchdog
                 {
                     Console.WriteLine(string.Format("Found statement: '{0}'", sb));
 
-                    // TODO: Run statement checks
+                    StatementHandler(sb.ToString());
 
                     sb.Clear();
                 }
