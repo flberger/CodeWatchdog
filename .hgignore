@@ -1,0 +1,5 @@
+syntax: glob
+
+./bin
+./AssemblyInfo.cs
+./CodeWatchdog.userprefs
