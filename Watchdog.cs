@@ -37,6 +37,7 @@ namespace CodeWatchdog
 {
     /// <summary>
     /// The abstract logic for parsing code files and calling handlers for code fragments.
+    /// A new Watchdog instance is expected to be created for parsing a project.
     /// </summary>
     public class Watchdog
     {
@@ -50,7 +51,35 @@ namespace CodeWatchdog
         
         protected delegate void FragementHandler(string statement);
         
+        /// <summary>
+        /// Called when a statement is encountered.
+        /// Add callbacks for statement handling here.
+        /// </summary>
         protected FragementHandler StatementHandler;
+        
+        /// <summary>
+        /// Translate error codes to human readable complaints.
+        /// This is meant to be filled by subclasses implementing specific parsers.
+        /// </summary>
+        protected Dictionary<int, string> ErrorCodeStrings;
+        
+        // Variables for processing a project
+        //
+        protected int CheckedLinesOfCode;
+        protected Dictionary<int, int> ErrorCodeCount;
+        
+        /// <summary>
+        /// Initialise this CodeWatchdog instance.
+        /// Call this before parsing a new project.
+        /// </summary>
+        public void Init()
+        {
+            CheckedLinesOfCode = 0;
+            
+            ErrorCodeCount = new Dictionary<int, int>();
+            
+            return;
+        }
 
         /// <summary>
         /// Check a single source code file.

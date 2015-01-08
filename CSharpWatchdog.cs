@@ -35,6 +35,10 @@ namespace CodeWatchdog
     /// </summary>
     public class CSharpWatchdog: Watchdog
     {
+        // Error code variables, for reading convenience
+        //
+        const int TAB_ERROR = 0; 
+        
         // TODO: Parentheses for if, while, foreach, for
         
         // TODO: Comments on separate line, not at the end of a line
@@ -53,13 +57,17 @@ namespace CodeWatchdog
         /// <summary>
         /// Initialise the underlying Watchdog for C#.
         /// </summary>
-        public void Init()
+        public override void Init()
         {
+            base.Init();
+            
             STATEMENT_DELIMTER = char.Parse(";");
             START_BLOCK_DELIMITER = char.Parse("{");
             END_BLOCK_DELIMITER = char.Parse("}");
             STRING_DELIMITERS = new List<char>() {char.Parse("\"")};
             STRING_ESCAPE = char.Parse("\\");
+            
+            ErrorCodeStrings[TAB_ERROR] = "Tabs instead of spaces used for indentation";
             
             StatementHandler += CheckStatement;
         }
