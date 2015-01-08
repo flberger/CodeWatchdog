@@ -30,8 +30,14 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 
+/// <summary>
+/// A coding convention compliance checker written in C#.
+// </summary>
 namespace CodeWatchdog
 {
+    /// <summary>
+    /// The abstract logic for parsing code files and calling handlers for code fragments.
+    /// </summary>
     public class Watchdog
     {
         // TODO: Check for and handle comments
@@ -46,6 +52,10 @@ namespace CodeWatchdog
         
         protected FragementHandler StatementHandler;
 
+        /// <summary>
+        /// Check a single source code file.
+        /// </summary>
+        /// <param name="filepath">The path to the file.</param>
         public void Check(string filepath)
         {
             StreamReader sr = new StreamReader(filepath, true);
@@ -130,6 +140,9 @@ namespace CodeWatchdog
     
     // TODO: Remove exceptions because of possible external code
     //
+    /// <summary>
+    /// The CodeWatchdog exception.
+    /// </summary>
     public class Woff: System.Exception
     {
         public Woff(string message): base(message)

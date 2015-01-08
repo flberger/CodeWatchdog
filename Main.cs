@@ -29,8 +29,14 @@ using System;
 
 namespace CodeWatchdog
 {
+    /// <summary>
+    /// Test class for command line testing.
+    /// </summary>
     class MainClass
     {
+        /// <summary>
+        /// Instantiate a CSharpWatchdog, and use it to check a single file provided on the command line.
+        /// </summary>
         public static void Main(string[] args)
         {
             CSharpWatchdog cswd = new CSharpWatchdog();

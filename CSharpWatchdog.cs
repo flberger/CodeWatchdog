@@ -30,6 +30,9 @@ using System.Collections.Generic;
 
 namespace CodeWatchdog
 {
+    /// <summary>
+    /// A Watchdog implementation for C#.
+    /// </summary>
     public class CSharpWatchdog: Watchdog
     {
         // TODO: Parentheses for if, while, foreach, for
@@ -47,6 +50,9 @@ namespace CodeWatchdog
         // TODO: /// comment methods
         // TODO: /// comment public members
         
+        /// <summary>
+        /// Initialise the underlying Watchdog for C#.
+        /// </summary>
         public void Init()
         {
             STATEMENT_DELIMTER = char.Parse(";");
@@ -58,6 +64,10 @@ namespace CodeWatchdog
             StatementHandler += CheckStatement;
         }
         
+        /// <summary>
+        /// Check a single statement.
+        /// </summary>
+        /// <param name="statement">A string containing a statement, possibly multi-line.</param>
         void CheckStatement(string statement)
         {
             // TODO: PascalCase for identifiers
