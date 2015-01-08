@@ -67,6 +67,8 @@ namespace CodeWatchdog
             STRING_DELIMITERS = new List<char>() {char.Parse("\"")};
             STRING_ESCAPE = char.Parse("\\");
             
+            ErrorCodeStrings = new Dictionary<int, string>();
+            
             ErrorCodeStrings[TAB_ERROR] = "Tabs instead of spaces used for indentation";
             
             StatementHandler += CheckStatement;
@@ -91,7 +93,16 @@ namespace CodeWatchdog
             
             if (statement.Contains("\t"))
             {
-                throw new Woff("Using tabs for indentation");
+                if (ErrorCodeCount.ContainsKey(TAB_ERROR))
+                {
+                    ErrorCodeCount[TAB_ERROR] += 1;
+                }
+                else
+                {
+                    ErrorCodeCount[TAB_ERROR] = 1;
+                }
+                
+                Woff("ERROR: " + ErrorCodeStrings[TAB_ERROR]);
             }
             
             return;

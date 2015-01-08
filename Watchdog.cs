@@ -49,13 +49,19 @@ namespace CodeWatchdog
         protected List<char> STRING_DELIMITERS;
         protected char STRING_ESCAPE;
         
-        protected delegate void FragementHandler(string statement);
+        public delegate void StringHandler(string input);
         
         /// <summary>
         /// Called when a statement is encountered.
         /// Add callbacks for statement handling here.
         /// </summary>
-        protected FragementHandler StatementHandler;
+        protected StringHandler StatementHandler;
+        
+        /// <summary>
+        /// Called when an error is to be output for human consideration.
+        /// Add callbacks with implementations suiting your environment.
+        /// </summary>
+        public StringHandler Woff;
         
         /// <summary>
         /// Translate error codes to human readable complaints.
@@ -72,7 +78,7 @@ namespace CodeWatchdog
         /// Initialise this CodeWatchdog instance.
         /// Call this before parsing a new project.
         /// </summary>
-        public void Init()
+        public virtual void Init()
         {
             CheckedLinesOfCode = 0;
             
@@ -164,18 +170,6 @@ namespace CodeWatchdog
             sr.Close();
 
             return;
-        }
-    }
-    
-    // TODO: Remove exceptions because of possible external code
-    //
-    /// <summary>
-    /// The CodeWatchdog exception.
-    /// </summary>
-    public class Woff: System.Exception
-    {
-        public Woff(string message): base(message)
-        {
         }
     }
 }

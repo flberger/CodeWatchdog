@@ -42,11 +42,20 @@ namespace CodeWatchdog
             CSharpWatchdog cswd = new CSharpWatchdog();
             
             cswd.Init();
+            
+            cswd.Woff += PrintError;
 
             // TODO: Check if arg is present
 
             cswd.Check(args[0]);
 
+            return;
+        }
+        
+        static void PrintError(string error)
+        {
+            Console.WriteLine(error);
+            
             return;
         }
     }
