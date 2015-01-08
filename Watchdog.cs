@@ -32,7 +32,7 @@ using System.Collections.Generic;
 
 /// <summary>
 /// A coding convention compliance checker written in C#.
-// </summary>
+/// </summary>
 namespace CodeWatchdog
 {
     /// <summary>
@@ -55,7 +55,13 @@ namespace CodeWatchdog
         /// Called when a statement is encountered.
         /// Add callbacks for statement handling here.
         /// </summary>
-        protected StringHandler StatementHandler;
+        protected StringHandler StatementHandler;        
+        
+        /// <summary>
+        /// Called when the beginning of a bloc ins encountered.
+        /// Add callbacks for start block handling here.
+        /// </summary>
+        protected StringHandler StartBlockHandler;
         
         /// <summary>
         /// Called when an error is to be output for human consideration.
@@ -126,7 +132,7 @@ namespace CodeWatchdog
                 {
                     //Console.WriteLine(string.Format("Found start block: '{0}'", sb));
 
-                    // TODO: Run start block checks on buffer
+                    StartBlockHandler(sb.ToString());
 
                     // TODO: Set active block to block type (stack)
 
