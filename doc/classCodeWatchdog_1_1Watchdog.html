@@ -91,6 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classCodeWatchdog_1_1Watchdog-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">CodeWatchdog.Watchdog Class Reference</div>  </div>
@@ -112,6 +113,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab1a93ea043b9cf199f706ce1bf7c2422"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#ab1a93ea043b9cf199f706ce1bf7c2422">Check</a> (string filepath)</td></tr>
 <tr class="memdesc:ab1a93ea043b9cf199f706ce1bf7c2422"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check a single source code file.  <a href="#ab1a93ea043b9cf199f706ce1bf7c2422">More...</a><br /></td></tr>
 <tr class="separator:ab1a93ea043b9cf199f706ce1bf7c2422"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13d24a8c3c02bcbfab31e55094a611bd"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a13d24a8c3c02bcbfab31e55094a611bd">Summary</a> ()</td></tr>
+<tr class="memdesc:a13d24a8c3c02bcbfab31e55094a611bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a human-readable summary of all <a class="el" href="classCodeWatchdog_1_1Watchdog.html#ab1a93ea043b9cf199f706ce1bf7c2422" title="Check a single source code file. ">Watchdog.Check()</a> runs done so far.  <a href="#a13d24a8c3c02bcbfab31e55094a611bd">More...</a><br /></td></tr>
+<tr class="separator:a13d24a8c3c02bcbfab31e55094a611bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -141,6 +145,11 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a0462fb7f82bd68d7f2d65909d4098bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ebe357967ff8b888f81eaf1714f5e7f"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; int, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a9ebe357967ff8b888f81eaf1714f5e7f">ErrorCodeCount</a></td></tr>
 <tr class="separator:a9ebe357967ff8b888f81eaf1714f5e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a06b6dc62d1e82c974aa4186d8743e702"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a06b6dc62d1e82c974aa4186d8743e702">MaxCodeScore</a> = 10.0</td></tr>
+<tr class="separator:a06b6dc62d1e82c974aa4186d8743e702"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The abstract logic for parsing code files and calling handlers for code fragments. A new <a class="el" href="classCodeWatchdog_1_1Watchdog.html" title="The abstract logic for parsing code files and calling handlers for code fragments. A new Watchdog instance is expected to be created for parsing a project. ">Watchdog</a> instance is expected to be created for parsing a project. </p>
@@ -217,6 +226,31 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a13d24a8c3c02bcbfab31e55094a611bd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string CodeWatchdog.Watchdog.Summary </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a human-readable summary of all <a class="el" href="classCodeWatchdog_1_1Watchdog.html#ab1a93ea043b9cf199f706ce1bf7c2422" title="Check a single source code file. ">Watchdog.Check()</a> runs done so far. </p>
 
 </div>
 </div>
@@ -300,6 +334,26 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Translate error codes to human readable complaints. This is meant to be filled by subclasses implementing specific parsers. </p>
+
+</div>
+</div>
+<a class="anchor" id="a06b6dc62d1e82c974aa4186d8743e702"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double CodeWatchdog.Watchdog.MaxCodeScore = 10.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -425,7 +479,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 8 2015 15:15:13 for CodeWatchdog by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jan 8 2015 15:57:59 for CodeWatchdog by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
