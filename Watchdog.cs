@@ -86,6 +86,8 @@ namespace CodeWatchdog
             
             return;
         }
+        
+        const double MaxCodeScore = 10.0;
 
         /// <summary>
         /// Check a single source code file.
@@ -106,10 +108,15 @@ namespace CodeWatchdog
             while (character != -1)
             {
                 //Console.WriteLine(string.Format("Parsing char '{0}'", (char)character));
+                
+                if ((char)character == '\n')
+                {
+                    CheckedLinesOfCode += 1;
+                }
 
                 if ((char)character == STATEMENT_DELIMTER && !stringRunning)
                 {
-                    Console.WriteLine(string.Format("Found statement: '{0}'", sb));
+                    //Console.WriteLine(string.Format("Found statement: '{0}'", sb));
 
                     StatementHandler(sb.ToString());
 
@@ -117,7 +124,7 @@ namespace CodeWatchdog
                 }
                 else if ((char)character == START_BLOCK_DELIMITER && !stringRunning)
                 {
-                    Console.WriteLine(string.Format("Found start block: '{0}'", sb));
+                    //Console.WriteLine(string.Format("Found start block: '{0}'", sb));
 
                     // TODO: Run start block checks on buffer
 
@@ -127,7 +134,7 @@ namespace CodeWatchdog
                 }
                 else if ((char)character == END_BLOCK_DELIMITER && !stringRunning)
                 {
-                    Console.WriteLine(string.Format("Ending block"));
+                    //Console.WriteLine(string.Format("Ending block"));
 
                     // TODO: Run end block checks
 
@@ -137,13 +144,13 @@ namespace CodeWatchdog
                 {
                     if (!stringRunning)
                     {
-                        Console.WriteLine(string.Format("Starting string with: '{0}'", (char)character));
+                        //Console.WriteLine(string.Format("Starting string with: '{0}'", (char)character));
 
                         stringRunning = true;
                     }
                     else if (previousChar != STRING_ESCAPE)
                     {
-                        Console.WriteLine(string.Format("Ending string: with: '{0}'", (char)character));
+                        //Console.WriteLine(string.Format("Ending string: with: '{0}'", (char)character));
 
                         stringRunning = false;
                     }
@@ -170,6 +177,35 @@ namespace CodeWatchdog
             sr.Close();
 
             return;
+        }
+        
+        /// <summary>
+        /// Return a human-readable summary of all Watchdog.Check() runs done so far.
+        /// </summary>
+        public string Summary()
+        {
+            // Using Markdown
+            //
+            StringBuilder summary = new StringBuilder("\nSUMMARY\n=======\n\n");
+            
+            summary.AppendLine(string.Format("Checked {0} line(s) of code.", CheckedLinesOfCode));
+            
+            int count = 0;
+            
+            foreach (int errorcount in ErrorCodeCount.Values)
+            {
+                count += errorcount;
+            }
+            
+            summary.AppendLine(string.Format("Found {0} error(s).", count));
+
+            // TODO: Add a nice table reporting the error types, sorted by frequency.
+
+            double score = MaxCodeScore - (((double)count / (double)CheckedLinesOfCode) * MaxCodeScore);
+
+            summary.AppendLine(string.Format("Your code is rated {0:0.##} / {1:0.##}.", score, MaxCodeScore));
+            
+            return summary.ToString();
         }
     }
 }

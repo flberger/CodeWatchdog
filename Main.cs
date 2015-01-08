@@ -48,6 +48,8 @@ namespace CodeWatchdog
             // TODO: Check if arg is present
 
             cswd.Check(args[0]);
+            
+            Console.Write(cswd.Summary());
 
             return;
         }
