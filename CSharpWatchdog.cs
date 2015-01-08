@@ -66,6 +66,8 @@ namespace CodeWatchdog
             END_BLOCK_DELIMITER = char.Parse("}");
             STRING_DELIMITERS = new List<char>() {char.Parse("\"")};
             STRING_ESCAPE = char.Parse("\\");
+            START_COMMENT_DELIMITER = "//";
+            END_COMMENT_DELIMITER = "\n";
             
             ErrorCodeStrings = new Dictionary<int, string>();
             

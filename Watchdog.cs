@@ -43,11 +43,15 @@ namespace CodeWatchdog
     {
         // TODO: Check for and handle comments
         
+        const bool Debug = true;
+        
         protected char STATEMENT_DELIMTER;
         protected char START_BLOCK_DELIMITER;
         protected char END_BLOCK_DELIMITER;
         protected List<char> STRING_DELIMITERS;
         protected char STRING_ESCAPE;
+        protected string START_COMMENT_DELIMITER;
+        protected string END_COMMENT_DELIMITER;
         
         public delegate void StringHandler(string input);
         
@@ -113,7 +117,7 @@ namespace CodeWatchdog
 
             while (character != -1)
             {
-                //Console.WriteLine(string.Format("Parsing char '{0}'", (char)character));
+                //DebugLog(string.Format("Parsing char '{0}'", (char)character));
                 
                 if ((char)character == '\n')
                 {
@@ -122,17 +126,23 @@ namespace CodeWatchdog
 
                 if ((char)character == STATEMENT_DELIMTER && !stringRunning)
                 {
-                    //Console.WriteLine(string.Format("Found statement: '{0}'", sb));
+                    DebugLog(string.Format("Found statement: '{0}'", sb));
 
-                    StatementHandler(sb.ToString());
-
+                    if (StatementHandler != null)
+                    {
+                        StatementHandler(sb.ToString());
+                    }
+ 
                     sb.Clear();
                 }
                 else if ((char)character == START_BLOCK_DELIMITER && !stringRunning)
                 {
-                    //Console.WriteLine(string.Format("Found start block: '{0}'", sb));
+                    DebugLog(string.Format("Found start block: '{0}'", sb));
 
-                    StartBlockHandler(sb.ToString());
+                    if (StartBlockHandler != null)
+                    {
+                        StartBlockHandler(sb.ToString());
+                    }
 
                     // TODO: Set active block to block type (stack)
 
@@ -140,7 +150,7 @@ namespace CodeWatchdog
                 }
                 else if ((char)character == END_BLOCK_DELIMITER && !stringRunning)
                 {
-                    //Console.WriteLine(string.Format("Ending block"));
+                    DebugLog(string.Format("Ending block"));
 
                     // TODO: Run end block checks
 
@@ -150,13 +160,13 @@ namespace CodeWatchdog
                 {
                     if (!stringRunning)
                     {
-                        //Console.WriteLine(string.Format("Starting string with: '{0}'", (char)character));
+                        //DebugLog(string.Format("Starting string with: '{0}'", (char)character));
 
                         stringRunning = true;
                     }
                     else if (previousChar != STRING_ESCAPE)
                     {
-                        //Console.WriteLine(string.Format("Ending string: with: '{0}'", (char)character));
+                        //DebugLog(string.Format("Ending string: with: '{0}'", (char)character));
 
                         stringRunning = false;
                     }
@@ -207,11 +217,23 @@ namespace CodeWatchdog
 
             // TODO: Add a nice table reporting the error types, sorted by frequency.
 
+            // TODO: Use a fancy rating function, in which little errors quickly provide a bad score
+            //
             double score = MaxCodeScore - (((double)count / (double)CheckedLinesOfCode) * MaxCodeScore);
 
             summary.AppendLine(string.Format("Your code is rated {0:0.##} / {1:0.##}.", score, MaxCodeScore));
             
             return summary.ToString();
+        }
+        
+        void DebugLog(string message)
+        {
+            if (Debug)
+            {
+                Console.WriteLine(message);
+                
+                return;
+            }
         }
     }
 }

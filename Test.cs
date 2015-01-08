@@ -12,4 +12,17 @@ public class Test
             Console.Writeline("42");
         }
     }
+
+    /// <summary>
+    /// Test
+    /// </summary>
+    public void AnotherTest()
+//  {
+    {
+        // Console.Writeline("Commented");
+
+        i += 1; // Comment on statement line
+
+        return;
+    }
 }
