@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['woff',['Woff',['../classCodeWatchdog_1_1Woff.html#a9d7268763c5f7cfc1a3ae374c14132a1',1,'CodeWatchdog::Woff']]]
+  ['stringhandler',['StringHandler',['../classCodeWatchdog_1_1Watchdog.html#a719ed0790ed76b75c2f0972babc0bf03',1,'CodeWatchdog::Watchdog']]]
 ];

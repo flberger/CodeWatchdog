@@ -7,12 +7,12 @@
 
 var indexSectionsWithContent =
 {
-  0: "cefimsw",
+  0: "ceimpstw",
   1: "cmw",
   2: "c",
   3: "cmw",
-  4: "cfimw",
-  5: "es"
+  4: "cimps",
+  5: "cestw"
 };
 
 var indexSectionNames =

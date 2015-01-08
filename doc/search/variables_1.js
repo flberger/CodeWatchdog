@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['start_5fblock_5fdelimiter',['START_BLOCK_DELIMITER',['../classCodeWatchdog_1_1Watchdog.html#a198299001e0f0a6311452a1be621e81e',1,'CodeWatchdog::Watchdog']]],
-  ['statement_5fdelimter',['STATEMENT_DELIMTER',['../classCodeWatchdog_1_1Watchdog.html#a6b5f06dc5432ef40225f9c7314c5b3d8',1,'CodeWatchdog::Watchdog']]],
-  ['statementhandler',['StatementHandler',['../classCodeWatchdog_1_1Watchdog.html#aacf19273a778e7523863d20c447778c9',1,'CodeWatchdog::Watchdog']]],
-  ['string_5fdelimiters',['STRING_DELIMITERS',['../classCodeWatchdog_1_1Watchdog.html#a9dd60928df622c93b7146960fccc9cc9',1,'CodeWatchdog::Watchdog']]],
-  ['string_5fescape',['STRING_ESCAPE',['../classCodeWatchdog_1_1Watchdog.html#a4abc09305e868e22552eebe87a258530',1,'CodeWatchdog::Watchdog']]]
+  ['end_5fblock_5fdelimiter',['END_BLOCK_DELIMITER',['../classCodeWatchdog_1_1Watchdog.html#aa98543f2d2333f32be8195078ea8bc21',1,'CodeWatchdog::Watchdog']]],
+  ['errorcodecount',['ErrorCodeCount',['../classCodeWatchdog_1_1Watchdog.html#a9ebe357967ff8b888f81eaf1714f5e7f',1,'CodeWatchdog::Watchdog']]],
+  ['errorcodestrings',['ErrorCodeStrings',['../classCodeWatchdog_1_1Watchdog.html#a9a371a409b9314d567406fb089ed5edf',1,'CodeWatchdog::Watchdog']]]
 ];
