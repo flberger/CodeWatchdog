@@ -9,7 +9,7 @@ public class Test
     {
         if (i == j)
         {
-            Console.Writeline("42");
+            Console.WriteLine("42");
         }
     }
 

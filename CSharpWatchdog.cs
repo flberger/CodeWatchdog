@@ -107,7 +107,7 @@ namespace CodeWatchdog
                 // TODO: The line report is inaccurate, as several lines may have passed.
                 // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
                 //
-                Woff(string.Format("ERROR: {0} (line {1})", ErrorCodeStrings[TAB_ERROR], CheckedLinesOfCode + 1));
+                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[TAB_ERROR], CheckedLinesOfCode + 1));
             }
             
             return;

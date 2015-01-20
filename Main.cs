@@ -56,7 +56,7 @@ namespace CodeWatchdog
         
         static void PrintError(string error)
         {
-            Console.WriteLine(error);
+            Logging.Error(error);
             
             return;
         }
