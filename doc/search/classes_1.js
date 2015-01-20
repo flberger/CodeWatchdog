@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mainclass',['MainClass',['../classCodeWatchdog_1_1MainClass.html',1,'CodeWatchdog']]]
+  ['logging',['Logging',['../classCodeWatchdog_1_1Logging.html',1,'CodeWatchdog']]]
 ];

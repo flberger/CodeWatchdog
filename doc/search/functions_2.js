@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main',['Main',['../classCodeWatchdog_1_1MainClass.html#ae259a6e8ebeb69f6833e1ef8c0fc392f',1,'CodeWatchdog::MainClass']]]
+  ['error',['Error',['../classCodeWatchdog_1_1Logging.html#a291a1447f8a8fe0d45060c00f808e7ca',1,'CodeWatchdog::Logging']]]
 ];

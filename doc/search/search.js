@@ -7,12 +7,12 @@
 
 var indexSectionsWithContent =
 {
-  0: "ceimpstw",
-  1: "cmw",
+  0: "cdeilmpstw",
+  1: "clmw",
   2: "c",
-  3: "cmw",
-  4: "cimps",
-  5: "cemstw"
+  3: "clmw",
+  4: "cdeimps",
+  5: "cdemstw"
 };
 
 var indexSectionNames =

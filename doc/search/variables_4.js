@@ -1,4 +1,10 @@
 var searchData=
 [
-  ['tab_5ferror',['TAB_ERROR',['../classCodeWatchdog_1_1CSharpWatchdog.html#a9840c34f601860bc2650b1bb2af90d35',1,'CodeWatchdog::CSharpWatchdog']]]
+  ['start_5fblock_5fdelimiter',['START_BLOCK_DELIMITER',['../classCodeWatchdog_1_1Watchdog.html#a198299001e0f0a6311452a1be621e81e',1,'CodeWatchdog::Watchdog']]],
+  ['start_5fcomment_5fdelimiter',['START_COMMENT_DELIMITER',['../classCodeWatchdog_1_1Watchdog.html#ae8f0726fbd21b7f7af831d24506ef5cf',1,'CodeWatchdog::Watchdog']]],
+  ['startblockhandler',['StartBlockHandler',['../classCodeWatchdog_1_1Watchdog.html#ad87da278ff2c933f348f1b85f686ad48',1,'CodeWatchdog::Watchdog']]],
+  ['statement_5fdelimter',['STATEMENT_DELIMTER',['../classCodeWatchdog_1_1Watchdog.html#a6b5f06dc5432ef40225f9c7314c5b3d8',1,'CodeWatchdog::Watchdog']]],
+  ['statementhandler',['StatementHandler',['../classCodeWatchdog_1_1Watchdog.html#aa393dd5e945a3cf669f60171b4e6aa8e',1,'CodeWatchdog::Watchdog']]],
+  ['string_5fdelimiters',['STRING_DELIMITERS',['../classCodeWatchdog_1_1Watchdog.html#a9dd60928df622c93b7146960fccc9cc9',1,'CodeWatchdog::Watchdog']]],
+  ['string_5fescape',['STRING_ESCAPE',['../classCodeWatchdog_1_1Watchdog.html#a4abc09305e868e22552eebe87a258530',1,'CodeWatchdog::Watchdog']]]
 ];

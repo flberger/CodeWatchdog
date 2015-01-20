@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['printerror',['PrintError',['../classCodeWatchdog_1_1MainClass.html#ac11f1e8efee5e42bd33cc4c2d5b524b4',1,'CodeWatchdog::MainClass']]]
+  ['info',['Info',['../classCodeWatchdog_1_1Logging.html#a76d0f0e57f852acff8741e2fc9d5010b',1,'CodeWatchdog::Logging']]],
+  ['init',['Init',['../classCodeWatchdog_1_1CSharpWatchdog.html#af21773e2bd2900a937b3eee622e88725',1,'CodeWatchdog.CSharpWatchdog.Init()'],['../classCodeWatchdog_1_1Watchdog.html#a8ee3e5cce00f31458be768041c3a1f81',1,'CodeWatchdog.Watchdog.Init()']]]
 ];
