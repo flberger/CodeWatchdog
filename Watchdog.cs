@@ -450,6 +450,11 @@ namespace CodeWatchdog
             //
             score = Math.Exp(6 * score - 6);
             
+            // Apply a quadratic parabola to get quicker to lower values.
+            // Values found by trying.
+            //
+            //score = Math.Pow(score, 2);
+            
             // Weigh MaxCodeScore by the result to get a number that is
             // meaningful to humans. MaxCodeScore means no errors.
             //

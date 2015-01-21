@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace CodeWatchdog
 {
@@ -38,8 +39,11 @@ namespace CodeWatchdog
         // Error code variables, for reading convenience
         //
         const int TAB_ERROR = 0; 
+        const int PASCALCASE_ERROR = 1;
+        const int SPECIALCHARACTER_ERROR = 2;
+        const int MISSINGBRACES_ERROR = 3;
         
-        // TODO: Parentheses for if, while, foreach, for
+        // TODO: camelCase for parameters
         
         // TODO: Comments on separate line, not at the end of a line
         // TODO: Begin comments with uppercase letter
@@ -72,6 +76,9 @@ namespace CodeWatchdog
             ErrorCodeStrings = new Dictionary<int, string>();
             
             ErrorCodeStrings[TAB_ERROR] = "Tabs instead of spaces used for indentation";
+            ErrorCodeStrings[PASCALCASE_ERROR] = "Identifier is not in PascalCase";
+            ErrorCodeStrings[SPECIALCHARACTER_ERROR] = "Disallowed character used in identifier";
+            ErrorCodeStrings[MISSINGBRACES_ERROR] = "Missing curly braces in if / while / foreach / for";
             
             StatementHandler += CheckStatement;
         }
@@ -82,17 +89,13 @@ namespace CodeWatchdog
         /// <param name="statement">A string containing a statement, possibly multi-line.</param>
         void CheckStatement(string statement)
         {
-            // TODO: PascalCase for identifiers
-            // TODO: camelCase for parameters
-            // TODO: No underscore, hyphens etc. in identifiers
-            // TODO: Identifiers should not contain common types.
-            
             // TODO: 4-character indents
-            // TODO: No tabs
             // TODO: One statement per line
             
             // TODO: Use var for common types and new statements.
             
+            // TAB_ERROR
+            //
             if (statement.Contains("\t"))
             {
                 if (ErrorCodeCount.ContainsKey(TAB_ERROR))
@@ -108,6 +111,96 @@ namespace CodeWatchdog
                 // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
                 //
                 Woff(string.Format("{0} (line {1})", ErrorCodeStrings[TAB_ERROR], CheckedLinesOfCode + 1));
+            }
+            
+            // Identifiers
+            //
+            string possibleIdentifier = "";
+            
+            Match firstMatch = Regex.Match(statement, @"\s+\w+(<[\w, ]+>)?\s+(\w+)\s*$");
+           
+            if (firstMatch.Success)
+            {
+                possibleIdentifier = firstMatch.Groups[2].Value;
+                
+                Logging.Debug("Match: " + possibleIdentifier);
+            }
+            else
+            {
+                Match secondMatch = Regex.Match(statement, @"\s+\w+(<[\w, ]+>)?\s+(\w+)\s*=");
+                
+                if (secondMatch.Success)
+                {
+                    possibleIdentifier = secondMatch.Groups[2].Value;
+                    
+                    Logging.Debug("Match: " + possibleIdentifier);
+                }
+            }
+            
+            if (possibleIdentifier != "")
+            {
+                // PASCALCASE_ERROR
+                // TODO: Check for more PascalCase characteristics
+                //
+                if (possibleIdentifier.Length > 2 && char.IsLower(possibleIdentifier, 0))
+                {
+                    if (ErrorCodeCount.ContainsKey(PASCALCASE_ERROR))
+                    {
+                        ErrorCodeCount[PASCALCASE_ERROR] += 1;
+                    }
+                    else
+                    {
+                        ErrorCodeCount[PASCALCASE_ERROR] = 1;
+                    }
+                    
+                    // TODO: The line report is inaccurate, as several lines may have passed.
+                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                    //
+                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[PASCALCASE_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
+                }
+                
+                // SPECIALCHARACTER_ERROR
+                //
+                if (possibleIdentifier.Contains("_"))
+                {
+                    if (ErrorCodeCount.ContainsKey(SPECIALCHARACTER_ERROR))
+                    {
+                        ErrorCodeCount[SPECIALCHARACTER_ERROR] += 1;
+                    }
+                    else
+                    {
+                        ErrorCodeCount[SPECIALCHARACTER_ERROR] = 1;
+                    }
+                    
+                    // TODO: The line report is inaccurate, as several lines may have passed.
+                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                    //
+                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[SPECIALCHARACTER_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
+                }
+                
+                // TODO: Identifiers should not contain common types. But this is hard to check, as 'Char' or 'Int' may be legitimate in 'Charter' or 'International'.
+            }
+            
+            // MISSINGBRACES_ERROR
+            //
+            if (statement.Trim().StartsWith("if")
+                || statement.Trim().StartsWith("while")
+                || statement.Trim().StartsWith("foreach")
+                || statement.Trim().StartsWith("for"))
+            {
+                if (ErrorCodeCount.ContainsKey(MISSINGBRACES_ERROR))
+                {
+                    ErrorCodeCount[MISSINGBRACES_ERROR] += 1;
+                }
+                else
+                {
+                    ErrorCodeCount[MISSINGBRACES_ERROR] = 1;
+                }
+                
+                // TODO: The line report is inaccurate, as several lines may have passed.
+                // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                //
+                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[MISSINGBRACES_ERROR], CheckedLinesOfCode + 1));
             }
             
             return;
