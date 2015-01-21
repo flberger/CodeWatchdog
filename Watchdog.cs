@@ -202,7 +202,7 @@ namespace CodeWatchdog
                                 
                                 // Remove beginning delimiter from ordinary string.
                                 // The final char is already omitted.
-                                // !!!
+                                //
                                 sb.Remove(sb.Length - (START_COMMENT_DELIMITER.Length - 1),
                                           START_COMMENT_DELIMITER.Length - 1);
                             }    
@@ -432,9 +432,29 @@ namespace CodeWatchdog
             // TODO: Add a nice table reporting the error types, sorted by frequency.
 
             // TODO: Use a fancy rating function, in which little errors quickly provide a bad score
-            //
-            double score = MaxCodeScore - (((double)count / (double)CheckedLinesOfCode) * MaxCodeScore);
 
+            // Compute errors per lines of code. This yields a double [0.0, ~infinity],
+            // but typically [0.0, 1.0]. 0.0 means no errors.
+            //
+            double score = (double)count / (double)CheckedLinesOfCode;
+            
+            // Substract it from 1 to get a [0.0, 1.0] range. Now a value of 1 means
+            // no errors.
+            // In case of a lot of errors, the score might even be negative, which
+            // serves as an additional alert.
+            //
+            score = 1 - score;
+            
+            // Apply a exponential parabola to get quicker to lower values.
+            // Values found by trying.
+            //
+            score = Math.Exp(6 * score - 6);
+            
+            // Weigh MaxCodeScore by the result to get a number that is
+            // meaningful to humans. MaxCodeScore means no errors.
+            //
+            score = score * MaxCodeScore;
+           
             summary.AppendLine(string.Format("Your code is rated {0:0.##} / {1:0.##}.", score, MaxCodeScore));
             
             return summary.ToString();
