@@ -41,6 +41,8 @@ namespace CodeWatchdog
     /// </summary>
     public class Watchdog
     {
+        // TODO: Most, if not all delimiters should be strings, and be parsed for accordingly.
+        //
         protected char STATEMENT_DELIMTER;
         protected char START_BLOCK_DELIMITER;
         protected char END_BLOCK_DELIMITER;

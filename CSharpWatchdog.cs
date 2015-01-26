@@ -42,21 +42,22 @@ namespace CodeWatchdog
         const int PASCALCASE_ERROR = 1;
         const int SPECIALCHARACTER_ERROR = 2;
         const int MISSINGBRACES_ERROR = 3;
+        const int MULTIPLESTATEMENT_ERROR = 4;
         
         // TODO: camelCase for parameters
         
         // TODO: Comments on separate line, not at the end of a line
+        // TODO: One space between comment delimiter and text
         // TODO: Begin comments with uppercase letter
         // TODO: End comment with a period.
-        // TODO: One space between comment delimiter and text
-        
-        // TODO: Use implicit typing with var in for, foreach
-        
-        // TODO: Prefer 'using' to 'try ... finally' for cleanups
         
         // TODO: /// comment classes
         // TODO: /// comment methods
         // TODO: /// comment public members
+        
+        // TODO: Use implicit typing with var in for, foreach
+        
+        // TODO: Prefer 'using' to 'try ... finally' for cleanups
         
         /// <summary>
         /// Initialise the underlying Watchdog for C#.
@@ -79,6 +80,7 @@ namespace CodeWatchdog
             ErrorCodeStrings[PASCALCASE_ERROR] = "Identifier is not in PascalCase";
             ErrorCodeStrings[SPECIALCHARACTER_ERROR] = "Disallowed character used in identifier";
             ErrorCodeStrings[MISSINGBRACES_ERROR] = "Missing curly braces in if / while / foreach / for";
+            ErrorCodeStrings[MULTIPLESTATEMENT_ERROR] = "Multiple statements on a single line";
             
             StatementHandler += CheckStatement;
         }
@@ -111,6 +113,22 @@ namespace CodeWatchdog
                 // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
                 //
                 Woff(string.Format("{0} (line {1})", ErrorCodeStrings[TAB_ERROR], CheckedLinesOfCode + 1));
+            }
+            
+            // MULTIPLESTATEMENT_ERROR
+            //
+            if (CheckedLinesOfCode > 1 && !statement.StartsWith("\n"))
+            {
+                if (ErrorCodeCount.ContainsKey(MULTIPLESTATEMENT_ERROR))
+                {
+                    ErrorCodeCount[MULTIPLESTATEMENT_ERROR] += 1;
+                }
+                else
+                {
+                    ErrorCodeCount[MULTIPLESTATEMENT_ERROR] = 1;
+                }
+                
+                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[MULTIPLESTATEMENT_ERROR], CheckedLinesOfCode + 1));
             }
             
             // Identifiers

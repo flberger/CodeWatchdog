@@ -15,6 +15,8 @@ public class Test
         if (i == j)
         {
             Console.WriteLine("42");
+            
+            Console.WriteLine("Multiple statement on single line"); Console.WriteLine("Multiple statement on single line");
         }
     }
 
