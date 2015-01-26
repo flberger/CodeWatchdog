@@ -15,4 +15,4 @@ docs:
 	doxygen Doxyfile
 
 push:
-	hg push 'https://butbucket.org/flberger/CodeWatchdog'
+	hg push 'https://bitbucket.org/flberger/CodeWatchdog'
