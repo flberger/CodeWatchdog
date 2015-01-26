@@ -256,7 +256,7 @@ namespace CodeWatchdog
                                 CommentHandler(removedChar + commentSb.ToString());
                             }
                             
-                            commentSb.Clear();
+                            commentSb.Length = 0;
                             
                             CommentLines += 1;
                             
@@ -297,7 +297,7 @@ namespace CodeWatchdog
                                     CommentHandler(removedChar + commentSb.ToString());
                                 }
                                 
-                                commentSb.Clear();
+                                commentSb.Length = 0;
                                 
                                 CommentLines += 1;
                                 
@@ -336,7 +336,7 @@ namespace CodeWatchdog
                         StatementHandler(sb.ToString());
                     }
  
-                    sb.Clear();
+                    sb.Length = 0;
                 }
                 else if (! commentRunning && !stringRunning && (char)character == START_BLOCK_DELIMITER)
                 {
@@ -349,7 +349,7 @@ namespace CodeWatchdog
 
                     // TODO: Set active block to block type (stack)
 
-                    sb.Clear();
+                    sb.Length = 0;
                 }
                 else if (! commentRunning && !stringRunning && (char)character == END_BLOCK_DELIMITER)
                 {
