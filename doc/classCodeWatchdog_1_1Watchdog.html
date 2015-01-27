@@ -91,6 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classCodeWatchdog_1_1Watchdog-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -105,8 +106,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a719ed0790ed76b75c2f0972babc0bf03"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a719ed0790ed76b75c2f0972babc0bf03">StringHandler</a> (string input)</td></tr>
-<tr class="separator:a719ed0790ed76b75c2f0972babc0bf03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52f372169e128608ae2d626b0ade2d66"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a52f372169e128608ae2d626b0ade2d66">SingleStringHandler</a> (string input)</td></tr>
+<tr class="separator:a52f372169e128608ae2d626b0ade2d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29db3cc2ba0f0f8b6289b46e68274006"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a29db3cc2ba0f0f8b6289b46e68274006">DoubleStringHandler</a> (string firstInput, string secondInput)</td></tr>
+<tr class="separator:a29db3cc2ba0f0f8b6289b46e68274006"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ee3e5cce00f31458be768041c3a1f81"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a8ee3e5cce00f31458be768041c3a1f81">Init</a> ()</td></tr>
 <tr class="memdesc:a8ee3e5cce00f31458be768041c3a1f81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise this <a class="el" href="namespaceCodeWatchdog.html" title="A coding convention compliance checker written in C#. ">CodeWatchdog</a> instance. Call this before parsing a new project.  <a href="#a8ee3e5cce00f31458be768041c3a1f81">More...</a><br /></td></tr>
 <tr class="separator:a8ee3e5cce00f31458be768041c3a1f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,9 +122,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a483056f558c42a42defdddf4189ad67f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a719ed0790ed76b75c2f0972babc0bf03">StringHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a483056f558c42a42defdddf4189ad67f">Woff</a></td></tr>
-<tr class="memdesc:a483056f558c42a42defdddf4189ad67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when an error is to be output for human consideration. Add callbacks with implementations suiting your environment.  <a href="#a483056f558c42a42defdddf4189ad67f">More...</a><br /></td></tr>
-<tr class="separator:a483056f558c42a42defdddf4189ad67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8798dc1507bf6aa22f757391933f30c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a52f372169e128608ae2d626b0ade2d66">SingleStringHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a8798dc1507bf6aa22f757391933f30c1">Woff</a></td></tr>
+<tr class="memdesc:a8798dc1507bf6aa22f757391933f30c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when an error is to be output for human consideration. Add callbacks with implementations suiting your environment.  <a href="#a8798dc1507bf6aa22f757391933f30c1">More...</a><br /></td></tr>
+<tr class="separator:a8798dc1507bf6aa22f757391933f30c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -139,15 +142,15 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ae8f0726fbd21b7f7af831d24506ef5cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab18ae50849cb166eb3fb3bc1c2d8f86a"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#ab18ae50849cb166eb3fb3bc1c2d8f86a">END_COMMENT_DELIMITER</a></td></tr>
 <tr class="separator:ab18ae50849cb166eb3fb3bc1c2d8f86a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa393dd5e945a3cf669f60171b4e6aa8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a719ed0790ed76b75c2f0972babc0bf03">StringHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#aa393dd5e945a3cf669f60171b4e6aa8e">StatementHandler</a></td></tr>
-<tr class="memdesc:aa393dd5e945a3cf669f60171b4e6aa8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a statement is encountered. Add callbacks for statement handling here.  <a href="#aa393dd5e945a3cf669f60171b4e6aa8e">More...</a><br /></td></tr>
-<tr class="separator:aa393dd5e945a3cf669f60171b4e6aa8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad87da278ff2c933f348f1b85f686ad48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a719ed0790ed76b75c2f0972babc0bf03">StringHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#ad87da278ff2c933f348f1b85f686ad48">StartBlockHandler</a></td></tr>
-<tr class="memdesc:ad87da278ff2c933f348f1b85f686ad48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the beginning of a block is encountered. Add callbacks for start block handling here.  <a href="#ad87da278ff2c933f348f1b85f686ad48">More...</a><br /></td></tr>
-<tr class="separator:ad87da278ff2c933f348f1b85f686ad48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0637dc9d1b958e5500da5e700f89b12"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a719ed0790ed76b75c2f0972babc0bf03">StringHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#ae0637dc9d1b958e5500da5e700f89b12">CommentHandler</a></td></tr>
-<tr class="memdesc:ae0637dc9d1b958e5500da5e700f89b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a comment is encountered. Add callbacks for comment handling here.  <a href="#ae0637dc9d1b958e5500da5e700f89b12">More...</a><br /></td></tr>
-<tr class="separator:ae0637dc9d1b958e5500da5e700f89b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b7c9c7d72714b025a04c28d45347730"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a52f372169e128608ae2d626b0ade2d66">SingleStringHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a1b7c9c7d72714b025a04c28d45347730">StatementHandler</a></td></tr>
+<tr class="memdesc:a1b7c9c7d72714b025a04c28d45347730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a statement is encountered. Add callbacks for statement handling here.  <a href="#a1b7c9c7d72714b025a04c28d45347730">More...</a><br /></td></tr>
+<tr class="separator:a1b7c9c7d72714b025a04c28d45347730"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa78126560cd32093458c381f9b7dfc44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a52f372169e128608ae2d626b0ade2d66">SingleStringHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#aa78126560cd32093458c381f9b7dfc44">StartBlockHandler</a></td></tr>
+<tr class="memdesc:aa78126560cd32093458c381f9b7dfc44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the beginning of a block is encountered. Add callbacks for start block handling here.  <a href="#aa78126560cd32093458c381f9b7dfc44">More...</a><br /></td></tr>
+<tr class="separator:aa78126560cd32093458c381f9b7dfc44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a548849b8b2735cbac66aa467aa7e13d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a29db3cc2ba0f0f8b6289b46e68274006">DoubleStringHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a548849b8b2735cbac66aa467aa7e13d5">CommentHandler</a></td></tr>
+<tr class="memdesc:a548849b8b2735cbac66aa467aa7e13d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a comment is encountered, called with the comment and the current parse buffer which contains preceding text. Add callbacks for comment handling here.  <a href="#a548849b8b2735cbac66aa467aa7e13d5">More...</a><br /></td></tr>
+<tr class="separator:a548849b8b2735cbac66aa467aa7e13d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a371a409b9314d567406fb089ed5edf"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; int, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a9a371a409b9314d567406fb089ed5edf">ErrorCodeStrings</a></td></tr>
 <tr class="memdesc:a9a371a409b9314d567406fb089ed5edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translate error codes to human readable complaints. This is meant to be filled by subclasses implementing specific parsers.  <a href="#a9a371a409b9314d567406fb089ed5edf">More...</a><br /></td></tr>
 <tr class="separator:a9a371a409b9314d567406fb089ed5edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,6 +160,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:afc960c2e3effe555f3f2e70bc4e44964"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ebe357967ff8b888f81eaf1714f5e7f"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; int, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a9ebe357967ff8b888f81eaf1714f5e7f">ErrorCodeCount</a></td></tr>
 <tr class="separator:a9ebe357967ff8b888f81eaf1714f5e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ad5331c15413316b34b8d316d4c0c567d"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#ad5331c15413316b34b8d316d4c0c567d">ShowWhitespace</a> (string input)</td></tr>
+<tr class="memdesc:ad5331c15413316b34b8d316d4c0c567d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace whitespace characters in input with printable characters, for debug display.  <a href="#ad5331c15413316b34b8d316d4c0c567d">More...</a><br /></td></tr>
+<tr class="separator:ad5331c15413316b34b8d316d4c0c567d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -198,6 +207,32 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a29db3cc2ba0f0f8b6289b46e68274006"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">delegate void CodeWatchdog.Watchdog.DoubleStringHandler </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>firstInput</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>secondInput</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8ee3e5cce00f31458be768041c3a1f81"></a>
 <div class="memitem">
 <div class="memproto">
@@ -225,12 +260,38 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a719ed0790ed76b75c2f0972babc0bf03"></a>
+<a class="anchor" id="ad5331c15413316b34b8d316d4c0c567d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string CodeWatchdog.Watchdog.ShowWhitespace </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Replace whitespace characters in input with printable characters, for debug display. </p>
+
+</div>
+</div>
+<a class="anchor" id="a52f372169e128608ae2d626b0ade2d66"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">delegate void CodeWatchdog.Watchdog.StringHandler </td>
+          <td class="memname">delegate void CodeWatchdog.Watchdog.SingleStringHandler </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>input</em></td><td>)</td>
@@ -287,7 +348,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae0637dc9d1b958e5500da5e700f89b12"></a>
+<a class="anchor" id="a548849b8b2735cbac66aa467aa7e13d5"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -295,7 +356,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a719ed0790ed76b75c2f0972babc0bf03">StringHandler</a> CodeWatchdog.Watchdog.CommentHandler</td>
+          <td class="memname"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a29db3cc2ba0f0f8b6289b46e68274006">DoubleStringHandler</a> CodeWatchdog.Watchdog.CommentHandler</td>
         </tr>
       </table>
   </td>
@@ -305,7 +366,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Called when a comment is encountered. Add callbacks for comment handling here. </p>
+<p>Called when a comment is encountered, called with the comment and the current parse buffer which contains preceding text. Add callbacks for comment handling here. </p>
 
 </div>
 </div>
@@ -471,7 +532,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad87da278ff2c933f348f1b85f686ad48"></a>
+<a class="anchor" id="aa78126560cd32093458c381f9b7dfc44"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -479,7 +540,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a719ed0790ed76b75c2f0972babc0bf03">StringHandler</a> CodeWatchdog.Watchdog.StartBlockHandler</td>
+          <td class="memname"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a52f372169e128608ae2d626b0ade2d66">SingleStringHandler</a> CodeWatchdog.Watchdog.StartBlockHandler</td>
         </tr>
       </table>
   </td>
@@ -513,7 +574,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa393dd5e945a3cf669f60171b4e6aa8e"></a>
+<a class="anchor" id="a1b7c9c7d72714b025a04c28d45347730"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -521,7 +582,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a719ed0790ed76b75c2f0972babc0bf03">StringHandler</a> CodeWatchdog.Watchdog.StatementHandler</td>
+          <td class="memname"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a52f372169e128608ae2d626b0ade2d66">SingleStringHandler</a> CodeWatchdog.Watchdog.StatementHandler</td>
         </tr>
       </table>
   </td>
@@ -575,12 +636,12 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a483056f558c42a42defdddf4189ad67f"></a>
+<a class="anchor" id="a8798dc1507bf6aa22f757391933f30c1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a719ed0790ed76b75c2f0972babc0bf03">StringHandler</a> CodeWatchdog.Watchdog.Woff</td>
+          <td class="memname"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a52f372169e128608ae2d626b0ade2d66">SingleStringHandler</a> CodeWatchdog.Watchdog.Woff</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -595,7 +656,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 20 2015 16:21:11 for CodeWatchdog by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 27 2015 16:43:16 for CodeWatchdog by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
