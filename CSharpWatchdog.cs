@@ -43,21 +43,33 @@ namespace CodeWatchdog
         const int SPECIALCHARACTER_ERROR = 2;
         const int MISSINGBRACES_ERROR = 3;
         const int MULTIPLESTATEMENT_ERROR = 4;
+        const int COMMENTONSAMELINE_ERROR = 5;
         
         // TODO: camelCase for parameters
-        
-        // TODO: Comments on separate line, not at the end of a line
-        // TODO: One space between comment delimiter and text
-        // TODO: Begin comments with uppercase letter
-        // TODO: End comment with a period.
-        
-        // TODO: /// comment classes
-        // TODO: /// comment methods
-        // TODO: /// comment public members
         
         // TODO: Use implicit typing with var in for, foreach
         
         // TODO: Prefer 'using' to 'try ... finally' for cleanups
+        
+        // TODO: if ()- nullchecks without else
+        
+        // Rainers C#-Workshop
+        //
+        // TODO: .Equals() statt ==
+        // TODO: int parse mit invariant culture
+        
+        // exozet's Unity C# Coding Conventions:
+        //
+        // TODO: grundsätzlich ist die CamelCase Schreibweise zu verwenden
+        // TODO: Member Variablen werden klein geschrieben und dann in CamelCase
+        // TODO: Variablen beginnen mit einem kleinen Buchstaben
+        // TODO: Properties beginnen mit einem großen Buchstaben
+        // TODO: Konstanten beginnen mit einem großen Buchstaben
+        // TODO: Funktionen/Methoden und Klassen beginnen mit einem großen Buchstaben
+        // TODO: Parameter von Funktionen/Methoden beginnen mit einem kleinen Buchstaben
+        // TODO: Enums werden in CamelCase Schreibweise (beginnend mit einem Großbuchstaben) benannt
+        // TODO: Interfaces beginnen mit einem großen "I"
+                
         
         /// <summary>
         /// Initialise the underlying Watchdog for C#.
@@ -81,8 +93,10 @@ namespace CodeWatchdog
             ErrorCodeStrings[SPECIALCHARACTER_ERROR] = "Disallowed character used in identifier";
             ErrorCodeStrings[MISSINGBRACES_ERROR] = "Missing curly braces in if / while / foreach / for";
             ErrorCodeStrings[MULTIPLESTATEMENT_ERROR] = "Multiple statements on a single line";
+            ErrorCodeStrings[COMMENTONSAMELINE_ERROR] = "Comment not on a separate line";
             
             StatementHandler += CheckStatement;
+            CommentHandler += CheckComment;
         }
         
         /// <summary>
@@ -92,7 +106,6 @@ namespace CodeWatchdog
         void CheckStatement(string statement)
         {
             // TODO: 4-character indents
-            // TODO: One statement per line
             
             // TODO: Use var for common types and new statements.
             
@@ -117,7 +130,9 @@ namespace CodeWatchdog
             
             // MULTIPLESTATEMENT_ERROR
             //
-            if (CheckedLinesOfCode > 1 && !statement.StartsWith("\n"))
+            // Trim leading spaces before check
+            //
+            if (CheckedLinesOfCode > 1 && !statement.TrimStart(char.Parse(" ")).StartsWith("\n"))
             {
                 if (ErrorCodeCount.ContainsKey(MULTIPLESTATEMENT_ERROR))
                 {
@@ -222,6 +237,39 @@ namespace CodeWatchdog
             }
             
             return;
+        }
+        
+        /// <summary>
+        /// Check a single comment.
+        /// </summary>
+        /// <param name="comment">A string containing a comment, possibly multi-line.</param>
+
+        
+        void CheckComment(string comment, string precedingInput)
+        {
+            // COMMENTONSAMELINE_ERROR
+            //
+            if (CheckedLinesOfCode > 1 && !precedingInput.Contains("\n"))
+            {
+                if (ErrorCodeCount.ContainsKey(COMMENTONSAMELINE_ERROR))
+                {
+                    ErrorCodeCount[COMMENTONSAMELINE_ERROR] += 1;
+                }
+                else
+                {
+                    ErrorCodeCount[COMMENTONSAMELINE_ERROR] = 1;
+                }
+                
+                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[COMMENTONSAMELINE_ERROR], CheckedLinesOfCode));
+            }
+            
+            // TODO: One space between comment delimiter and text
+            // TODO: Begin comments with uppercase letter
+            // TODO: End comment with a period.
+            
+            // TODO: /// comment classes
+            // TODO: /// comment methods
+            // TODO: /// comment public members
         }
     }
 }

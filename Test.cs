@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class Test
 {
     int i = 2;
+
+    // Tab-indented line:
 	int j = 3;
     
     string CorrectPascalCase = "default";
@@ -29,6 +31,7 @@ public class Test
         // Console.Writeline("Commented");
 
         i += 1; // Comment on statement line
+        j += 1; // Another comment on statement line
         
         if (1 != 0)
             Console.WriteLine("Woops, forgot curly braces.");
@@ -36,6 +39,9 @@ public class Test
         while (false)
             Console.WriteLine("Woops, forgot curly braces.");
             
+        i += 1;    Console.WriteLine("Another attempt "
+                                     + "at multiple statements");
+         
         return;
     }
 }

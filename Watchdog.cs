@@ -51,7 +51,8 @@ namespace CodeWatchdog
         protected string START_COMMENT_DELIMITER;
         protected string END_COMMENT_DELIMITER;
         
-        public delegate void StringHandler(string input);
+        public delegate void SingleStringHandler(string input);
+        public delegate void DoubleStringHandler(string firstInput, string secondInput);
 
         #region Delegates
                         
@@ -59,25 +60,26 @@ namespace CodeWatchdog
         /// Called when a statement is encountered.
         /// Add callbacks for statement handling here.
         /// </summary>
-        protected StringHandler StatementHandler;        
+        protected SingleStringHandler StatementHandler;        
         
         /// <summary>
         /// Called when the beginning of a block is encountered.
         /// Add callbacks for start block handling here.
         /// </summary>
-        protected StringHandler StartBlockHandler;
+        protected SingleStringHandler StartBlockHandler;
         
         /// <summary>
-        /// Called when a comment is encountered.
+        /// Called when a comment is encountered, called with the comment
+        /// and the current parse buffer which contains preceding text.
         /// Add callbacks for comment handling here.
         /// </summary>
-        protected StringHandler CommentHandler;
+        protected DoubleStringHandler CommentHandler;
         
         /// <summary>
         /// Called when an error is to be output for human consideration.
         /// Add callbacks with implementations suiting your environment.
         /// </summary>
-        public StringHandler Woff;
+        public SingleStringHandler Woff;
         
         #endregion
         
@@ -255,7 +257,8 @@ namespace CodeWatchdog
 
                             if (CommentHandler != null)
                             {
-                                CommentHandler(removedChar + commentSb.ToString());
+                                CommentHandler(removedChar + commentSb.ToString(),
+                                               sb.ToString());
                             }
                             
                             commentSb.Length = 0;
@@ -296,7 +299,8 @@ namespace CodeWatchdog
                                 
                                 if (CommentHandler != null)
                                 {
-                                    CommentHandler(removedChar + commentSb.ToString());
+                                    CommentHandler(removedChar + commentSb.ToString(),
+                                                   sb.ToString());
                                 }
                                 
                                 commentSb.Length = 0;
@@ -331,7 +335,7 @@ namespace CodeWatchdog
 
                 if (! commentRunning && !stringRunning && (char)character == STATEMENT_DELIMTER)
                 {
-                    Logging.Info(string.Format("Found statement: '{0}'", sb));
+                    Logging.Info(string.Format("Found statement: '{0}'", ShowWhitespace(sb.ToString())));
 
                     if (StatementHandler != null)
                     {
@@ -342,7 +346,7 @@ namespace CodeWatchdog
                 }
                 else if (! commentRunning && !stringRunning && (char)character == START_BLOCK_DELIMITER)
                 {
-                    Logging.Info(string.Format("Found start block: '{0}'", sb));
+                    Logging.Info(string.Format("Found start block: '{0}'", ShowWhitespace(sb.ToString())));
 
                     if (StartBlockHandler != null)
                     {
@@ -447,11 +451,15 @@ namespace CodeWatchdog
             //
             score = 1 - score;
             
+            // Now for the psychology part. :-)
+            //
             // Apply a exponential parabola to get quicker to lower values.
             // Values found by trying.
             //
             score = Math.Exp(6 * score - 6);
             
+            // Alternative:
+            //
             // Apply a quadratic parabola to get quicker to lower values.
             // Values found by trying.
             //
@@ -465,6 +473,18 @@ namespace CodeWatchdog
             summary.AppendLine(string.Format("Your code is rated {0:0.##} / {1:0.##}.", score, MaxCodeScore));
             
             return summary.ToString();
+        }
+        
+        /// <summary>
+        /// Replace whitespace characters in input with printable characters,
+        /// for debug display.
+        /// </summary>
+        string ShowWhitespace(string input)
+        {
+            input = input.Replace(" ", "~");
+            input = input.Replace("\n", @"\n" + "\n");
+            
+            return input;
         }
     }
 }
