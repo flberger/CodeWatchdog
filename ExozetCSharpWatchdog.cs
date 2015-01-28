@@ -32,9 +32,9 @@ using System.Text.RegularExpressions;
 namespace CodeWatchdog
 {
     /// <summary>
-    /// A Watchdog implementation for C#.
+    /// A Watchdog implementation for exozet's C# coding style.
     /// </summary>
-    public class CSharpWatchdog: Watchdog
+    public class ExozetCSharpWatchdog: Watchdog
     {
         // Error code variables, for reading convenience
         //
@@ -44,6 +44,7 @@ namespace CodeWatchdog
         const int MISSINGBRACES_ERROR = 3;
         const int MULTIPLESTATEMENT_ERROR = 4;
         const int COMMENTONSAMELINE_ERROR = 5;
+        const int COMMENTNOSPACE_ERROR = 6;
         
         // TODO: camelCase for parameters
         
@@ -51,6 +52,8 @@ namespace CodeWatchdog
         
         // TODO: Prefer 'using' to 'try ... finally' for cleanups
         
+        // Selected antipatterns
+        //
         // TODO: if ()- nullchecks without else
         
         // Rainers C#-Workshop
@@ -94,6 +97,7 @@ namespace CodeWatchdog
             ErrorCodeStrings[MISSINGBRACES_ERROR] = "Missing curly braces in if / while / foreach / for";
             ErrorCodeStrings[MULTIPLESTATEMENT_ERROR] = "Multiple statements on a single line";
             ErrorCodeStrings[COMMENTONSAMELINE_ERROR] = "Comment not on a separate line";
+            ErrorCodeStrings[COMMENTNOSPACE_ERROR] = "No space between comment delimiter and comment text";
             
             StatementHandler += CheckStatement;
             CommentHandler += CheckComment;
@@ -243,8 +247,6 @@ namespace CodeWatchdog
         /// Check a single comment.
         /// </summary>
         /// <param name="comment">A string containing a comment, possibly multi-line.</param>
-
-        
         void CheckComment(string comment, string precedingInput)
         {
             // COMMENTONSAMELINE_ERROR
@@ -263,7 +265,22 @@ namespace CodeWatchdog
                 Woff(string.Format("{0} (line {1})", ErrorCodeStrings[COMMENTONSAMELINE_ERROR], CheckedLinesOfCode));
             }
             
-            // TODO: One space between comment delimiter and text
+            // COMMENTNOSPACE_ERROR
+            //
+            if (!comment.StartsWith(START_COMMENT_DELIMITER + " "))
+            {
+                if (ErrorCodeCount.ContainsKey(COMMENTNOSPACE_ERROR))
+                {
+                    ErrorCodeCount[COMMENTNOSPACE_ERROR] += 1;
+                }
+                else
+                {
+                    ErrorCodeCount[COMMENTNOSPACE_ERROR] = 1;
+                }
+                
+                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[COMMENTNOSPACE_ERROR], CheckedLinesOfCode));
+            }
+            
             // TODO: Begin comments with uppercase letter
             // TODO: End comment with a period.
             

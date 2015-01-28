@@ -39,7 +39,7 @@ namespace CodeWatchdog
         /// </summary>
         public static void Main(string[] args)
         {
-            CSharpWatchdog cswd = new CSharpWatchdog();
+            ExozetCSharpWatchdog cswd = new ExozetCSharpWatchdog();
             
             cswd.Init();
             

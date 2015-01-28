@@ -4,6 +4,7 @@ help:
 	@echo '    commit'
 	@echo '    docs'
 	@echo '    push'
+	@echo '    update_files'
 
 commit.txt:
 	hg diff > commit.txt
@@ -16,3 +17,7 @@ docs:
 
 push:
 	hg push 'https://bitbucket.org/flberger/CodeWatchdog'
+
+update_files:
+	cp -v CSharpWatchdog.cs Logging.cs README.txt Watchdog.cs ~/Desktop/unity3d/watchdog_test/Assets/packages/UBS/Dependencies/CodeWatchdog/
+	cp -v Test.cs ~/Desktop/unity3d/watchdog_test/Assets/scripts/
