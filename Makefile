@@ -19,5 +19,5 @@ push:
 	hg push 'https://bitbucket.org/flberger/CodeWatchdog'
 
 update_files:
-	cp -v CSharpWatchdog.cs Logging.cs README.txt Watchdog.cs ~/Desktop/unity3d/watchdog_test/Assets/packages/UBS/Dependencies/CodeWatchdog/
+	cp -v ExozetCSharpWatchdog.cs Logging.cs README.txt Watchdog.cs ~/Desktop/unity3d/watchdog_test/Assets/packages/UBS/Dependencies/CodeWatchdog/
 	cp -v Test.cs ~/Desktop/unity3d/watchdog_test/Assets/scripts/
