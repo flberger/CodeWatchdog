@@ -13,6 +13,7 @@ public class Test
     protected Dictionary<int, string> Disallowed_Character;
     
     const int anotherCamelCase = 42;
+    const string ThisTimeInPascal = "The answer";
         
     public void TestMethod()
     {

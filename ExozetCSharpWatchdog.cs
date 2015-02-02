@@ -209,48 +209,54 @@ namespace CodeWatchdog
                     //
                     Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[SPECIALCHARACTER_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
                 }
-                
-                
-                // PASCALCASE_ERROR
-                // TODO: Check for more PascalCase / camelCase characteristics
-                //
-                if (possibleIdentifier.Length > 2 && statement.Contains("const ") && char.IsLower(possibleIdentifier, 0))
+                else
                 {
-                    if (ErrorCodeCount.ContainsKey(PASCALCASE_ERROR))
+                    if (statement.Contains("const "))
                     {
-                        ErrorCodeCount[PASCALCASE_ERROR] += 1;
+                        // PASCALCASE_ERROR
+                        // TODO: Check for more PascalCase / camelCase characteristics
+                        //
+                        if (possibleIdentifier.Length > 2 && char.IsLower(possibleIdentifier, 0))
+                        {
+                            if (ErrorCodeCount.ContainsKey(PASCALCASE_ERROR))
+                            {
+                                ErrorCodeCount[PASCALCASE_ERROR] += 1;
+                            }
+                            else
+                            {
+                                ErrorCodeCount[PASCALCASE_ERROR] = 1;
+                            }
+                            
+                            // TODO: The line report is inaccurate, as several lines may have passed.
+                            // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                            //
+                            Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[PASCALCASE_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
+                        }
                     }
                     else
                     {
-                        ErrorCodeCount[PASCALCASE_ERROR] = 1;
+                        // CAMELCASE_ERROR
+                        // TODO: Check for more PascalCase / camelCase characteristics
+                        //
+                        if (possibleIdentifier.Length > 2 && char.IsUpper(possibleIdentifier, 0))
+                        {
+                            
+                            if (ErrorCodeCount.ContainsKey(CAMELCASE_ERROR))
+                            {
+                                ErrorCodeCount[CAMELCASE_ERROR] += 1;
+                            }
+                            else
+                            {
+                                ErrorCodeCount[CAMELCASE_ERROR] = 1;
+                            }
+                            
+                            // TODO: The line report is inaccurate, as several lines may have passed.
+                            // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                            //
+                            Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[CAMELCASE_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
+                        }
                     }
-                    
-                    // TODO: The line report is inaccurate, as several lines may have passed.
-                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                    //
-                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[PASCALCASE_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
                 }
-                
-                // CAMELCASE_ERROR
-                // TODO: Check for more PascalCase / camelCase characteristics
-                //
-                if (possibleIdentifier.Length > 2 && char.IsUpper(possibleIdentifier, 0))
-                {
-                    if (ErrorCodeCount.ContainsKey(CAMELCASE_ERROR))
-                    {
-                        ErrorCodeCount[CAMELCASE_ERROR] += 1;
-                    }
-                    else
-                    {
-                        ErrorCodeCount[CAMELCASE_ERROR] = 1;
-                    }
-                    
-                    // TODO: The line report is inaccurate, as several lines may have passed.
-                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                    //
-                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[CAMELCASE_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
-                }
-                
             }
             
             // MISSINGBRACES_ERROR
@@ -284,6 +290,13 @@ namespace CodeWatchdog
         /// <param name="comment">A string containing a comment, possibly multi-line.</param>
         void CheckComment(string comment, string precedingInput)
         {
+            // TODO: Begin comments with uppercase letter
+            // TODO: End comment with a period.
+            
+            // TODO: /// comment classes
+            // TODO: /// comment methods
+            // TODO: /// comment public members
+
             // COMMENTONSAMELINE_ERROR
             //
             if (CheckedLinesOfCode > 1 && !precedingInput.Contains("\n"))
@@ -301,8 +314,9 @@ namespace CodeWatchdog
             }
             
             // COMMENTNOSPACE_ERROR
+            // Also include /// doc comments.
             //
-            if (!comment.StartsWith(START_COMMENT_DELIMITER + " "))
+            if (!(comment.StartsWith(START_COMMENT_DELIMITER + " ") || comment.StartsWith(START_COMMENT_DELIMITER + "/ ")))
             {
                 if (ErrorCodeCount.ContainsKey(COMMENTNOSPACE_ERROR))
                 {
@@ -315,13 +329,6 @@ namespace CodeWatchdog
                 
                 Woff(string.Format("{0} (line {1})", ErrorCodeStrings[COMMENTNOSPACE_ERROR], CheckedLinesOfCode));
             }
-            
-            // TODO: Begin comments with uppercase letter
-            // TODO: End comment with a period.
-            
-            // TODO: /// comment classes
-            // TODO: /// comment methods
-            // TODO: /// comment public members
         }
     }
 }
