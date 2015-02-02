@@ -67,7 +67,6 @@ namespace CodeWatchdog
         // exozet's Unity C# Coding Conventions:
         //
         // TODO: Properties beginnen mit einem großen Buchstaben
-        // TODO: Konstanten beginnen mit einem großen Buchstaben
         // TODO: Funktionen/Methoden und Klassen beginnen mit einem großen Buchstaben
         // TODO: Parameter von Funktionen/Methoden beginnen mit einem kleinen Buchstaben
         // TODO: Enums werden in CamelCase Schreibweise (beginnend mit einem Großbuchstaben) benannt
@@ -82,7 +81,7 @@ namespace CodeWatchdog
         // TODO: Classes with too much code
         // TODO: Classes with too little code
         // TODO: Too many private methods
-        // TODO: Empty catch clauses        
+        // TODO: Empty catch clauses
         // TODO: Long method names
         // TODO: Too many parameters
         // TODO: Deeply nested if clauses / loops
@@ -190,25 +189,7 @@ namespace CodeWatchdog
             
             if (possibleIdentifier != "")
             {
-                // CAMELCASE_ERROR
-                // TODO: Check for more PascalCase / camelCase characteristics
-                //
-                if (possibleIdentifier.Length > 2 && char.IsUpper(possibleIdentifier, 0))
-                {
-                    if (ErrorCodeCount.ContainsKey(CAMELCASE_ERROR))
-                    {
-                        ErrorCodeCount[CAMELCASE_ERROR] += 1;
-                    }
-                    else
-                    {
-                        ErrorCodeCount[CAMELCASE_ERROR] = 1;
-                    }
-                    
-                    // TODO: The line report is inaccurate, as several lines may have passed.
-                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                    //
-                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[CAMELCASE_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
-                }
+                // TODO: Identifiers should not contain common types. But this is hard to check, as 'Char' or 'Int' may be legitimate in 'Charter' or 'International'.
                 
                 // SPECIALCHARACTER_ERROR
                 //
@@ -229,7 +210,47 @@ namespace CodeWatchdog
                     Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[SPECIALCHARACTER_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
                 }
                 
-                // TODO: Identifiers should not contain common types. But this is hard to check, as 'Char' or 'Int' may be legitimate in 'Charter' or 'International'.
+                
+                // PASCALCASE_ERROR
+                // TODO: Check for more PascalCase / camelCase characteristics
+                //
+                if (possibleIdentifier.Length > 2 && statement.Contains("const ") && char.IsLower(possibleIdentifier, 0))
+                {
+                    if (ErrorCodeCount.ContainsKey(PASCALCASE_ERROR))
+                    {
+                        ErrorCodeCount[PASCALCASE_ERROR] += 1;
+                    }
+                    else
+                    {
+                        ErrorCodeCount[PASCALCASE_ERROR] = 1;
+                    }
+                    
+                    // TODO: The line report is inaccurate, as several lines may have passed.
+                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                    //
+                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[PASCALCASE_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
+                }
+                
+                // CAMELCASE_ERROR
+                // TODO: Check for more PascalCase / camelCase characteristics
+                //
+                if (possibleIdentifier.Length > 2 && char.IsUpper(possibleIdentifier, 0))
+                {
+                    if (ErrorCodeCount.ContainsKey(CAMELCASE_ERROR))
+                    {
+                        ErrorCodeCount[CAMELCASE_ERROR] += 1;
+                    }
+                    else
+                    {
+                        ErrorCodeCount[CAMELCASE_ERROR] = 1;
+                    }
+                    
+                    // TODO: The line report is inaccurate, as several lines may have passed.
+                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                    //
+                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[CAMELCASE_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
+                }
+                
             }
             
             // MISSINGBRACES_ERROR

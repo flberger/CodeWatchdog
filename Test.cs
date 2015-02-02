@@ -8,9 +8,11 @@ public class Test
     // Tab-indented line:
 	int j = 3;
     
-    string PascalCase = "default";
-    public List<string> camelCase;
+    string IdentifierInPascalCase = "default";
+    public List<string> identifierInCamelCase;
     protected Dictionary<int, string> Disallowed_Character;
+    
+    const int anotherCamelCase = 42;
         
     public void TestMethod()
     {
