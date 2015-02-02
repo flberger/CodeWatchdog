@@ -8,8 +8,8 @@ public class Test
     // Tab-indented line:
 	int j = 3;
     
-    string CorrectPascalCase = "default";
-    public List<string> incorrectCamelCase;
+    string PascalCase = "default";
+    public List<string> camelCase;
     protected Dictionary<int, string> Disallowed_Character;
         
     public void TestMethod()
