@@ -41,7 +41,6 @@ namespace CodeWatchdog
     /// </summary>
     public class Watchdog
     {
-        // TODO: Flag the start of a new file, for line count, wrong multiple statement errors etc. !!!
         // TODO: Errors should have a severity.
         
         // TODO: Most, if not all delimiters should be strings, and be parsed for accordingly.
@@ -94,11 +93,15 @@ namespace CodeWatchdog
         
         // Variables for processing a project
         //
-        protected int CheckedLinesOfCode;
+        protected int TotalCheckedLines;
         protected int CommentLines;
         protected Dictionary<int, int> ErrorCodeCount;
         
         const double MaxCodeScore = 10.0;
+        
+        // Class-accessible variable for each run
+        //
+        protected int CheckedLinesThisFile;
         
         /// <summary>
         /// Initialise this CodeWatchdog instance.
@@ -106,7 +109,7 @@ namespace CodeWatchdog
         /// </summary>
         public virtual void Init()
         {
-            CheckedLinesOfCode = 0;
+            TotalCheckedLines = 0;
             
             CommentLines = 0;
             
@@ -130,6 +133,10 @@ namespace CodeWatchdog
             StringBuilder commentSb = new StringBuilder();
 
             Nullable<char> previousChar = null;
+            
+            // Resetting globals
+            //
+            CheckedLinesThisFile = 0;
             
             // TODO: stringRunning, comments ... this calls for a state machine.
 
@@ -156,7 +163,8 @@ namespace CodeWatchdog
                 
                 if ((char)character == '\n')
                 {
-                    CheckedLinesOfCode += 1;
+                    CheckedLinesThisFile += 1;
+                    TotalCheckedLines += 1;
                 }
                 
                 // Comments need special handling since there might be
@@ -423,7 +431,7 @@ namespace CodeWatchdog
             //
             StringBuilder summary = new StringBuilder("\nSUMMARY\n=======\n\n");
             
-            summary.AppendLine(string.Format("Checked {0} line(s) of code.", CheckedLinesOfCode));
+            summary.AppendLine(string.Format("Checked {0} line(s) of code.", TotalCheckedLines));
             
             // TODO: Add comment lines value to score formula
             //
@@ -456,7 +464,7 @@ namespace CodeWatchdog
             // Compute errors per lines of code. This yields a double [0.0, ~infinity],
             // but typically [0.0, 1.0]. 0.0 means no errors.
             //
-            double score = (double)count / (double)CheckedLinesOfCode;
+            double score = (double)count / (double)TotalCheckedLines;
             
             // Substract it from 1 to get a [0.0, 1.0] range. Now a value of 1 means
             // no errors.

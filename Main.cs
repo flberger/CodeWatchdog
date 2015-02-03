@@ -49,6 +49,10 @@ namespace CodeWatchdog
 
             cswd.Check(args[0]);
             
+            Logging.Info("Checking file again to spot double check errors");
+            
+            cswd.Check(args[0]);
+            
             Console.Write(cswd.Summary());
 
             return;

@@ -142,14 +142,14 @@ namespace CodeWatchdog
                 // TODO: The line report is inaccurate, as several lines may have passed.
                 // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
                 //
-                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[TAB_ERROR], CheckedLinesOfCode + 1));
+                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[TAB_ERROR], CheckedLinesThisFile + 1));
             }
             
             // MULTIPLESTATEMENT_ERROR
             //
             // Trim leading spaces before check
             //
-            if (CheckedLinesOfCode > 1 && !statement.TrimStart(char.Parse(" ")).StartsWith("\n"))
+            if (CheckedLinesThisFile > 1 && !statement.TrimStart(char.Parse(" ")).StartsWith("\n"))
             {
                 if (ErrorCodeCount.ContainsKey(MULTIPLESTATEMENT_ERROR))
                 {
@@ -160,7 +160,7 @@ namespace CodeWatchdog
                     ErrorCodeCount[MULTIPLESTATEMENT_ERROR] = 1;
                 }
                 
-                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[MULTIPLESTATEMENT_ERROR], CheckedLinesOfCode + 1));
+                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[MULTIPLESTATEMENT_ERROR], CheckedLinesThisFile + 1));
             }
             
             // Identifiers
@@ -207,7 +207,7 @@ namespace CodeWatchdog
                     // TODO: The line report is inaccurate, as several lines may have passed.
                     // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
                     //
-                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[SPECIALCHARACTER_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
+                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[SPECIALCHARACTER_ERROR], possibleIdentifier, CheckedLinesThisFile + 1));
                 }
                 else
                 {
@@ -230,7 +230,7 @@ namespace CodeWatchdog
                             // TODO: The line report is inaccurate, as several lines may have passed.
                             // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
                             //
-                            Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[PASCALCASE_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
+                            Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[PASCALCASE_ERROR], possibleIdentifier, CheckedLinesThisFile + 1));
                         }
                     }
                     else
@@ -253,7 +253,7 @@ namespace CodeWatchdog
                             // TODO: The line report is inaccurate, as several lines may have passed.
                             // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
                             //
-                            Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[CAMELCASE_ERROR], possibleIdentifier, CheckedLinesOfCode + 1));
+                            Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[CAMELCASE_ERROR], possibleIdentifier, CheckedLinesThisFile + 1));
                         }
                     }
                 }
@@ -278,7 +278,7 @@ namespace CodeWatchdog
                 // TODO: The line report is inaccurate, as several lines may have passed.
                 // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
                 //
-                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[MISSINGBRACES_ERROR], CheckedLinesOfCode + 1));
+                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[MISSINGBRACES_ERROR], CheckedLinesThisFile + 1));
             }
             
             return;
@@ -299,7 +299,7 @@ namespace CodeWatchdog
 
             // COMMENTONSAMELINE_ERROR
             //
-            if (CheckedLinesOfCode > 1 && !precedingInput.Contains("\n"))
+            if (CheckedLinesThisFile > 1 && !precedingInput.Contains("\n"))
             {
                 if (ErrorCodeCount.ContainsKey(COMMENTONSAMELINE_ERROR))
                 {
@@ -310,7 +310,7 @@ namespace CodeWatchdog
                     ErrorCodeCount[COMMENTONSAMELINE_ERROR] = 1;
                 }
                 
-                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[COMMENTONSAMELINE_ERROR], CheckedLinesOfCode));
+                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[COMMENTONSAMELINE_ERROR], CheckedLinesThisFile));
             }
             
             // COMMENTNOSPACE_ERROR
@@ -327,7 +327,7 @@ namespace CodeWatchdog
                     ErrorCodeCount[COMMENTNOSPACE_ERROR] = 1;
                 }
                 
-                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[COMMENTNOSPACE_ERROR], CheckedLinesOfCode));
+                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[COMMENTNOSPACE_ERROR], CheckedLinesThisFile));
             }
         }
     }
