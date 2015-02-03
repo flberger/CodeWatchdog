@@ -32,9 +32,9 @@ using System.Text.RegularExpressions;
 namespace CodeWatchdog
 {
     /// <summary>
-    /// A Watchdog implementation for exozet's C# coding style.
+    /// A Watchdog implementation for C# that favors camelCase coding style.
     /// </summary>
-    public class ExozetCSharpWatchdog: Watchdog
+    public class CamelCaseCSharpWatchdog: Watchdog
     {
         // Error code variables, for reading convenience
         //
@@ -59,12 +59,12 @@ namespace CodeWatchdog
         //
         // TODO: if ()- nullchecks without else
         
-        // Rainers C#-Workshop
+        // C#-Workshop
         //
         // TODO: .Equals() statt ==
         // TODO: int parse mit invariant culture
         
-        // exozet's Unity C# Coding Conventions:
+        // Internal Unity C# Coding Conventions:
         //
         // TODO: Properties beginnen mit einem großen Buchstaben
         // TODO: Funktionen/Methoden und Klassen beginnen mit einem großen Buchstaben

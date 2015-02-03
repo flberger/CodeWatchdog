@@ -39,7 +39,7 @@
     <Compile Include="Watchdog.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="Logging.cs" />
-    <Compile Include="ExozetCSharpWatchdog.cs" />
+    <Compile Include="CamelCaseCSharpWatchdog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

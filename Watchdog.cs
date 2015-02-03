@@ -41,6 +41,7 @@ namespace CodeWatchdog
     /// </summary>
     public class Watchdog
     {
+        // TODO: Flag the start of a new file, for line count, wrong multiple statement errors etc. !!!
         // TODO: Errors should have a severity.
         
         // TODO: Most, if not all delimiters should be strings, and be parsed for accordingly.
@@ -430,21 +431,21 @@ namespace CodeWatchdog
             
             int count = 0;
   
-            summary.AppendLine("\n" + "+-------+----------------------------------------------------------+");
-            summary.AppendLine("| Count | Error type                                               |");
-            summary.AppendLine("+-------+----------------------------------------------------------+");
+            summary.AppendLine("\n" + "------------------------------------------------------------------");
+            summary.AppendLine(" Count    Error type");
+            summary.AppendLine("------------------------------------------------------------------");
             
             foreach (int errorCode in ErrorCodeCount.Keys)
             {
-                // Left-pad count for 3 characters.
+                // Left-pad count for 4 characters.
                 // Right-pad description for 56 characters.
                 //
-                summary.AppendLine(string.Format("|  {0,3}  | {1, -56} |", ErrorCodeCount[errorCode], ErrorCodeStrings[errorCode]));
+                summary.AppendLine(string.Format("  {0,4}    {1, -56}", ErrorCodeCount[errorCode], ErrorCodeStrings[errorCode]));
                 
                 count += ErrorCodeCount[errorCode];
             }
             
-            summary.AppendLine("+-------+----------------------------------------------------------+\n");
+            summary.AppendLine("------------------------------------------------------------------\n");
             
             summary.AppendLine(string.Format("Found {0} error(s).", count));
 
