@@ -26,7 +26,7 @@ public class Test
     }
 
     /// <summary>
-    /// Test
+    /// Properly documented method
     /// </summary>
     public void AnotherTest()
 //  {
@@ -49,4 +49,18 @@ public class Test
         
         return;
     }
+}
+
+// This does not suffice as a class documentation
+public class NotWellDocumented
+{
+    public static int k = 0;
+}
+
+/// <summary>
+/// Now this is really nice.
+/// </summary>
+public class ProperlyDocumented
+{
+    string thisClassHasBeen = "properly documented.";
 }

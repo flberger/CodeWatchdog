@@ -46,6 +46,8 @@ namespace CodeWatchdog
             cswd.Woff += PrintError;
 
             // TODO: Check if arg is present
+            
+            Logging.Info("Checking file " + args[0]);
 
             cswd.Check(args[0]);
             
