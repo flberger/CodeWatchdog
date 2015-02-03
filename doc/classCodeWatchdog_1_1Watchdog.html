@@ -102,7 +102,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>The abstract logic for parsing code files and calling handlers for code fragments. A new <a class="el" href="classCodeWatchdog_1_1Watchdog.html" title="The abstract logic for parsing code files and calling handlers for code fragments. A new Watchdog instance is expected to be created for parsing a project. ">Watchdog</a> instance is expected to be created for parsing a project.  
  <a href="classCodeWatchdog_1_1Watchdog.html#details">More...</a></p>
 
-<p>Inherited by <a class="el" href="classCodeWatchdog_1_1ExozetCSharpWatchdog.html">CodeWatchdog.ExozetCSharpWatchdog</a>.</p>
+<p>Inherited by <a class="el" href="classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html">CodeWatchdog.CamelCaseCSharpWatchdog</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -154,12 +154,14 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a9a371a409b9314d567406fb089ed5edf"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; int, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a9a371a409b9314d567406fb089ed5edf">ErrorCodeStrings</a></td></tr>
 <tr class="memdesc:a9a371a409b9314d567406fb089ed5edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translate error codes to human readable complaints. This is meant to be filled by subclasses implementing specific parsers.  <a href="#a9a371a409b9314d567406fb089ed5edf">More...</a><br /></td></tr>
 <tr class="separator:a9a371a409b9314d567406fb089ed5edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0462fb7f82bd68d7f2d65909d4098bb4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a0462fb7f82bd68d7f2d65909d4098bb4">CheckedLinesOfCode</a></td></tr>
-<tr class="separator:a0462fb7f82bd68d7f2d65909d4098bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae764318c861444d83787c118f70ddaad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#ae764318c861444d83787c118f70ddaad">TotalCheckedLines</a></td></tr>
+<tr class="separator:ae764318c861444d83787c118f70ddaad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc960c2e3effe555f3f2e70bc4e44964"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#afc960c2e3effe555f3f2e70bc4e44964">CommentLines</a></td></tr>
 <tr class="separator:afc960c2e3effe555f3f2e70bc4e44964"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ebe357967ff8b888f81eaf1714f5e7f"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; int, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a9ebe357967ff8b888f81eaf1714f5e7f">ErrorCodeCount</a></td></tr>
 <tr class="separator:a9ebe357967ff8b888f81eaf1714f5e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a702e419a8a04fe607775e934839b8f3e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCodeWatchdog_1_1Watchdog.html#a702e419a8a04fe607775e934839b8f3e">CheckedLinesThisFile</a></td></tr>
+<tr class="separator:a702e419a8a04fe607775e934839b8f3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -256,7 +258,7 @@ Private Attributes</h2></td></tr>
 
 <p>Initialise this <a class="el" href="namespaceCodeWatchdog.html" title="A coding convention compliance checker written in C#. ">CodeWatchdog</a> instance. Call this before parsing a new project. </p>
 
-<p>Reimplemented in <a class="el" href="classCodeWatchdog_1_1ExozetCSharpWatchdog.html#aab6a320412de7f51e5eb743d194cd26c">CodeWatchdog.ExozetCSharpWatchdog</a>.</p>
+<p>Reimplemented in <a class="el" href="classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#a0f92173e91c1f6ef1d58777601cdb5ae">CodeWatchdog.CamelCaseCSharpWatchdog</a>.</p>
 
 </div>
 </div>
@@ -328,7 +330,7 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a0462fb7f82bd68d7f2d65909d4098bb4"></a>
+<a class="anchor" id="a702e419a8a04fe607775e934839b8f3e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -336,7 +338,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int CodeWatchdog.Watchdog.CheckedLinesOfCode</td>
+          <td class="memname">int CodeWatchdog.Watchdog.CheckedLinesThisFile</td>
         </tr>
       </table>
   </td>
@@ -636,6 +638,26 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ae764318c861444d83787c118f70ddaad"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int CodeWatchdog.Watchdog.TotalCheckedLines</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8798dc1507bf6aa22f757391933f30c1"></a>
 <div class="memitem">
 <div class="memproto">
@@ -656,7 +678,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 28 2015 18:07:06 for CodeWatchdog by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Feb 3 2015 10:46:12 for CodeWatchdog by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

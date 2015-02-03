@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exozetcsharpwatchdog_2ecs',['ExozetCSharpWatchdog.cs',['../ExozetCSharpWatchdog_8cs.html',1,'']]]
+  ['camelcasecsharpwatchdog_2ecs',['CamelCaseCSharpWatchdog.cs',['../CamelCaseCSharpWatchdog_8cs.html',1,'']]]
 ];

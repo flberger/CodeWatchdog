@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tab_5ferror',['TAB_ERROR',['../classCodeWatchdog_1_1ExozetCSharpWatchdog.html#a59b66b72f57f734e67619f128f01cef3',1,'CodeWatchdog::ExozetCSharpWatchdog']]]
+  ['tab_5ferror',['TAB_ERROR',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#a7c89f8f612b9b996cda3bdb2483e48ea',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
+  ['totalcheckedlines',['TotalCheckedLines',['../classCodeWatchdog_1_1Watchdog.html#ae764318c861444d83787c118f70ddaad',1,'CodeWatchdog::Watchdog']]]
 ];

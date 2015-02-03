@@ -4,6 +4,6 @@ var searchData=
   ['main_2ecs',['Main.cs',['../Main_8cs.html',1,'']]],
   ['mainclass',['MainClass',['../classCodeWatchdog_1_1MainClass.html',1,'CodeWatchdog']]],
   ['maxcodescore',['MaxCodeScore',['../classCodeWatchdog_1_1Watchdog.html#a06b6dc62d1e82c974aa4186d8743e702',1,'CodeWatchdog::Watchdog']]],
-  ['missingbraces_5ferror',['MISSINGBRACES_ERROR',['../classCodeWatchdog_1_1ExozetCSharpWatchdog.html#ad1cac8bf3e6291634c1857773dbc1249',1,'CodeWatchdog::ExozetCSharpWatchdog']]],
-  ['multiplestatement_5ferror',['MULTIPLESTATEMENT_ERROR',['../classCodeWatchdog_1_1ExozetCSharpWatchdog.html#a53936ecd47ba22aa23d0a3b5364bb91a',1,'CodeWatchdog::ExozetCSharpWatchdog']]]
+  ['missingbraces_5ferror',['MISSINGBRACES_ERROR',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#a0c00ef5fdb41b039560a4a6c07907439',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
+  ['multiplestatement_5ferror',['MULTIPLESTATEMENT_ERROR',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#a7bd19ecd5a602c2f7e9ff6b42bc0dc30',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]]
 ];
