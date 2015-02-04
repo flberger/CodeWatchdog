@@ -43,7 +43,7 @@ namespace CodeWatchdog
             
             cswd.Init();
             
-            cswd.Woff += PrintError;
+            cswd.woff += PrintError;
 
             if (args.Length == 0)
             {

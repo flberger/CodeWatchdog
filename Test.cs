@@ -84,7 +84,7 @@ public class properlyDocumented : Object
     
     string ReturnString()
     {
-        return "test";
+        return "I went to the public library()";
     }
 }
 
