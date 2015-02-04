@@ -45,15 +45,19 @@ namespace CodeWatchdog
             
             cswd.Woff += PrintError;
 
-            // TODO: Check if arg is present
+            if (args.Length == 0)
+            {
+                Logging.Error("Please supply file names to check on the command line.");
+                
+                return;
+            }
             
-            Logging.Info("Checking file " + args[0]);
-
-            cswd.Check(args[0]);
-            
-            Logging.Info("Checking file again to spot double check errors");
-            
-            cswd.Check(args[0]);
+            foreach (string filePath in args)
+            {
+                Logging.Info("Checking file " + filePath);
+                
+                cswd.Check(filePath);
+            }
             
             Console.Write(cswd.Summary());
 

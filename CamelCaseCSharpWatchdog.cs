@@ -150,7 +150,8 @@ namespace CodeWatchdog
             //
             // Trim leading spaces before check
             //
-            if (CheckedLinesThisFile > 1 && !statement.TrimStart(char.Parse(" ")).StartsWith("\n"))
+            if (CheckedLinesThisFile > 1
+                && !statement.TrimStart(char.Parse(" "), char.Parse("\r")).StartsWith("\n"))
             {
                 if (ErrorCodeCount.ContainsKey(MULTIPLESTATEMENT_ERROR))
                 {
@@ -310,10 +311,15 @@ namespace CodeWatchdog
                 Woff(string.Format("{0} (line {1})", ErrorCodeStrings[COMMENTONSAMELINE_ERROR], CheckedLinesThisFile));
             }
             
+            Logging.Info("*** '" + comment + "'");
+            
             // COMMENTNOSPACE_ERROR
             // Also include /// doc comments.
+            // Ignore empty comments.
             //
-            if (!(comment.StartsWith(START_COMMENT_DELIMITER + " ") || comment.StartsWith(START_COMMENT_DELIMITER + "/ ")))
+            if (!comment.Trim().EndsWith(START_COMMENT_DELIMITER)
+                && !(comment.StartsWith(START_COMMENT_DELIMITER + " ")
+                     || comment.StartsWith(START_COMMENT_DELIMITER + "/ ")))
             {
                 if (ErrorCodeCount.ContainsKey(COMMENTNOSPACE_ERROR))
                 {
