@@ -48,6 +48,7 @@ namespace CodeWatchdog
         const int COMMENTNOSPACE_ERROR = 7;
         const int CLASSNOTDOCUMENTED_ERROR = 8;
         const int METHODNOTDOCUMENTED_ERROR = 9;
+        const int INTERFACENAMING_ERROR = 10;
         
         // MSDN Coding Conventions
         // https://msdn.microsoft.com/en-us/library/ff926074.aspx
@@ -107,6 +108,7 @@ namespace CodeWatchdog
             ErrorCodeStrings[COMMENTNOSPACE_ERROR] = "No space between comment delimiter and comment text";
             ErrorCodeStrings[CLASSNOTDOCUMENTED_ERROR] = "Public class not documented";
             ErrorCodeStrings[METHODNOTDOCUMENTED_ERROR] = "Public method not documented";
+            ErrorCodeStrings[INTERFACENAMING_ERROR] = "Interface name does not begin with an I";
             
             StatementHandler += CheckStatement;
             CommentHandler += CheckComment;
@@ -239,7 +241,6 @@ namespace CodeWatchdog
                         //
                         if (possibleIdentifier.Length > 2 && char.IsUpper(possibleIdentifier, 0))
                         {
-                            
                             if (ErrorCodeCount.ContainsKey(CAMELCASE_ERROR))
                             {
                                 ErrorCodeCount[CAMELCASE_ERROR] += 1;
@@ -385,7 +386,6 @@ namespace CodeWatchdog
             }
             else if (startBlock.Contains("enum "))
             {
-                // TODO: *** Enums werden in CamelCase Schreibweise (beginnend mit einem Großbuchstaben) benannt
                 string enumName = "";
                 
                 Match enumNameMatch = Regex.Match(startBlock, @"enum\s+(\w+)");
@@ -394,7 +394,7 @@ namespace CodeWatchdog
                 {
                     enumName = enumNameMatch.Groups[1].Value;
                     
-                    Logging.Debug("Class name: " + enumName);
+                    Logging.Debug("Enum name: " + enumName);
                 }
                 
                 // PASCALCASE_ERROR
@@ -419,7 +419,35 @@ namespace CodeWatchdog
             }
             else if (startBlock.Contains("interface "))
             {
-                // TODO: *** Interfaces beginnen mit einem großen "I"
+                string interfaceName = "";
+                
+                Match interfaceNameMatch = Regex.Match(startBlock, @"interface\s+(\w+)");
+                
+                if (interfaceNameMatch.Success)
+                {
+                    interfaceName = interfaceNameMatch.Groups[1].Value;
+                    
+                    Logging.Debug("Interface name: " + interfaceName);
+                }
+                
+                // INTERFACENAMING_ERROR
+                //
+                if (interfaceName.Length > 2 && !interfaceName.StartsWith("I"))
+                {
+                    if (ErrorCodeCount.ContainsKey(INTERFACENAMING_ERROR))
+                    {
+                        ErrorCodeCount[INTERFACENAMING_ERROR] += 1;
+                    }
+                    else
+                    {
+                        ErrorCodeCount[INTERFACENAMING_ERROR] = 1;
+                    }
+                    
+                    // TODO: The line report is inaccurate, as several lines may have passed.
+                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                    //
+                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[INTERFACENAMING_ERROR], interfaceName, CheckedLinesThisFile));
+                }
             }
             else if (startBlock.Contains("(") && startBlock.Contains(")"))
             {

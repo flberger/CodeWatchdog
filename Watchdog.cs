@@ -161,7 +161,7 @@ namespace CodeWatchdog
 
             while (character != -1)
             {
-                //Logging.Debug(string.Format("Parsing char '{0}'", (char)character));
+                Logging.Debug(string.Format("Parsing char '{0}'", (char)character));
                 
                 if ((char)character == '\n')
                 {
@@ -367,6 +367,8 @@ namespace CodeWatchdog
                     //
                     PreviousToken = sb.ToString();
                     
+                    Logging.Debug("Resetting StringBuilder");
+                    
                     sb.Length = 0;
                 }
                 else if (! commentRunning && !stringRunning && (char)character == START_BLOCK_DELIMITER)
@@ -384,6 +386,8 @@ namespace CodeWatchdog
                     //
                     PreviousToken = sb.ToString();
                     
+                    Logging.Debug("Resetting StringBuilder");
+                    
                     sb.Length = 0;
                 }
                 else if (! commentRunning && !stringRunning && (char)character == END_BLOCK_DELIMITER)
@@ -395,6 +399,10 @@ namespace CodeWatchdog
                     // TODO: Pop active block from stack
                     
                     PreviousToken = "";
+
+                    Logging.Debug("Resetting StringBuilder");
+                    
+                    sb.Length = 0;
                 }
                 else if (! commentRunning && STRING_DELIMITERS.Contains((char)character))
                 {

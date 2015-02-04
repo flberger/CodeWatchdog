@@ -67,7 +67,12 @@ public class properlyDocumented : Object
     // Neither is this a proper method documentation.
     public int Main()
     {
-        return 0;
+        return 12345;
+    }
+    
+    string ReturnString()
+    {
+        return "test";
     }
 }
 
@@ -81,4 +86,14 @@ enum SecondEnumeration
 {
     value1,
     value2
+}
+
+interface ITestThingy
+{
+    void Pass();
+}
+
+interface HardlyRecognisable
+{
+    void Noop();
 }
