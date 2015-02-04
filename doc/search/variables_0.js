@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['camelcase_5ferror',['CAMELCASE_ERROR',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#addf22dd1fb5bcabe4aabe709faec3a62',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
-  ['checkedlinesthisfile',['CheckedLinesThisFile',['../classCodeWatchdog_1_1Watchdog.html#a702e419a8a04fe607775e934839b8f3e',1,'CodeWatchdog::Watchdog']]],
-  ['commenthandler',['CommentHandler',['../classCodeWatchdog_1_1Watchdog.html#a548849b8b2735cbac66aa467aa7e13d5',1,'CodeWatchdog::Watchdog']]],
-  ['commentlines',['CommentLines',['../classCodeWatchdog_1_1Watchdog.html#afc960c2e3effe555f3f2e70bc4e44964',1,'CodeWatchdog::Watchdog']]],
-  ['commentnospace_5ferror',['COMMENTNOSPACE_ERROR',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#ae5c10925176e3b46a78cd1bf43064544',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
-  ['commentonsameline_5ferror',['COMMENTONSAMELINE_ERROR',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#ae7901e15739fe311a545b07ac027da4d',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]]
+  ['camelcaseerror',['CamelCaseError',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#aaa8efe6fdfe2accf1c3591881103d899',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
+  ['checkedlinesthisfile',['checkedLinesThisFile',['../classCodeWatchdog_1_1Watchdog.html#a6294aa989438c7aeeff9cc343765856c',1,'CodeWatchdog::Watchdog']]],
+  ['classnotdocumentederror',['ClassNotDocumentedError',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#ac2b45a4164d8158ce13b64e41953f94e',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
+  ['commenthandler',['commentHandler',['../classCodeWatchdog_1_1Watchdog.html#abe0d378d2f0f4117996f2e870fb0ce25',1,'CodeWatchdog::Watchdog']]],
+  ['commentlines',['commentLines',['../classCodeWatchdog_1_1Watchdog.html#a043f209cbbef3674761a6e11bdf8f95e',1,'CodeWatchdog::Watchdog']]],
+  ['commentnospaceerror',['CommentNoSpaceError',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#ac2aeab852179819754bae58dde0e5d62',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
+  ['commentonsamelineerror',['CommentOnSameLineError',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#aaa52af5825addbe0cc37da362ac9d898',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]]
 ];
