@@ -63,4 +63,10 @@ public class NotWellDocumented
 public class ProperlyDocumented
 {
     string thisClassHasBeen = "properly documented.";
+    
+    // Neither is this a proper method documentation.
+    public int Main()
+    {
+        return 0;
+    }
 }

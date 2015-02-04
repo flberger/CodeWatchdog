@@ -47,6 +47,7 @@ namespace CodeWatchdog
         const int COMMENTONSAMELINE_ERROR = 6;
         const int COMMENTNOSPACE_ERROR = 7;
         const int CLASSNOTDOCUMENTED_ERROR = 8;
+        const int METHODNOTDOCUMENTED_ERROR = 9;
         
         // MSDN Coding Conventions
         // https://msdn.microsoft.com/en-us/library/ff926074.aspx
@@ -112,7 +113,8 @@ namespace CodeWatchdog
             ErrorCodeStrings[MULTIPLESTATEMENT_ERROR] = "Multiple statements on a single line";
             ErrorCodeStrings[COMMENTONSAMELINE_ERROR] = "Comment not on a separate line";
             ErrorCodeStrings[COMMENTNOSPACE_ERROR] = "No space between comment delimiter and comment text";
-            ErrorCodeStrings[CLASSNOTDOCUMENTED_ERROR] = "Class not documented";
+            ErrorCodeStrings[CLASSNOTDOCUMENTED_ERROR] = "Public class not documented";
+            ErrorCodeStrings[METHODNOTDOCUMENTED_ERROR] = "Public method not documented";
             
             StatementHandler += CheckStatement;
             CommentHandler += CheckComment;
@@ -338,8 +340,6 @@ namespace CodeWatchdog
         /// <param name="startBlock">A string containing the start block.</param>
         void CheckStartBlock(string startBlock)
         {
-            // TODO: *** /// comment methods
-            
             // CLASSNOTDOCUMENTED_ERROR
             //
             if (startBlock.Contains("public ")
@@ -359,6 +359,25 @@ namespace CodeWatchdog
                 Woff(string.Format("{0} (line {1})", ErrorCodeStrings[CLASSNOTDOCUMENTED_ERROR], CheckedLinesThisFile));
             }
             
+            // METHODNOTDOCUMENTED_ERROR
+            //
+            if (startBlock.Contains("public ")
+                && startBlock.Contains("(")
+                && startBlock.Contains(")")
+                && !PreviousToken.Contains(START_COMMENT_DELIMITER + "/")
+                && !PreviousToken.Contains("</summary>"))
+            {
+                if (ErrorCodeCount.ContainsKey(METHODNOTDOCUMENTED_ERROR))
+                {
+                    ErrorCodeCount[METHODNOTDOCUMENTED_ERROR] += 1;
+                }
+                else
+                {
+                    ErrorCodeCount[METHODNOTDOCUMENTED_ERROR] = 1;
+                }
+                
+                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[METHODNOTDOCUMENTED_ERROR], CheckedLinesThisFile));
+            }
             return;
         }
     }
