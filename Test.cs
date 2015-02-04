@@ -70,3 +70,15 @@ public class properlyDocumented : Object
         return 0;
     }
 }
+
+public enum firstEnumeration
+{
+    foo,
+    bar
+}
+
+enum SecondEnumeration
+{
+    value1,
+    value2
+}

@@ -386,6 +386,36 @@ namespace CodeWatchdog
             else if (startBlock.Contains("enum "))
             {
                 // TODO: *** Enums werden in CamelCase Schreibweise (beginnend mit einem Großbuchstaben) benannt
+                string enumName = "";
+                
+                Match enumNameMatch = Regex.Match(startBlock, @"enum\s+(\w+)");
+                
+                if (enumNameMatch.Success)
+                {
+                    enumName = enumNameMatch.Groups[1].Value;
+                    
+                    Logging.Debug("Class name: " + enumName);
+                }
+                
+                // PASCALCASE_ERROR
+                // TODO: Check for more PascalCase / camelCase characteristics
+                //
+                if (enumName.Length > 2 && char.IsLower(enumName, 0))
+                {
+                    if (ErrorCodeCount.ContainsKey(PASCALCASE_ERROR))
+                    {
+                        ErrorCodeCount[PASCALCASE_ERROR] += 1;
+                    }
+                    else
+                    {
+                        ErrorCodeCount[PASCALCASE_ERROR] = 1;
+                    }
+                    
+                    // TODO: The line report is inaccurate, as several lines may have passed.
+                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                    //
+                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[PASCALCASE_ERROR], enumName, CheckedLinesThisFile));
+                }
             }
             else if (startBlock.Contains("interface "))
             {
