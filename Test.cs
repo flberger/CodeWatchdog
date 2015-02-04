@@ -52,7 +52,7 @@ public class Test
 }
 
 // This does not suffice as a class documentation
-public class NotWellDocumented
+public class NotWellDocumented: Object
 {
     public static int k = 0;
 }
@@ -60,7 +60,7 @@ public class NotWellDocumented
 /// <summary>
 /// Now this is really nice.
 /// </summary>
-public class ProperlyDocumented
+public class properlyDocumented : Object
 {
     string thisClassHasBeen = "properly documented.";
     

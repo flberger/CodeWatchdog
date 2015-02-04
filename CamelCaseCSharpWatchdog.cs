@@ -66,14 +66,6 @@ namespace CodeWatchdog
         // TODO: .Equals() statt ==
         // TODO: int parse mit invariant culture
         
-        // Internal Unity C# Coding Conventions:
-        //
-        // TODO: *** Properties beginnen mit einem großen Buchstaben
-        // TODO: *** Funktionen/Methoden und Klassen beginnen mit einem großen Buchstaben
-        // TODO: *** Parameter von Funktionen/Methoden beginnen mit einem kleinen Buchstaben
-        // TODO: *** Enums werden in CamelCase Schreibweise (beginnend mit einem Großbuchstaben) benannt
-        // TODO: *** Interfaces beginnen mit einem großen "I"
-                
         // c2 Code Smells: http://www.c2.com/cgi/wiki?CodeSmell
         //
         // TODO: Duplicated code
@@ -180,7 +172,7 @@ namespace CodeWatchdog
             {
                 possibleIdentifier = firstMatch.Groups[2].Value;
                 
-                Logging.Debug("Match: " + possibleIdentifier);
+                Logging.Debug("Possible identifier: " + possibleIdentifier);
             }
             else
             {
@@ -190,7 +182,7 @@ namespace CodeWatchdog
                 {
                     possibleIdentifier = secondMatch.Groups[2].Value;
                     
-                    Logging.Debug("Match: " + possibleIdentifier);
+                    Logging.Debug("Possible identifier: " + possibleIdentifier);
                 }
             }
             
@@ -340,44 +332,93 @@ namespace CodeWatchdog
         /// <param name="startBlock">A string containing the start block.</param>
         void CheckStartBlock(string startBlock)
         {
-            // CLASSNOTDOCUMENTED_ERROR
-            //
-            if (startBlock.Contains("public ")
-                && startBlock.Contains(" class ")
-                && !PreviousToken.Contains(START_COMMENT_DELIMITER + "/")
-                && !PreviousToken.Contains("</summary>"))
+            if (startBlock.Contains("class "))
             {
-                if (ErrorCodeCount.ContainsKey(CLASSNOTDOCUMENTED_ERROR))
+                // CLASSNOTDOCUMENTED_ERROR
+                //
+                if (startBlock.Contains("public ")
+                    && !PreviousToken.Contains(START_COMMENT_DELIMITER + "/")
+                    && !PreviousToken.Contains("</summary>"))
                 {
-                    ErrorCodeCount[CLASSNOTDOCUMENTED_ERROR] += 1;
-                }
-                else
-                {
-                    ErrorCodeCount[CLASSNOTDOCUMENTED_ERROR] = 1;
+                    if (ErrorCodeCount.ContainsKey(CLASSNOTDOCUMENTED_ERROR))
+                    {
+                        ErrorCodeCount[CLASSNOTDOCUMENTED_ERROR] += 1;
+                    }
+                    else
+                    {
+                        ErrorCodeCount[CLASSNOTDOCUMENTED_ERROR] = 1;
+                    }
+                    
+                    Woff(string.Format("{0} (line {1})", ErrorCodeStrings[CLASSNOTDOCUMENTED_ERROR], CheckedLinesThisFile));
                 }
                 
-                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[CLASSNOTDOCUMENTED_ERROR], CheckedLinesThisFile));
+                string className = "";
+                
+                Match classNameMatch = Regex.Match(startBlock, @"class\s+(\w+)");
+                
+                if (classNameMatch.Success)
+                {
+                    className = classNameMatch.Groups[1].Value;
+                    
+                    Logging.Debug("Class name: " + className);
+                }
+                
+                // PASCALCASE_ERROR
+                // TODO: Check for more PascalCase / camelCase characteristics
+                //
+                if (className.Length > 2 && char.IsLower(className, 0))
+                {
+                    if (ErrorCodeCount.ContainsKey(PASCALCASE_ERROR))
+                    {
+                        ErrorCodeCount[PASCALCASE_ERROR] += 1;
+                    }
+                    else
+                    {
+                        ErrorCodeCount[PASCALCASE_ERROR] = 1;
+                    }
+                    
+                    // TODO: The line report is inaccurate, as several lines may have passed.
+                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                    //
+                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[PASCALCASE_ERROR], className, CheckedLinesThisFile));
+                }
+            }
+            else if (startBlock.Contains("enum "))
+            {
+                // TODO: *** Enums werden in CamelCase Schreibweise (beginnend mit einem Großbuchstaben) benannt
+            }
+            else if (startBlock.Contains("interface "))
+            {
+                // TODO: *** Interfaces beginnen mit einem großen "I"
+            }
+            else if (startBlock.Contains("(") && startBlock.Contains(")"))
+            {
+                // TODO: *** Funktionen/Methoden und Klassen beginnen mit einem großen Buchstaben
+                // TODO: *** Parameter von Funktionen/Methoden beginnen mit einem kleinen Buchstaben
+                
+                // METHODNOTDOCUMENTED_ERROR
+                //
+                if (startBlock.Contains("public ")
+                    && !PreviousToken.Contains(START_COMMENT_DELIMITER + "/")
+                    && !PreviousToken.Contains("</summary>"))
+                {
+                    if (ErrorCodeCount.ContainsKey(METHODNOTDOCUMENTED_ERROR))
+                    {
+                        ErrorCodeCount[METHODNOTDOCUMENTED_ERROR] += 1;
+                    }
+                    else
+                    {
+                        ErrorCodeCount[METHODNOTDOCUMENTED_ERROR] = 1;
+                    }
+                    
+                    Woff(string.Format("{0} (line {1})", ErrorCodeStrings[METHODNOTDOCUMENTED_ERROR], CheckedLinesThisFile));
+                }
+            }
+            else
+            {
+                // TODO: *** Properties beginnen mit einem großen Buchstaben
             }
             
-            // METHODNOTDOCUMENTED_ERROR
-            //
-            if (startBlock.Contains("public ")
-                && startBlock.Contains("(")
-                && startBlock.Contains(")")
-                && !PreviousToken.Contains(START_COMMENT_DELIMITER + "/")
-                && !PreviousToken.Contains("</summary>"))
-            {
-                if (ErrorCodeCount.ContainsKey(METHODNOTDOCUMENTED_ERROR))
-                {
-                    ErrorCodeCount[METHODNOTDOCUMENTED_ERROR] += 1;
-                }
-                else
-                {
-                    ErrorCodeCount[METHODNOTDOCUMENTED_ERROR] = 1;
-                }
-                
-                Woff(string.Format("{0} (line {1})", ErrorCodeStrings[METHODNOTDOCUMENTED_ERROR], CheckedLinesThisFile));
-            }
             return;
         }
     }
