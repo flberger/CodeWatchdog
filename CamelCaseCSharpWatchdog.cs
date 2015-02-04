@@ -188,7 +188,8 @@ namespace CodeWatchdog
                 }
             }
             
-            if (possibleIdentifier != "")
+            if (possibleIdentifier != ""
+                && !statement.Contains("using"))
             {
                 // TODO: Identifiers should not contain common types. But this is hard to check, as 'Char' or 'Int' may be legitimate in 'Charter' or 'International'.
                 
