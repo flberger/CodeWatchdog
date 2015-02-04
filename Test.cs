@@ -28,7 +28,7 @@ public class Test
     /// <summary>
     /// Properly documented method
     /// </summary>
-    public void AnotherTest()
+    public void anotherTest ()
 //  {
     {
         // Console.Writeline("Commented");
@@ -63,6 +63,18 @@ public class NotWellDocumented: Object
 public class properlyDocumented : Object
 {
     string thisClassHasBeen = "properly documented.";
+    
+    public string getterProperty
+    {
+        get;
+        private set;
+    }
+    
+    public string SetterProperty
+    {
+        private get;
+        set;
+    }
     
     // Neither is this a proper method documentation.
     public int Main()

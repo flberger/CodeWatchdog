@@ -451,8 +451,7 @@ namespace CodeWatchdog
             }
             else if (startBlock.Contains("(") && startBlock.Contains(")"))
             {
-                // TODO: *** Funktionen/Methoden und Klassen beginnen mit einem großen Buchstaben
-                // TODO: *** Parameter von Funktionen/Methoden beginnen mit einem kleinen Buchstaben
+                // TODO: Parameter von Funktionen/Methoden beginnen mit einem kleinen Buchstaben
                 
                 // METHODNOTDOCUMENTED_ERROR
                 //
@@ -471,10 +470,72 @@ namespace CodeWatchdog
                     
                     Woff(string.Format("{0} (line {1})", ErrorCodeStrings[METHODNOTDOCUMENTED_ERROR], CheckedLinesThisFile));
                 }
+                
+                string methodName = "";
+                
+                Match methodNameMatch = Regex.Match(startBlock, @"\w+\s+(\w+)\s*\(");
+                
+                if (methodNameMatch.Success)
+                {
+                    methodName = methodNameMatch.Groups[1].Value;
+                    
+                    Logging.Debug("Method name: " + methodName);
+                }
+                
+                // PASCALCASE_ERROR
+                // TODO: Check for more PascalCase / camelCase characteristics
+                //
+                if (methodName.Length > 2 && char.IsLower(methodName, 0))
+                {
+                    if (ErrorCodeCount.ContainsKey(PASCALCASE_ERROR))
+                    {
+                        ErrorCodeCount[PASCALCASE_ERROR] += 1;
+                    }
+                    else
+                    {
+                        ErrorCodeCount[PASCALCASE_ERROR] = 1;
+                    }
+                    
+                    // TODO: The line report is inaccurate, as several lines may have passed.
+                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                    //
+                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[PASCALCASE_ERROR], methodName, CheckedLinesThisFile));
+                }
             }
             else
             {
-                // TODO: *** Properties beginnen mit einem großen Buchstaben
+                // Assuming it's a property
+                
+                string propertyName = "";
+                
+                Match propertyNameMatch = Regex.Match(startBlock, @"\s+(\w+)\s*$");
+                
+                if (propertyNameMatch.Success)
+                {
+                    propertyName = propertyNameMatch.Groups[1].Value;
+                    
+                    Logging.Debug("Property name: " + propertyName);
+                }
+                
+                // PASCALCASE_ERROR
+                // TODO: Check for more PascalCase / camelCase characteristics
+                //
+                if (propertyName.Length > 2 && char.IsLower(propertyName, 0))
+                {
+                    if (ErrorCodeCount.ContainsKey(PASCALCASE_ERROR))
+                    {
+                        ErrorCodeCount[PASCALCASE_ERROR] += 1;
+                    }
+                    else
+                    {
+                        ErrorCodeCount[PASCALCASE_ERROR] = 1;
+                    }
+                    
+                    // TODO: The line report is inaccurate, as several lines may have passed.
+                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                    //
+                    Woff(string.Format("{0}: '{1}' (line {2})", ErrorCodeStrings[PASCALCASE_ERROR], propertyName, CheckedLinesThisFile));
+                }
             }
             
             return;
