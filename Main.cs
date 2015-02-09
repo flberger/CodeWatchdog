@@ -56,7 +56,22 @@ namespace CodeWatchdog
             {
                 Logging.Info("Checking file " + filePath);
                 
-                cswd.Check(filePath);
+                try
+                {
+                    cswd.Check(filePath);
+                }
+                catch (System.IO.FileNotFoundException e)
+                {
+                    // TODO: Log, and report later
+                    //
+                    Logging.Error(string.Format ("Cannot check '{0}' - file not found.", filePath));
+                }
+                catch (System.IO.DirectoryNotFoundException e)
+                {
+                    // TODO: Log, and report later
+                    //
+                    Logging.Error(string.Format ("Cannot check '{0}' - directory not found.", filePath));
+                }
             }
             
             Console.Write(cswd.Summary());

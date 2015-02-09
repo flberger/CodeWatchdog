@@ -99,6 +99,8 @@ namespace CodeWatchdog
         
         const double MaxCodeScore = 10.0;
         
+        Nullable<DateTime> startTime = null;
+        
         // Class-accessible variable for each run
         //
         protected int checkedLinesThisFile;
@@ -125,6 +127,11 @@ namespace CodeWatchdog
         /// <param name="filepath">The path to the file.</param>
         public void Check(string filepath)
         {
+            if (startTime == null)
+            {
+                startTime = DateTime.Now;
+            }
+            
             // Local variables needed for this scan only
             //
             StreamReader sr = new StreamReader(filepath, true);
@@ -462,6 +469,16 @@ namespace CodeWatchdog
             StringBuilder summary = new StringBuilder("\nSUMMARY\n=======\n\n");
             
             summary.AppendLine(string.Format("Checked {0} line(s) of code.", totalCheckedLines));
+            
+            if (startTime != null)
+            {
+                TimeSpan duration = DateTime.Now - (DateTime)startTime;
+                
+                summary.AppendLine(string.Format("Processing time: {0:00}:{1:00}.{2}",
+                                                 duration.Minutes,
+                                                 duration.Seconds,
+                                                 duration.Milliseconds));
+            }
             
             // TODO: Add comment lines value to score formula
             //
