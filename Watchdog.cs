@@ -490,14 +490,29 @@ namespace CodeWatchdog
             summary.AppendLine(" Count    Error type");
             summary.AppendLine("------------------------------------------------------------------");
             
-            foreach (int errorCode in errorCodeCount.Keys)
+            // Sort errors by frequency
+            // http://stackoverflow.com/a/292/1132250
+            //
+            List<KeyValuePair<int, int>> errorCodeCountSorted = new List<KeyValuePair<int, int>>(errorCodeCount);
+            
+            errorCodeCountSorted.Sort(delegate(KeyValuePair<int, int> firstPair,
+                                               KeyValuePair<int, int> nextPair)
+                                      {
+                                          // Sort reversed
+                                          //
+                                          return nextPair.Value.CompareTo(firstPair.Value);
+                                      });
+            
+            foreach (KeyValuePair<int, int> errorCodeCountPair in errorCodeCountSorted)
             {
                 // Left-pad count for 4 characters.
                 // Right-pad description for 56 characters.
                 //
-                summary.AppendLine(string.Format("  {0,4}    {1, -56}", errorCodeCount[errorCode], errorCodeStrings[errorCode]));
+                summary.AppendLine(string.Format(" {0,5}    {1, -56}",
+                                                 errorCodeCountPair.Value,
+                                                 errorCodeStrings[errorCodeCountPair.Key]));
                 
-                count += errorCodeCount[errorCode];
+                count += errorCodeCountPair.Value;
             }
             
             summary.AppendLine("------------------------------------------------------------------\n");
