@@ -70,15 +70,22 @@ namespace CodeWatchdog
         // c2 Code Smells: http://www.c2.com/cgi/wiki?CodeSmell
         //
         // TODO: Duplicated code
+        //
         // TODO: Method too big
-        // TODO: Classes with too many variables
-        // TODO: Classes with too little variables
         // TODO: Classes with too much code
         // TODO: Classes with too little code
+        //
+        // TODO: Classes with too many variables
+        // TODO: Classes with too little variables
+        //
         // TODO: Too many private methods
+        //
         // TODO: Empty catch clauses
+        //
         // TODO: Long method names
+        //
         // TODO: Too many parameters
+        //
         // TODO: Deeply nested if clauses / loops
         
         // TODO: Code-comment-ratio evaluation

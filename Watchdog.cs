@@ -547,21 +547,30 @@ namespace CodeWatchdog
             // Apply a exponential parabola to get quicker to lower values.
             // Values found by trying.
             //
-            score = Math.Exp(6 * score - 6);
+            double expScore = Math.Exp(6 * score - 6);
+            
+            // Weigh MaxCodeScore by the result to get a number that is
+            // meaningful to humans. MaxCodeScore means no errors.
+            //
+            expScore = expScore * MaxCodeScore;
+            
+            summary.AppendLine(string.Format("Your code is rated {0:0.##} / {1:0.##} (exp scale).", expScore, MaxCodeScore));
             
             // Alternative:
             //
             // Apply a quadratic parabola to get quicker to lower values.
             // Values found by trying.
             //
-            // score = Math.Pow(score, 2);
-            
+            // TODO: Choose one.
+            //
+            double quadraticScore = Math.Pow(score, 2);
+
             // Weigh MaxCodeScore by the result to get a number that is
             // meaningful to humans. MaxCodeScore means no errors.
             //
-            score = score * MaxCodeScore;
-           
-            summary.AppendLine(string.Format("Your code is rated {0:0.##} / {1:0.##}.", score, MaxCodeScore));
+            quadraticScore = quadraticScore * MaxCodeScore;
+            
+            summary.AppendLine(string.Format("Your code is rated {0:0.##} / {1:0.##} (quadratic scale).", quadraticScore, MaxCodeScore));
             
             return summary.ToString();
         }
