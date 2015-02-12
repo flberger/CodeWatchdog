@@ -21,4 +21,4 @@ push:
 update_files:
 	cp -v CamelCaseCSharpWatchdog.cs Logging.cs Watchdog.cs /cygdrive/g/watchdog_test/Assets/packages/UBS/Dependencies/CodeWatchdog/
 	cp -v Test.cs /cygdrive/g/watchdog_test/Assets/scripts/
-	cp -v CamelCaseCSharpWatchdog.cs Logging.cs Watchdog.cs /cygdrive/g/watchdog_test/Assets/packages/CodeWatchdogEditor/Editor/
+	cp -v CamelCaseCSharpWatchdog.cs Logging.cs Watchdog.cs /cygdrive/g/watchdog_test/Assets/packages/UnityGameBase/Utils/CodeWatchdogEditor/Editor/

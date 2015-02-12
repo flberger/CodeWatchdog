@@ -221,6 +221,8 @@ namespace CodeWatchdog
                 }
             }
             
+            // TODO: Use C# Keywords list from https://msdn.microsoft.com/en-us/library/x53a06bb.aspx
+            //
             if (possibleIdentifier != ""
                 && possibleIdentifier != "if"
                 && possibleIdentifier != "else"
