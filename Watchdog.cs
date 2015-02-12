@@ -544,33 +544,30 @@ namespace CodeWatchdog
             
             // Now for the psychology part. :-)
             //
-            // Apply a exponential parabola to get quicker to lower values.
-            // Values found by trying.
-            //
-            double expScore = Math.Exp(6 * score - 6);
-            
-            // Weigh MaxCodeScore by the result to get a number that is
-            // meaningful to humans. MaxCodeScore means no errors.
-            //
-            expScore = expScore * MaxCodeScore;
-            
-            summary.AppendLine(string.Format("Your code is rated {0:0.##} / {1:0.##} (exp scale).", expScore, MaxCodeScore));
-            
-            // Alternative:
-            //
             // Apply a quadratic parabola to get quicker to lower values.
-            // Values found by trying.
-            //
-            // TODO: Choose one.
             //
             double quadraticScore = Math.Pow(score, 2);
-
+            
             // Weigh MaxCodeScore by the result to get a number that is
             // meaningful to humans. MaxCodeScore means no errors.
             //
             quadraticScore = quadraticScore * MaxCodeScore;
             
-            summary.AppendLine(string.Format("Your code is rated {0:0.##} / {1:0.##} (quadratic scale).", quadraticScore, MaxCodeScore));
+            summary.AppendLine(string.Format("Your code is rated {0:0.##} / {1:0.##}.", quadraticScore, MaxCodeScore));
+            
+            // Alternative:
+            //
+            // Apply a exponential parabola to get quicker to lower values.
+            // Values found by trying.
+            //
+//            double expScore = Math.Exp(6 * score - 6);
+            
+            // Weigh MaxCodeScore by the result to get a number that is
+            // meaningful to humans. MaxCodeScore means no errors.
+            //
+//            expScore = expScore * MaxCodeScore;
+            
+//            summary.AppendLine(string.Format("Your code is rated {0:0.##} / {1:0.##} (exp scale).", expScore, MaxCodeScore));
             
             return summary.ToString();
         }
