@@ -1,0 +1,67 @@
+TODO for CodeWatchdog
+=====================
+
+See https://bitbucket.org/flberger/codewatchdog/issues for the issue tracker.
+
+
+## Watchdog
+
+TODO: Errors should have a severity.
+TODO: Most, if not all delimiters should be strings, and be parsed for accordingly.
+TODO: Probably use a state machine instead of `stringRunning` etc. flags.
+TODO: Set active block to block type (stack)
+TODO: Add comment lines value to score formula
+
+
+## CamelCaseCSharpWatchdog
+
+TODO: Code-comment-ratio evaluation - neither too little nor too much
+TODO: *** Check for doc comments of public members
+TODO: Check for actual 4-character indents
+TODO: Inline Property get / set should be legal
+TODO: Use C# Keywords list from https://msdn.microsoft.com/en-us/library/x53a06bb.aspx
+TODO: Identifiers should not contain common types. But this is hard to check, as 'Char' or 'Int' may be legitimate in 'Charter' or 'International'.
+TODO: Check for more PascalCase / camelCase characteristics
+TODO: Fix line report
+
+
+### MSDN Coding Conventions
+
+https://msdn.microsoft.com/en-us/library/ff926074.aspx
+https://msdn.microsoft.com/en-us/library/xzf533w0%28v=vs.71%29.aspx
+
+TODO: Check camelCase for parameters
+TODO: Check for implicit typing with var in for, foreach
+TODO: Check for 'using' instead of 'try ... finally' for cleanups
+TODO: Use var for common types and new statements.
+TODO: Begin comments with uppercase letter
+TODO: End comment with a period.
+
+
+### Selected antipatterns
+
+TODO: *** Check for if (object != null)- nullchecks without else
+TODO: *** Check for redundant if-clauses with `== true` and `return true` usage     
+
+
+### C#-Workshop
+
+TODO: Check for `.Equals()` instead of `==`
+TODO: Check for parsing int using invariant culture
+
+
+### c2 Code Smells
+
+http://www.c2.com/cgi/wiki?CodeSmell
+
+TODO: Check for duplicated code
+TODO: Check for too long methods
+TODO: Check for classes with too little code
+TODO: Check for empty catch clauses
+TODO: Check for too long method names
+TODO: Check for too many parameters
+TODO: Check for deeply nested if clauses / loops (arrow antipattern)
+        
+
+
+End of TODO.
