@@ -39,9 +39,9 @@
     <Compile Include="Watchdog.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="Logging.cs" />
-    <Compile Include="CamelCaseCSharpWatchdog.cs" />
     <Compile Include="ParsingParameters.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\CamelCaseCSharpWatchdogParsingParameters.cs" />
+    <Compile Include="CamelCaseCSharpWatchdog\CamelCaseCSharpWatchdog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
