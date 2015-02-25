@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['interfacenamingerror',['InterfaceNamingError',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#a71d57696be939f326754c6f21f73ded9',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]]
+  ['foundendcommentdelimiters',['foundEndCommentDelimiters',['../classCodeWatchdog_1_1Watchdog.html#a548e491d80d1ab8f6b4559daa8cc415c',1,'CodeWatchdog::Watchdog']]],
+  ['foundstartcommentdelimiters',['foundStartCommentDelimiters',['../classCodeWatchdog_1_1Watchdog.html#a5ee08a31a38e2f15739dafca953650cf',1,'CodeWatchdog::Watchdog']]]
 ];

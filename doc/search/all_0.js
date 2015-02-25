@@ -8,6 +8,7 @@ var searchData=
   ['camelcaseerror',['CamelCaseError',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#aaa8efe6fdfe2accf1c3591881103d899',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
   ['check',['Check',['../classCodeWatchdog_1_1Watchdog.html#ab1a93ea043b9cf199f706ce1bf7c2422',1,'CodeWatchdog::Watchdog']]],
   ['checkcomment',['CheckComment',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#a4d4205d25fa590e7dba1642a4549bcf5',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
+  ['checkcommentdelimiters',['CheckCommentDelimiters',['../classCodeWatchdog_1_1Watchdog.html#a45c199d8f38e212fb2e579203cebdf41',1,'CodeWatchdog::Watchdog']]],
   ['checkedfiles',['checkedFiles',['../classCodeWatchdog_1_1Watchdog.html#a74a2e9cbb6b40e6c95bcb42555f04c45',1,'CodeWatchdog::Watchdog']]],
   ['checkedlinesthisfile',['checkedLinesThisFile',['../classCodeWatchdog_1_1Watchdog.html#a6294aa989438c7aeeff9cc343765856c',1,'CodeWatchdog::Watchdog']]],
   ['checkstartblock',['CheckStartBlock',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#ab716cf7a5916e5e9bf05f4afcf989e1c',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
@@ -17,5 +18,7 @@ var searchData=
   ['commenthandler',['commentHandler',['../classCodeWatchdog_1_1Watchdog.html#abe0d378d2f0f4117996f2e870fb0ce25',1,'CodeWatchdog::Watchdog']]],
   ['commentlines',['commentLines',['../classCodeWatchdog_1_1Watchdog.html#a043f209cbbef3674761a6e11bdf8f95e',1,'CodeWatchdog::Watchdog']]],
   ['commentnospaceerror',['CommentNoSpaceError',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#ac2aeab852179819754bae58dde0e5d62',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
-  ['commentonsamelineerror',['CommentOnSameLineError',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#aaa52af5825addbe0cc37da362ac9d898',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]]
+  ['commentonsamelineerror',['CommentOnSameLineError',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#aaa52af5825addbe0cc37da362ac9d898',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
+  ['commentrunning',['commentRunning',['../classCodeWatchdog_1_1Watchdog.html#a44e6c10b968b16cc16cd1f5dacd73571',1,'CodeWatchdog::Watchdog']]],
+  ['commentsb',['commentSb',['../classCodeWatchdog_1_1Watchdog.html#ac872735c42a8527f981520814bbe4568',1,'CodeWatchdog::Watchdog']]]
 ];
