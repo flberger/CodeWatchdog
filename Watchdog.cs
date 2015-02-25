@@ -140,38 +140,7 @@ namespace CodeWatchdog
         /// <param name="filepath">The path to the file.</param>
         public void Check(string filepath)
         {
-            if (startTime == null)
-            {
-                startTime = DateTime.Now;
-            }
-            
-            // Local variables needed for this scan only
-            //
-            sr = new StreamReader(filepath, true);
-
-            sb = new StringBuilder();
-            
-            commentSb = new StringBuilder();
-
-            previousChar = null;
-            
-            stringRunning = false;
-            
-            // -1 = not scanning for further delimiters
-            // 0..n = index in START_COMMENT_DELIMITER that has been found
-            //
-            foundStartCommentDelimiters = -1;
-
-            // See above.
-            //
-            foundEndCommentDelimiters = -1;
-            
-            commentRunning = false;
-            
-            // Resetting globals
-            //
-            checkedLinesThisFile = 0;
-            previousToken = "";
+            ResetVariables(filepath);
             
             // Let's go!
             //
@@ -469,6 +438,33 @@ namespace CodeWatchdog
             
             checkedFiles += 1;
 
+            return;
+        }
+
+        void ResetVariables(string filepath)
+        {
+            if (startTime == null)
+            {
+                startTime = DateTime.Now;
+            }
+
+            sr = new StreamReader (filepath, true);
+            sb = new StringBuilder ();
+            commentSb = new StringBuilder ();
+            
+            previousChar = null;
+            
+            stringRunning = false;
+            
+            foundStartCommentDelimiters = -1;
+            foundEndCommentDelimiters = -1;
+            
+            commentRunning = false;
+            
+            checkedLinesThisFile = 0;
+            
+            previousToken = "";
+            
             return;
         }
         
