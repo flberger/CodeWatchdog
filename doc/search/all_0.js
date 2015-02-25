@@ -2,6 +2,9 @@ var searchData=
 [
   ['camelcasecsharpwatchdog',['CamelCaseCSharpWatchdog',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html',1,'CodeWatchdog']]],
   ['camelcasecsharpwatchdog_2ecs',['CamelCaseCSharpWatchdog.cs',['../CamelCaseCSharpWatchdog_8cs.html',1,'']]],
+  ['camelcasecsharpwatchdogparsingparameters',['CamelCaseCSharpWatchdogParsingParameters',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdogParsingParameters.html',1,'CodeWatchdog']]],
+  ['camelcasecsharpwatchdogparsingparameters',['CamelCaseCSharpWatchdogParsingParameters',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdogParsingParameters.html#aeb6504544bf43e278d5a553c30be8d15',1,'CodeWatchdog::CamelCaseCSharpWatchdogParsingParameters']]],
+  ['camelcasecsharpwatchdogparsingparameters_2ecs',['CamelCaseCSharpWatchdogParsingParameters.cs',['../CamelCaseCSharpWatchdogParsingParameters_8cs.html',1,'']]],
   ['camelcaseerror',['CamelCaseError',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#aaa8efe6fdfe2accf1c3591881103d899',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
   ['check',['Check',['../classCodeWatchdog_1_1Watchdog.html#ab1a93ea043b9cf199f706ce1bf7c2422',1,'CodeWatchdog::Watchdog']]],
   ['checkcomment',['CheckComment',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#a4d4205d25fa590e7dba1642a4549bcf5',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
