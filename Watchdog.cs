@@ -81,21 +81,41 @@ namespace CodeWatchdog
         /// </summary>
         protected Dictionary<int, string> errorCodeStrings;
         
-        // Variables for processing a project
-        //
+        #region Variables for processing a project
+
         protected int totalCheckedLines;
         protected int commentLines;
         protected Dictionary<int, int> errorCodeCount;
         protected int checkedFiles;
         
         const double MaxCodeScore = 10.0;
-        
-        Nullable<DateTime> startTime = null;
-        
-        // Class-accessible variable for each run
-        //
+
+        #endregion
+
+        #region Class-accessible variables for each run
+
         protected int checkedLinesThisFile;
         protected string previousToken;
+
+        StreamReader sr;
+        StringBuilder sb;
+        StringBuilder commentSb;
+        
+        Nullable<char> previousChar;
+        
+        bool stringRunning;
+        
+        // -1 = not scanning for further delimiters
+        // 0..n = index in START_COMMENT_DELIMITER that has been found
+        //
+        int foundStartCommentDelimiters;
+        int foundEndCommentDelimiters;
+        
+        bool commentRunning;
+
+        Nullable<DateTime> startTime = null;
+        
+        #endregion
         
         /// <summary>
         /// Initialise this CodeWatchdog instance.
@@ -127,31 +147,31 @@ namespace CodeWatchdog
             
             // Local variables needed for this scan only
             //
-            StreamReader sr = new StreamReader(filepath, true);
+            sr = new StreamReader(filepath, true);
 
-            StringBuilder sb = new StringBuilder();
+            sb = new StringBuilder();
             
-            StringBuilder commentSb = new StringBuilder();
+            commentSb = new StringBuilder();
 
-            Nullable<char> previousChar = null;
+            previousChar = null;
+            
+            stringRunning = false;
+            
+            // -1 = not scanning for further delimiters
+            // 0..n = index in START_COMMENT_DELIMITER that has been found
+            //
+            foundStartCommentDelimiters = -1;
+
+            // See above.
+            //
+            foundEndCommentDelimiters = -1;
+            
+            commentRunning = false;
             
             // Resetting globals
             //
             checkedLinesThisFile = 0;
             previousToken = "";
-            
-            bool stringRunning = false;
-            
-            // -1 = not scanning for further delimiters
-            // 0..n = index in START_COMMENT_DELIMITER that has been found
-            //
-            int foundStartCommentDelimiters = -1;
-
-            // See above.
-            //
-            int foundEndCommentDelimiters = -1;
-            
-            bool commentRunning = false;
             
             // Let's go!
             //
