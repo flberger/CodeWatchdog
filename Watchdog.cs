@@ -174,107 +174,12 @@ namespace CodeWatchdog
                     foundStartCommentDelimiters = -1;
                 }
 
-                if (commentRunning && parsingParameters.endCommentDelimiter.Contains(((char)character).ToString()))
+                if (commentRunning
+                    && parsingParameters.endCommentDelimiter.Contains(((char)character).ToString()))
                 {
                     // Gotcha. This needs further attention.
                     
-                    Logging.Debug(string.Format("Found possible end comment delimiter character: '{0}'", (char)character));
-                    
-                    if (foundEndCommentDelimiters == -1)
-                    {
-                        // Not scanning for further end comment characters
-                        
-                        if ((char)character == char.Parse(parsingParameters.endCommentDelimiter.Substring(0, 1)))
-                        {
-                            if (parsingParameters.endCommentDelimiter.Length == 1)
-                            {
-                                string removedChar = "";
-                                
-                                if (parsingParameters.startCommentDelimiter.Length > 1)
-                                {
-                                    removedChar = parsingParameters.startCommentDelimiter.Substring(0, 1);
-                                }
-                                
-                                Logging.Info(string.Format("Comment complete in: '{0}'", removedChar + commentSb.ToString() + ((char)character).ToString()));
-    
-                                if (commentHandler != null)
-                                {
-                                    commentHandler(removedChar + commentSb.ToString(),
-                                                   sb.ToString());
-                                }
-                                
-                                // NOTE: Set after handler call
-                                //
-                                previousToken = removedChar + commentSb.ToString();
-                                
-                                commentSb.Length = 0;
-                                
-                                commentLines += 1;
-                                
-                                commentRunning = false;
-                            }
-                            else
-                            {
-                                Logging.Debug("Will scan for more end comment delimiter characters");
-                                
-                                foundEndCommentDelimiters = 0;
-                            }
-                        }
-                        // No 'else' - not interested in this character
-                    }    
-                    else
-                    {
-                        Logging.Debug("Already scanning for end comment characters");
-                        
-                        if ((char)character == char.Parse(parsingParameters.endCommentDelimiter.Substring(foundStartCommentDelimiters + 1, 1)))
-                        {
-                            Logging.Debug(string.Format("Next possible end comment delimiter character found: '{0}'", (char)character));
-                            
-                            // Compensate 0 index offset
-                            //
-                            if (foundEndCommentDelimiters + 2 == parsingParameters.endCommentDelimiter.Length)
-                            {
-                                string removedChar = "";
-                                
-                                if (parsingParameters.startCommentDelimiter.Length > 1)
-                                {
-                                    removedChar = parsingParameters.startCommentDelimiter.Substring(0, 1);
-                                }
-                                
-                                Logging.Info(string.Format("Comment complete in: '{0}'", removedChar + commentSb.ToString() + ((char)character).ToString()));
-                                
-                                if (commentHandler != null)
-                                {
-                                    commentHandler(removedChar + commentSb.ToString(),
-                                                   sb.ToString());
-                                }
-                                
-                                // NOTE: Set after handler call
-                                //
-                                previousToken = removedChar + commentSb.ToString();
-
-                                commentSb.Length = 0;
-                                
-                                commentLines += 1;
-                                
-                                commentRunning = false;
-                                
-                                foundEndCommentDelimiters = -1;
-                            }    
-                            else
-                            {
-                                Logging.Debug("Will scan for more end comment delimiter characters");
-                                
-                                foundEndCommentDelimiters += 1;
-                            }
-                        }
-                        else
-                        {
-                            Logging.Debug(string.Format("Character '{0}' is not the next possible end comment delimiter, endping scan", (char)character));
-                            
-                            foundEndCommentDelimiters = -1;
-                        }
-                    }
+                    HandlePossibleEndCommentDelimiter((char)character);
                 }
                 else if (foundEndCommentDelimiters > -1)
                 {
@@ -410,23 +315,23 @@ namespace CodeWatchdog
 
         void HandlePossibleStartCommentDelimiter(char character)
         {
-            Logging.Debug (string.Format ("Found possible start comment delimiter character: '{0}'", (char)character));
+            Logging.Debug (string.Format("Found possible start comment delimiter character: '{0}'", (char)character));
             
             if (foundStartCommentDelimiters == -1)
             {
                 // Not scanning for further start comment characters
                 
-                if ((char)character == char.Parse (parsingParameters.startCommentDelimiter.Substring (0, 1)))
+                if ((char)character == char.Parse(parsingParameters.startCommentDelimiter.Substring(0, 1)))
                 {
                     if (parsingParameters.startCommentDelimiter.Length == 1)
                     {
-                        Logging.Debug (string.Format ("Start comment delimiter '{0}' complete in: '{1}'", parsingParameters.startCommentDelimiter, sb.ToString () + ((char)character).ToString ()));
+                        Logging.Debug (string.Format("Start comment delimiter '{0}' complete in: '{1}'", parsingParameters.startCommentDelimiter, sb.ToString() + ((char)character).ToString()));
                         
                         commentRunning = true;
                     }
                     else
                     {
-                        Logging.Debug ("Will scan for more start comment delimiter characters");
+                        Logging.Debug("Will scan for more start comment delimiter characters");
                         
                         foundStartCommentDelimiters = 0;
                     }
@@ -435,17 +340,17 @@ namespace CodeWatchdog
             }
             else
             {
-                Logging.Debug ("Already scanning for start comment characters");
+                Logging.Debug("Already scanning for start comment characters");
                 
-                if ((char)character == char.Parse (parsingParameters.startCommentDelimiter.Substring (foundStartCommentDelimiters + 1, 1)))
+                if ((char)character == char.Parse(parsingParameters.startCommentDelimiter.Substring(foundStartCommentDelimiters + 1, 1)))
                 {
-                    Logging.Debug (string.Format ("Next possible start comment delimiter character found: '{0}'", (char)character));
+                    Logging.Debug(string.Format("Next possible start comment delimiter character found: '{0}'", (char)character));
                     
                     // Compensate 0 index offset
                     //
                     if (foundStartCommentDelimiters + 2 == parsingParameters.startCommentDelimiter.Length)
                     {
-                        Logging.Debug (string.Format ("Start comment delimiter '{0}' complete in: '{1}'", parsingParameters.startCommentDelimiter, sb.ToString () + ((char)character).ToString ()));
+                        Logging.Debug(string.Format ("Start comment delimiter '{0}' complete in: '{1}'", parsingParameters.startCommentDelimiter, sb.ToString() + ((char)character).ToString()));
                         
                         foundStartCommentDelimiters = -1;
                         
@@ -454,21 +359,122 @@ namespace CodeWatchdog
                         // Remove beginning delimiter from ordinary string.
                         // The final char is already omitted.
                         //
-                        sb.Remove (sb.Length - (parsingParameters.startCommentDelimiter.Length - 1),
-                                   parsingParameters.startCommentDelimiter.Length - 1);
+                        sb.Remove(sb.Length - (parsingParameters.startCommentDelimiter.Length - 1),
+                                  parsingParameters.startCommentDelimiter.Length - 1);
                     }
                     else
                     {
-                        Logging.Debug ("Will scan for more start comment delimiter characters");
+                        Logging.Debug("Will scan for more start comment delimiter characters");
                         
                         foundStartCommentDelimiters += 1;
                     }
                 }
                 else
                 {
-                    Logging.Debug (string.Format ("Character '{0}' is not the next possible start comment delimiter, stopping scan", (char)character));
+                    Logging.Debug (string.Format("Character '{0}' is not the next possible start comment delimiter, stopping scan", (char)character));
                     
                     foundStartCommentDelimiters = -1;
+                }
+            }
+            
+            return;
+        }
+
+        void HandlePossibleEndCommentDelimiter(char character)
+        {
+            Logging.Debug (string.Format ("Found possible end comment delimiter character: '{0}'", (char)character));
+            
+            if (foundEndCommentDelimiters == -1)
+            {
+                // Not scanning for further end comment characters
+                
+                if ((char)character == char.Parse (parsingParameters.endCommentDelimiter.Substring (0, 1)))
+                {
+                    if (parsingParameters.endCommentDelimiter.Length == 1)
+                    {
+                        string removedChar = "";
+                        
+                        if (parsingParameters.startCommentDelimiter.Length > 1)
+                        {
+                            removedChar = parsingParameters.startCommentDelimiter.Substring (0, 1);
+                        }
+                        
+                        Logging.Info (string.Format ("Comment complete in: '{0}'", removedChar + commentSb.ToString () + ((char)character).ToString ()));
+                        
+                        if (commentHandler != null)
+                        {
+                            commentHandler (removedChar + commentSb.ToString (), sb.ToString ());
+                        }
+                        
+                        // NOTE: Set after handler call
+                        //
+                        previousToken = removedChar + commentSb.ToString ();
+                        
+                        commentSb.Length = 0;
+                        
+                        commentLines += 1;
+                        
+                        commentRunning = false;
+                    }
+                    else
+                    {
+                        Logging.Debug ("Will scan for more end comment delimiter characters");
+                        
+                        foundEndCommentDelimiters = 0;
+                    }
+                }
+                // No 'else' - not interested in this character
+            }
+            else
+            {
+                Logging.Debug ("Already scanning for end comment characters");
+                
+                if ((char)character == char.Parse(parsingParameters.endCommentDelimiter.Substring(foundStartCommentDelimiters + 1, 1)))
+                {
+                    Logging.Debug(string.Format("Next possible end comment delimiter character found: '{0}'", (char)character));
+                    
+                    // Compensate 0 index offset
+                    //
+                    if (foundEndCommentDelimiters + 2 == parsingParameters.endCommentDelimiter.Length)
+                    {
+                        string removedChar = "";
+                        
+                        if (parsingParameters.startCommentDelimiter.Length > 1)
+                        {
+                            removedChar = parsingParameters.startCommentDelimiter.Substring(0, 1);
+                        }
+                        
+                        Logging.Info (string.Format("Comment complete in: '{0}'", removedChar + commentSb.ToString() + ((char)character).ToString()));
+                        
+                        if (commentHandler != null)
+                        {
+                            commentHandler(removedChar + commentSb.ToString(), sb.ToString());
+                        }
+                        
+                        // NOTE: Set after handler call
+                        //
+                        previousToken = removedChar + commentSb.ToString();
+                        
+                        commentSb.Length = 0;
+                        
+                        commentLines += 1;
+                        
+                        commentRunning = false;
+                        
+                        foundEndCommentDelimiters = -1;
+                    }
+                    else
+                    {
+                        Logging.Debug("Will scan for more end comment delimiter characters");
+                        
+                        foundEndCommentDelimiters += 1;
+                    }
+                }
+                else
+                {
+                    Logging.Debug(string.Format ("Character '{0}' is not the next possible end comment delimiter, endping scan", (char)character));
+                    
+                    foundEndCommentDelimiters = -1;
                 }
             }
             
