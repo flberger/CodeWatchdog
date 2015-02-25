@@ -188,57 +188,26 @@ namespace CodeWatchdog
                     foundEndCommentDelimiters = -1;
                 }
 
-                if (! commentRunning && !stringRunning && (char)character == parsingParameters.statementDelimiter)
+                if (!commentRunning
+                    && !stringRunning
+                    && (char)character == parsingParameters.statementDelimiter)
                 {
-                    Logging.Info(string.Format("Found statement: '{0}'", ShowWhitespace(sb.ToString())));
-
-                    if (statementHandler != null)
-                    {
-                        statementHandler(sb.ToString());
-                    }
-                    
-                    // NOTE: Set after handler call
-                    //
-                    previousToken = sb.ToString();
-                    
-                    Logging.Debug("Resetting StringBuilder");
-                    
-                    sb.Length = 0;
+                    HandleStatement();
                 }
-                else if (! commentRunning && !stringRunning && (char)character == parsingParameters.startBlockDelimiter)
+                else if (!commentRunning
+                         && !stringRunning
+                         && (char)character == parsingParameters.startBlockDelimiter)
                 {
-                    Logging.Info(string.Format("Found start block: '{0}'", ShowWhitespace(sb.ToString())));
-
-                    if (startBlockHandler != null)
-                    {
-                        startBlockHandler(sb.ToString());
-                    }
-
-                    // TODO: Set active block to block type (stack)
-                    
-                    // NOTE: Set after handler call
-                    //
-                    previousToken = sb.ToString();
-                    
-                    Logging.Debug("Resetting StringBuilder");
-                    
-                    sb.Length = 0;
+                    HandleStartBlock();
                 }
-                else if (! commentRunning && !stringRunning && (char)character == parsingParameters.endBlockDelimiter)
+                else if (!commentRunning
+                         && !stringRunning
+                         && (char)character == parsingParameters.endBlockDelimiter)
                 {
-                    Logging.Info(string.Format("Ending block"));
-
-                    // TODO: Run end block checks
-
-                    // TODO: Pop active block from stack
-                    
-                    previousToken = "";
-
-                    Logging.Debug("Resetting StringBuilder");
-                    
-                    sb.Length = 0;
+                    HandleEndBlock();
                 }
-                else if (! commentRunning && parsingParameters.stringDelimiters.Contains((char)character))
+                else if (!commentRunning
+                         && parsingParameters.stringDelimiters.Contains((char)character))
                 {
                     if (!stringRunning)
                     {
@@ -267,7 +236,8 @@ namespace CodeWatchdog
                     }
                 }
 
-                if ((char)character == parsingParameters.stringEscape && previousChar == parsingParameters.stringEscape)
+                if ((char)character == parsingParameters.stringEscape
+                    && previousChar == parsingParameters.stringEscape)
                 {
                     previousChar = null;
                 }
@@ -477,6 +447,64 @@ namespace CodeWatchdog
                     foundEndCommentDelimiters = -1;
                 }
             }
+            
+            return;
+        }
+
+        void HandleStatement()
+        {
+            Logging.Info(string.Format("Found statement: '{0}'", ShowWhitespace(sb.ToString())));
+            
+            if (statementHandler != null)
+            {
+                statementHandler(sb.ToString());
+            }
+            
+            // NOTE: Set after handler call
+            //
+            previousToken = sb.ToString();
+            
+            Logging.Debug("Resetting StringBuilder");
+            
+            sb.Length = 0;
+            
+            return;
+        }
+
+        void HandleStartBlock()
+        {
+            Logging.Info(string.Format("Found start block: '{0}'", ShowWhitespace(sb.ToString())));
+            
+            if (startBlockHandler != null)
+            {
+                startBlockHandler(sb.ToString());
+            }
+            
+            // TODO: Set active block to block type (stack)
+            // NOTE: Set after handler call
+            //
+            previousToken = sb.ToString();
+            
+            Logging.Debug("Resetting StringBuilder");
+            
+            sb.Length = 0;
+            
+            return;
+        }
+
+        void HandleEndBlock()
+        {
+            Logging.Info(string.Format("Ending block"));
+            
+            // TODO: Run end block checks
+            
+            // TODO: Pop active block from stack
+            
+            previousToken = "";
+            
+            Logging.Debug("Resetting StringBuilder");
+            
+            sb.Length = 0;
             
             return;
         }
