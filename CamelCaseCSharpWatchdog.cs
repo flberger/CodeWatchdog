@@ -57,14 +57,8 @@ namespace CodeWatchdog
         {
             base.Init();
             
-            statementDelimiter = char.Parse(";");
-            startBlockDelimiter = char.Parse("{");
-            endBlockDelimiter = char.Parse("}");
-            stringDelimiters = new List<char>() {char.Parse("\"")};
-            stringEscape = char.Parse("\\");
-            startCommentDelimiter = "//";
-            endCommentDelimiter = "\n";
-            
+            parsingParameters = new CamelCaseCSharpWatchdogParsingParameters();
+
             errorCodeStrings = new Dictionary<int, string>();
             
             errorCodeStrings[TabError] = "Tabs instead of spaces used for indentation";
@@ -322,10 +316,10 @@ namespace CodeWatchdog
             // Ignore empty comments.
             // Ignore comments starting with "--", these are most probably auto-generated decorative lines.
             //
-            if (!comment.Trim().EndsWith(startCommentDelimiter)
-                && !(comment.StartsWith(startCommentDelimiter + " ")
-                     || comment.StartsWith(startCommentDelimiter + "/ "))
-                && !comment.StartsWith(startCommentDelimiter + "--"))
+            if (!comment.Trim().EndsWith(parsingParameters.startCommentDelimiter)
+                && !(comment.StartsWith(parsingParameters.startCommentDelimiter + " ")
+                     || comment.StartsWith(parsingParameters.startCommentDelimiter + "/ "))
+                && !comment.StartsWith(parsingParameters.startCommentDelimiter + "--"))
             {
                 if (errorCodeCount.ContainsKey(CommentNoSpaceError))
                 {
@@ -354,7 +348,7 @@ namespace CodeWatchdog
                 // ClassNotDocumentedError
                 //
                 if (startBlock.Contains("public ")
-                    && !previousToken.Contains(startCommentDelimiter + "/")
+                    && !previousToken.Contains(parsingParameters.startCommentDelimiter + "/")
                     && !previousToken.Contains("</summary>"))
                 {
                     if (errorCodeCount.ContainsKey(ClassNotDocumentedError))
@@ -483,7 +477,7 @@ namespace CodeWatchdog
                 // Make sure 'public' is before the first brace.
                 //
                 if (startBlock.Split(Char.Parse("("))[0].Contains("public ")
-                    && !previousToken.Contains(startCommentDelimiter + "/")
+                    && !previousToken.Contains(parsingParameters.startCommentDelimiter + "/")
                     && !previousToken.Contains("</summary>"))
                 {
                     if (errorCodeCount.ContainsKey(MethodNotDocumentedError))

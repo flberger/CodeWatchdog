@@ -41,13 +41,7 @@ namespace CodeWatchdog
     /// </summary>
     public class Watchdog
     {
-        protected char statementDelimiter;
-        protected char startBlockDelimiter;
-        protected char endBlockDelimiter;
-        protected List<char> stringDelimiters;
-        protected char stringEscape;
-        protected string startCommentDelimiter;
-        protected string endCommentDelimiter;
+        protected ParsingParameters parsingParameters;
         
         public delegate void SingleStringHandler(string input);
         public delegate void DoubleStringHandler(string firstInput, string secondInput);
@@ -178,7 +172,7 @@ namespace CodeWatchdog
 
                 if (! commentRunning
                     && !stringRunning
-                    && startCommentDelimiter.Contains(((char)character).ToString()))
+                    && parsingParameters.startCommentDelimiter.Contains(((char)character).ToString()))
                 {
                     // Gotcha. This needs further attention.
                     
@@ -188,11 +182,11 @@ namespace CodeWatchdog
                     {
                         // Not scanning for further start comment characters
                         
-                        if ((char)character == char.Parse(startCommentDelimiter.Substring(0, 1)))
+                        if ((char)character == char.Parse(parsingParameters.startCommentDelimiter.Substring(0, 1)))
                         
-                            if (startCommentDelimiter.Length == 1)
+                            if (parsingParameters.startCommentDelimiter.Length == 1)
                             {
-                                Logging.Debug(string.Format("Start comment delimiter '{0}' complete in: '{1}'",  startCommentDelimiter, sb.ToString() + ((char)character).ToString()));
+                            Logging.Debug(string.Format("Start comment delimiter '{0}' complete in: '{1}'",  parsingParameters.startCommentDelimiter, sb.ToString() + ((char)character).ToString()));
                             
                                 commentRunning = true;
                             }
@@ -209,15 +203,15 @@ namespace CodeWatchdog
                     {
                         Logging.Debug("Already scanning for start comment characters");
                         
-                        if ((char)character == char.Parse(startCommentDelimiter.Substring(foundStartCommentDelimiters + 1, 1)))
+                        if ((char)character == char.Parse(parsingParameters.startCommentDelimiter.Substring(foundStartCommentDelimiters + 1, 1)))
                         {
                             Logging.Debug(string.Format("Next possible start comment delimiter character found: '{0}'", (char)character));
                             
                             // Compensate 0 index offset
                             //
-                            if (foundStartCommentDelimiters + 2 == startCommentDelimiter.Length)
+                            if (foundStartCommentDelimiters + 2 == parsingParameters.startCommentDelimiter.Length)
                             {
-                                Logging.Debug(string.Format("Start comment delimiter '{0}' complete in: '{1}'",  startCommentDelimiter, sb.ToString() + ((char)character).ToString()));
+                                Logging.Debug(string.Format("Start comment delimiter '{0}' complete in: '{1}'",  parsingParameters.startCommentDelimiter, sb.ToString() + ((char)character).ToString()));
                                 
                                 foundStartCommentDelimiters = -1;
                                 
@@ -226,8 +220,8 @@ namespace CodeWatchdog
                                 // Remove beginning delimiter from ordinary string.
                                 // The final char is already omitted.
                                 //
-                                sb.Remove(sb.Length - (startCommentDelimiter.Length - 1),
-                                          startCommentDelimiter.Length - 1);
+                                sb.Remove(sb.Length - (parsingParameters.startCommentDelimiter.Length - 1),
+                                          parsingParameters.startCommentDelimiter.Length - 1);
                             }    
                             else
                             {
@@ -251,7 +245,7 @@ namespace CodeWatchdog
                     foundStartCommentDelimiters = -1;
                 }
 
-                if (commentRunning && endCommentDelimiter.Contains(((char)character).ToString()))
+                if (commentRunning && parsingParameters.endCommentDelimiter.Contains(((char)character).ToString()))
                 {
                     // Gotcha. This needs further attention.
                     
@@ -261,15 +255,15 @@ namespace CodeWatchdog
                     {
                         // Not scanning for further end comment characters
                         
-                        if ((char)character == char.Parse(endCommentDelimiter.Substring(0, 1)))
+                        if ((char)character == char.Parse(parsingParameters.endCommentDelimiter.Substring(0, 1)))
                             
-                        if (endCommentDelimiter.Length == 1)
+                        if (parsingParameters.endCommentDelimiter.Length == 1)
                         {
                             string removedChar = "";
                             
-                            if (startCommentDelimiter.Length > 1)
+                            if (parsingParameters.startCommentDelimiter.Length > 1)
                             {
-                                removedChar = startCommentDelimiter.Substring(0, 1);
+                                removedChar = parsingParameters.startCommentDelimiter.Substring(0, 1);
                             }
                             
                             Logging.Info(string.Format("Comment complete in: '{0}'", removedChar + commentSb.ToString() + ((char)character).ToString()));
@@ -303,19 +297,19 @@ namespace CodeWatchdog
                     {
                         Logging.Debug("Already scanning for end comment characters");
                         
-                        if ((char)character == char.Parse(endCommentDelimiter.Substring(foundStartCommentDelimiters + 1, 1)))
+                        if ((char)character == char.Parse(parsingParameters.endCommentDelimiter.Substring(foundStartCommentDelimiters + 1, 1)))
                         {
                             Logging.Debug(string.Format("Next possible end comment delimiter character found: '{0}'", (char)character));
                             
                             // Compensate 0 index offset
                             //
-                            if (foundEndCommentDelimiters + 2 == endCommentDelimiter.Length)
+                            if (foundEndCommentDelimiters + 2 == parsingParameters.endCommentDelimiter.Length)
                             {
                                 string removedChar = "";
                                 
-                                if (startCommentDelimiter.Length > 1)
+                                if (parsingParameters.startCommentDelimiter.Length > 1)
                                 {
-                                    removedChar = startCommentDelimiter.Substring(0, 1);
+                                    removedChar = parsingParameters.startCommentDelimiter.Substring(0, 1);
                                 }
                                 
                                 Logging.Info(string.Format("Comment complete in: '{0}'", removedChar + commentSb.ToString() + ((char)character).ToString()));
@@ -360,7 +354,7 @@ namespace CodeWatchdog
                     foundEndCommentDelimiters = -1;
                 }
 
-                if (! commentRunning && !stringRunning && (char)character == statementDelimiter)
+                if (! commentRunning && !stringRunning && (char)character == parsingParameters.statementDelimiter)
                 {
                     Logging.Info(string.Format("Found statement: '{0}'", ShowWhitespace(sb.ToString())));
 
@@ -377,7 +371,7 @@ namespace CodeWatchdog
                     
                     sb.Length = 0;
                 }
-                else if (! commentRunning && !stringRunning && (char)character == startBlockDelimiter)
+                else if (! commentRunning && !stringRunning && (char)character == parsingParameters.startBlockDelimiter)
                 {
                     Logging.Info(string.Format("Found start block: '{0}'", ShowWhitespace(sb.ToString())));
 
@@ -396,7 +390,7 @@ namespace CodeWatchdog
                     
                     sb.Length = 0;
                 }
-                else if (! commentRunning && !stringRunning && (char)character == endBlockDelimiter)
+                else if (! commentRunning && !stringRunning && (char)character == parsingParameters.endBlockDelimiter)
                 {
                     Logging.Info(string.Format("Ending block"));
 
@@ -410,7 +404,7 @@ namespace CodeWatchdog
                     
                     sb.Length = 0;
                 }
-                else if (! commentRunning && stringDelimiters.Contains((char)character))
+                else if (! commentRunning && parsingParameters.stringDelimiters.Contains((char)character))
                 {
                     if (!stringRunning)
                     {
@@ -418,7 +412,7 @@ namespace CodeWatchdog
 
                         stringRunning = true;
                     }
-                    else if (previousChar != stringEscape)
+                    else if (previousChar != parsingParameters.stringEscape)
                     {
                         Logging.Debug(string.Format("Ending string: with: '{0}'", (char)character));
 
@@ -439,7 +433,7 @@ namespace CodeWatchdog
                     }
                 }
 
-                if ((char)character == stringEscape && previousChar == stringEscape)
+                if ((char)character == parsingParameters.stringEscape && previousChar == parsingParameters.stringEscape)
                 {
                     previousChar = null;
                 }
