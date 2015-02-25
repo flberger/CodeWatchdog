@@ -6,6 +6,7 @@ See https://bitbucket.org/flberger/codewatchdog/issues for the issue tracker.
 
 ## Watchdog
 
+TODO: Refactor Watchdog to be more modular
 TODO: Errors should have a severity.
 TODO: Most, if not all delimiters should be strings, and be parsed for accordingly.
 TODO: Probably use a state machine instead of `stringRunning` etc. flags.
@@ -15,6 +16,8 @@ TODO: Add comment lines value to score formula
 
 ## CamelCaseCSharpWatchdog
 
+TODO: Refactor CamelCaseCSharpWatchdog checks into classes
+TODO: Create Unit Tests for CamelCaseCSharpWatchdog
 TODO: Code-comment-ratio evaluation - neither too little nor too much
 TODO: *** Check for doc comments of public members
 TODO: Check for actual 4-character indents
