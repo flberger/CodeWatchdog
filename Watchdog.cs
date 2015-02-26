@@ -179,20 +179,7 @@ namespace CodeWatchdog
                 else if (!commentRunning
                          && parsingParameters.stringDelimiters.Contains((char)character))
                 {
-                    if (!stringRunning)
-                    {
-                        Logging.Debug(string.Format("Starting string with: '{0}'", (char)character));
-
-                        stringRunning = true;
-                    }
-                    else if (previousChar != parsingParameters.stringEscape)
-                    {
-                        Logging.Debug(string.Format("Ending string: with: '{0}'", (char)character));
-
-                        stringRunning = false;
-                    }
-
-                    sb.Append((char)character);
+                    HandleString((char)character);
                 }
                 else
                 {
@@ -509,6 +496,26 @@ namespace CodeWatchdog
             Logging.Debug("Resetting StringBuilder");
             
             sb.Length = 0;
+            
+            return;
+        }
+
+        void HandleString(char character)
+        {
+            if (!stringRunning)
+            {
+                Logging.Debug(string.Format("Starting string with: '{0}'", character));
+                
+                stringRunning = true;
+            }
+            else if (previousChar != parsingParameters.stringEscape)
+            {
+                Logging.Debug(string.Format("Ending string: with: '{0}'", character));
+                
+                stringRunning = false;
+            }
+            
+            sb.Append(character);
             
             return;
         }
