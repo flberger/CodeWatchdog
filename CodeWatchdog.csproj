@@ -40,8 +40,8 @@
     <Compile Include="Test.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="ParsingParameters.cs" />
-    <Compile Include="CamelCaseCSharpWatchdog\CamelCaseCSharpWatchdogParsingParameters.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\CamelCaseCSharpWatchdog.cs" />
+    <Compile Include="CamelCaseCSharpWatchdog\ParsingParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -28,14 +28,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace CodeWatchdog
+namespace CodeWatchdog.CamelCaseCSharpWatchdog
 {
     /// <summary>
     /// Parsing parameters for C#.
     /// </summary>
-    public class CamelCaseCSharpWatchdogParsingParameters : ParsingParameters
+    public class ParsingParameters : CodeWatchdog.ParsingParameters
     {
-        public CamelCaseCSharpWatchdogParsingParameters()
+        public ParsingParameters()
         {
             statementDelimiter = char.Parse(";");
             startBlockDelimiter = char.Parse("{");

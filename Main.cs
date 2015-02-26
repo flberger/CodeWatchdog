@@ -39,7 +39,7 @@ namespace CodeWatchdog
         /// </summary>
         public static void Main(string[] args)
         {
-            CamelCaseCSharpWatchdog cswd = new CamelCaseCSharpWatchdog();
+            CamelCaseCSharpWatchdog.CamelCaseCSharpWatchdog cswd = new CamelCaseCSharpWatchdog.CamelCaseCSharpWatchdog();
             
             cswd.Init();
             

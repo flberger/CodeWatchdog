@@ -29,12 +29,12 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace CodeWatchdog
+namespace CodeWatchdog.CamelCaseCSharpWatchdog
 {
     /// <summary>
     /// A Watchdog implementation for C# that favors camelCase coding style.
     /// </summary>
-    public class CamelCaseCSharpWatchdog: Watchdog
+    public class CamelCaseCSharpWatchdog: CodeWatchdog.Watchdog
     {
         // Error code variables, for reading convenience
         //
@@ -57,7 +57,7 @@ namespace CodeWatchdog
         {
             base.Init();
             
-            parsingParameters = new CamelCaseCSharpWatchdogParsingParameters();
+            parsingParameters = new ParsingParameters();
 
             errorCodeStrings = new Dictionary<int, string>();
             
