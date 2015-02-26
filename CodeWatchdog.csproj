@@ -42,6 +42,7 @@
     <Compile Include="ParsingParameters.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\CamelCaseCSharpWatchdog.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\ParsingParameters.cs" />
+    <Compile Include="CamelCaseCSharpWatchdog\ErrorCodes.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

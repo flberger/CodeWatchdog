@@ -36,20 +36,6 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
     /// </summary>
     public class CamelCaseCSharpWatchdog: CodeWatchdog.Watchdog
     {
-        // Error code variables, for reading convenience
-        //
-        const int TabError = 0; 
-        const int PascalCaseError = 1;
-        const int CamelCaseError = 2;
-        const int SpecialCharacterError = 3;
-        const int MissingBracesError = 4;
-        const int MultipleStatementError = 5;
-        const int CommentOnSameLineError = 6;
-        const int CommentNoSpaceError = 7;
-        const int ClassNotDocumentedError = 8;
-        const int MethodNotDocumentedError = 9;
-        const int InterfaceNamingError = 10;
-
         /// <summary>
         /// Initialise the underlying Watchdog for C#.
         /// </summary>
@@ -61,17 +47,17 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
 
             errorCodeStrings = new Dictionary<int, string>();
             
-            errorCodeStrings[TabError] = "Tabs instead of spaces used for indentation";
-            errorCodeStrings[PascalCaseError] = "Identifier is not in PascalCase";
-            errorCodeStrings[CamelCaseError] = "Identifier is not in camelCase";
-            errorCodeStrings[SpecialCharacterError] = "Disallowed character used in identifier";
-            errorCodeStrings[MissingBracesError] = "Missing curly braces in if / while / foreach / for";
-            errorCodeStrings[MultipleStatementError] = "Multiple statements on a single line";
-            errorCodeStrings[CommentOnSameLineError] = "Comment not on a separate line";
-            errorCodeStrings[CommentNoSpaceError] = "No space between comment delimiter and comment text";
-            errorCodeStrings[ClassNotDocumentedError] = "Public class not documented";
-            errorCodeStrings[MethodNotDocumentedError] = "Public method not documented";
-            errorCodeStrings[InterfaceNamingError] = "Interface name does not begin with an I";
+            errorCodeStrings[(int)ErrorCodes.TabError] = "Tabs instead of spaces used for indentation";
+            errorCodeStrings[(int)ErrorCodes.PascalCaseError] = "Identifier is not in PascalCase";
+            errorCodeStrings[(int)ErrorCodes.CamelCaseError] = "Identifier is not in camelCase";
+            errorCodeStrings[(int)ErrorCodes.SpecialCharacterError] = "Disallowed character used in identifier";
+            errorCodeStrings[(int)ErrorCodes.MissingBracesError] = "Missing curly braces in if / while / foreach / for";
+            errorCodeStrings[(int)ErrorCodes.MultipleStatementError] = "Multiple statements on a single line";
+            errorCodeStrings[(int)ErrorCodes.CommentOnSameLineError] = "Comment not on a separate line";
+            errorCodeStrings[(int)ErrorCodes.CommentNoSpaceError] = "No space between comment delimiter and comment text";
+            errorCodeStrings[(int)ErrorCodes.ClassNotDocumentedError] = "Public class not documented";
+            errorCodeStrings[(int)ErrorCodes.MethodNotDocumentedError] = "Public method not documented";
+            errorCodeStrings[(int)ErrorCodes.InterfaceNamingError] = "Interface name does not begin with an I";
             
             statementHandler += CheckStatement;
             commentHandler += CheckComment;
@@ -88,13 +74,13 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             //
             if (statement.Contains("\t"))
             {
-                if (errorCodeCount.ContainsKey(TabError))
+                if (errorCodeCount.ContainsKey((int)ErrorCodes.TabError))
                 {
-                    errorCodeCount[TabError] += 1;
+                    errorCodeCount[(int)ErrorCodes.TabError] += 1;
                 }
                 else
                 {
-                    errorCodeCount[TabError] = 1;
+                    errorCodeCount[(int)ErrorCodes.TabError] = 1;
                 }
                 
                 // TODO: The line report is inaccurate, as several lines may have passed.
@@ -102,7 +88,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                 //
                 if (woff != null)
                 {
-                    woff(string.Format("{0} (line {1})", errorCodeStrings[TabError], checkedLinesThisFile + 1));
+                    woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.TabError], checkedLinesThisFile + 1));
                 }
             }
             
@@ -123,18 +109,18 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                 && !statement.Contains("get")
                 && !statement.Contains("set"))
             {
-                if (errorCodeCount.ContainsKey(MultipleStatementError))
+                if (errorCodeCount.ContainsKey((int)ErrorCodes.MultipleStatementError))
                 {
-                    errorCodeCount[MultipleStatementError] += 1;
+                    errorCodeCount[(int)ErrorCodes.MultipleStatementError] += 1;
                 }
                 else
                 {
-                    errorCodeCount[MultipleStatementError] = 1;
+                    errorCodeCount[(int)ErrorCodes.MultipleStatementError] = 1;
                 }
                 
                 if (woff != null)
                 {
-                    woff(string.Format("{0} (line {1})", errorCodeStrings[MultipleStatementError], checkedLinesThisFile + 1));
+                    woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.MultipleStatementError], checkedLinesThisFile + 1));
                 }
             }
             
@@ -185,13 +171,13 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                 //
                 if (possibleIdentifier.Contains("_"))
                 {
-                    if (errorCodeCount.ContainsKey(SpecialCharacterError))
+                    if (errorCodeCount.ContainsKey((int)ErrorCodes.SpecialCharacterError))
                     {
-                        errorCodeCount[SpecialCharacterError] += 1;
+                        errorCodeCount[(int)ErrorCodes.SpecialCharacterError] += 1;
                     }
                     else
                     {
-                        errorCodeCount[SpecialCharacterError] = 1;
+                        errorCodeCount[(int)ErrorCodes.SpecialCharacterError] = 1;
                     }
                     
                     // TODO: The line report is inaccurate, as several lines may have passed.
@@ -199,7 +185,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                     //
                     if (woff != null)
                     {
-                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[SpecialCharacterError], possibleIdentifier, checkedLinesThisFile + 1));
+                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.SpecialCharacterError], possibleIdentifier, checkedLinesThisFile + 1));
                     }
                 }
                 else
@@ -210,13 +196,13 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                         //
                         if (possibleIdentifier.Length > 2 && char.IsLower(possibleIdentifier, 0))
                         {
-                            if (errorCodeCount.ContainsKey(PascalCaseError))
+                            if (errorCodeCount.ContainsKey((int)ErrorCodes.PascalCaseError))
                             {
-                                errorCodeCount[PascalCaseError] += 1;
+                                errorCodeCount[(int)ErrorCodes.PascalCaseError] += 1;
                             }
                             else
                             {
-                                errorCodeCount[PascalCaseError] = 1;
+                                errorCodeCount[(int)ErrorCodes.PascalCaseError] = 1;
                             }
                             
                             // TODO: The line report is inaccurate, as several lines may have passed.
@@ -224,7 +210,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                             //
                             if (woff != null)
                             {
-                                woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[PascalCaseError], possibleIdentifier, checkedLinesThisFile + 1));
+                                woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.PascalCaseError], possibleIdentifier, checkedLinesThisFile + 1));
                             }
                         }
                     }
@@ -234,13 +220,13 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                         //
                         if (possibleIdentifier.Length > 2 && char.IsUpper(possibleIdentifier, 0))
                         {
-                            if (errorCodeCount.ContainsKey(CamelCaseError))
+                            if (errorCodeCount.ContainsKey((int)ErrorCodes.CamelCaseError))
                             {
-                                errorCodeCount[CamelCaseError] += 1;
+                                errorCodeCount[(int)ErrorCodes.CamelCaseError] += 1;
                             }
                             else
                             {
-                                errorCodeCount[CamelCaseError] = 1;
+                                errorCodeCount[(int)ErrorCodes.CamelCaseError] = 1;
                             }
                             
                             // TODO: The line report is inaccurate, as several lines may have passed.
@@ -248,7 +234,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                             //
                             if (woff != null)
                             {
-                                woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[CamelCaseError], possibleIdentifier, checkedLinesThisFile + 1));
+                                woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.CamelCaseError], possibleIdentifier, checkedLinesThisFile + 1));
                             }
                         }
                     }
@@ -265,13 +251,13 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                 || statement.Trim().StartsWith("for"))
                 && statement.Contains(")"))
             {
-                if (errorCodeCount.ContainsKey(MissingBracesError))
+                if (errorCodeCount.ContainsKey((int)ErrorCodes.MissingBracesError))
                 {
-                    errorCodeCount[MissingBracesError] += 1;
+                    errorCodeCount[(int)ErrorCodes.MissingBracesError] += 1;
                 }
                 else
                 {
-                    errorCodeCount[MissingBracesError] = 1;
+                    errorCodeCount[(int)ErrorCodes.MissingBracesError] = 1;
                 }
                 
                 // TODO: The line report is inaccurate, as several lines may have passed.
@@ -279,7 +265,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                 //
                 if (woff != null)
                 {
-                    woff(string.Format("{0} (line {1})", errorCodeStrings[MissingBracesError], checkedLinesThisFile + 1));
+                    woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.MissingBracesError], checkedLinesThisFile + 1));
                 }
             }
             
@@ -296,18 +282,18 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             //
             if (checkedLinesThisFile > 1 && !precedingInput.Contains("\n"))
             {
-                if (errorCodeCount.ContainsKey(CommentOnSameLineError))
+                if (errorCodeCount.ContainsKey((int)ErrorCodes.CommentOnSameLineError))
                 {
-                    errorCodeCount[CommentOnSameLineError] += 1;
+                    errorCodeCount[(int)ErrorCodes.CommentOnSameLineError] += 1;
                 }
                 else
                 {
-                    errorCodeCount[CommentOnSameLineError] = 1;
+                    errorCodeCount[(int)ErrorCodes.CommentOnSameLineError] = 1;
                 }
                 
                 if (woff != null)
                 {
-                    woff(string.Format("{0} (line {1})", errorCodeStrings[CommentOnSameLineError], checkedLinesThisFile));
+                    woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.CommentOnSameLineError], checkedLinesThisFile));
                 }
             }
             
@@ -321,18 +307,18 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                      || comment.StartsWith(parsingParameters.startCommentDelimiter + "/ "))
                 && !comment.StartsWith(parsingParameters.startCommentDelimiter + "--"))
             {
-                if (errorCodeCount.ContainsKey(CommentNoSpaceError))
+                if (errorCodeCount.ContainsKey((int)ErrorCodes.CommentNoSpaceError))
                 {
-                    errorCodeCount[CommentNoSpaceError] += 1;
+                    errorCodeCount[(int)ErrorCodes.CommentNoSpaceError] += 1;
                 }
                 else
                 {
-                    errorCodeCount[CommentNoSpaceError] = 1;
+                    errorCodeCount[(int)ErrorCodes.CommentNoSpaceError] = 1;
                 }
                 
                 if (woff != null)
                 {
-                    woff(string.Format("{0} (line {1})", errorCodeStrings[CommentNoSpaceError], checkedLinesThisFile));
+                    woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.CommentNoSpaceError], checkedLinesThisFile));
                 }
             }
         }
@@ -351,18 +337,18 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                     && !previousToken.Contains(parsingParameters.startCommentDelimiter + "/")
                     && !previousToken.Contains("</summary>"))
                 {
-                    if (errorCodeCount.ContainsKey(ClassNotDocumentedError))
+                    if (errorCodeCount.ContainsKey((int)ErrorCodes.ClassNotDocumentedError))
                     {
-                        errorCodeCount[ClassNotDocumentedError] += 1;
+                        errorCodeCount[(int)ErrorCodes.ClassNotDocumentedError] += 1;
                     }
                     else
                     {
-                        errorCodeCount[ClassNotDocumentedError] = 1;
+                        errorCodeCount[(int)ErrorCodes.ClassNotDocumentedError] = 1;
                     }
                     
                     if (woff != null)
                     {
-                        woff(string.Format("{0} (line {1})", errorCodeStrings[ClassNotDocumentedError], checkedLinesThisFile));
+                        woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.ClassNotDocumentedError], checkedLinesThisFile));
                     }
                 }
                 
@@ -382,13 +368,13 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                 if (className.Length > 2
                     && char.IsLower(className, 0))
                 {
-                    if (errorCodeCount.ContainsKey(PascalCaseError))
+                    if (errorCodeCount.ContainsKey((int)ErrorCodes.PascalCaseError))
                     {
-                        errorCodeCount[PascalCaseError] += 1;
+                        errorCodeCount[(int)ErrorCodes.PascalCaseError] += 1;
                     }
                     else
                     {
-                        errorCodeCount[PascalCaseError] = 1;
+                        errorCodeCount[(int)ErrorCodes.PascalCaseError] = 1;
                     }
                     
                     // TODO: The line report is inaccurate, as several lines may have passed.
@@ -396,7 +382,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                     //
                     if (woff != null)
                     {
-                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[PascalCaseError], className, checkedLinesThisFile));
+                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.PascalCaseError], className, checkedLinesThisFile));
                     }
                 }
             }
@@ -417,13 +403,13 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                 //
                 if (enumName.Length > 2 && char.IsLower(enumName, 0))
                 {
-                    if (errorCodeCount.ContainsKey(PascalCaseError))
+                    if (errorCodeCount.ContainsKey((int)ErrorCodes.PascalCaseError))
                     {
-                        errorCodeCount[PascalCaseError] += 1;
+                        errorCodeCount[(int)ErrorCodes.PascalCaseError] += 1;
                     }
                     else
                     {
-                        errorCodeCount[PascalCaseError] = 1;
+                        errorCodeCount[(int)ErrorCodes.PascalCaseError] = 1;
                     }
                     
                     // TODO: The line report is inaccurate, as several lines may have passed.
@@ -431,7 +417,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                     //
                     if (woff != null)
                     {
-                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[PascalCaseError], enumName, checkedLinesThisFile));
+                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.PascalCaseError], enumName, checkedLinesThisFile));
                     }
                 }
             }
@@ -452,13 +438,13 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                 //
                 if (interfaceName.Length > 2 && !interfaceName.StartsWith("I"))
                 {
-                    if (errorCodeCount.ContainsKey(InterfaceNamingError))
+                    if (errorCodeCount.ContainsKey((int)ErrorCodes.InterfaceNamingError))
                     {
-                        errorCodeCount[InterfaceNamingError] += 1;
+                        errorCodeCount[(int)ErrorCodes.InterfaceNamingError] += 1;
                     }
                     else
                     {
-                        errorCodeCount[InterfaceNamingError] = 1;
+                        errorCodeCount[(int)ErrorCodes.InterfaceNamingError] = 1;
                     }
                     
                     // TODO: The line report is inaccurate, as several lines may have passed.
@@ -466,7 +452,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                     //
                     if (woff != null)
                     {
-                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[InterfaceNamingError], interfaceName, checkedLinesThisFile));
+                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.InterfaceNamingError], interfaceName, checkedLinesThisFile));
                     }
                 }
             }
@@ -480,18 +466,18 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                     && !previousToken.Contains(parsingParameters.startCommentDelimiter + "/")
                     && !previousToken.Contains("</summary>"))
                 {
-                    if (errorCodeCount.ContainsKey(MethodNotDocumentedError))
+                    if (errorCodeCount.ContainsKey((int)ErrorCodes.MethodNotDocumentedError))
                     {
-                        errorCodeCount[MethodNotDocumentedError] += 1;
+                        errorCodeCount[(int)ErrorCodes.MethodNotDocumentedError] += 1;
                     }
                     else
                     {
-                        errorCodeCount[MethodNotDocumentedError] = 1;
+                        errorCodeCount[(int)ErrorCodes.MethodNotDocumentedError] = 1;
                     }
                     
                     if (woff != null)
                     {
-                        woff(string.Format("{0} (line {1})", errorCodeStrings[MethodNotDocumentedError], checkedLinesThisFile));
+                        woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.MethodNotDocumentedError], checkedLinesThisFile));
                     }
                 }
                 
@@ -524,13 +510,13 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                     && methodName != "public"
                     && methodName != "switch")
                 {
-                    if (errorCodeCount.ContainsKey(PascalCaseError))
+                    if (errorCodeCount.ContainsKey((int)ErrorCodes.PascalCaseError))
                     {
-                        errorCodeCount[PascalCaseError] += 1;
+                        errorCodeCount[(int)ErrorCodes.PascalCaseError] += 1;
                     }
                     else
                     {
-                        errorCodeCount[PascalCaseError] = 1;
+                        errorCodeCount[(int)ErrorCodes.PascalCaseError] = 1;
                     }
                     
                     // TODO: The line report is inaccurate, as several lines may have passed.
@@ -538,7 +524,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                     //
                     if (woff != null)
                     {
-                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[PascalCaseError], methodName, checkedLinesThisFile));
+                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.PascalCaseError], methodName, checkedLinesThisFile));
                     }
                 }
             }
@@ -573,13 +559,13 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                 //
                 if (propertyName.Length > 2 && char.IsLower(propertyName, 0))
                 {
-                    if (errorCodeCount.ContainsKey(PascalCaseError))
+                    if (errorCodeCount.ContainsKey((int)ErrorCodes.PascalCaseError))
                     {
-                        errorCodeCount[PascalCaseError] += 1;
+                        errorCodeCount[(int)ErrorCodes.PascalCaseError] += 1;
                     }
                     else
                     {
-                        errorCodeCount[PascalCaseError] = 1;
+                        errorCodeCount[(int)ErrorCodes.PascalCaseError] = 1;
                     }
                     
                     // TODO: The line report is inaccurate, as several lines may have passed.
@@ -587,7 +573,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                     //
                     if (woff != null)
                     {
-                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[PascalCaseError], propertyName, checkedLinesThisFile));
+                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.PascalCaseError], propertyName, checkedLinesThisFile));
                     }
                 }
             }
