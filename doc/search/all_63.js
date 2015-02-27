@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['camelcasecsharpwatchdog',['CamelCaseCSharpWatchdog',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog_1_1CamelCaseCSharpWatchdog.html',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
+  ['camelcasecsharpwatchdog',['CamelCaseCSharpWatchdog',['../namespaceCodeWatchdog_1_1CamelCaseCSharpWatchdog.html',1,'CodeWatchdog']]],
+  ['camelcasecsharpwatchdog_2ecs',['CamelCaseCSharpWatchdog.cs',['../CamelCaseCSharpWatchdog_8cs.html',1,'']]],
+  ['camelcaseerror',['CamelCaseError',['../namespaceCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#af9f4d2dae6ba6dcb93b7d62e64fef27aa84bfbe603d9ee4750d20d16678965ceb',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
+  ['check',['Check',['../classCodeWatchdog_1_1Watchdog.html#ab1a93ea043b9cf199f706ce1bf7c2422',1,'CodeWatchdog::Watchdog']]],
+  ['checkcomment',['CheckComment',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog_1_1CamelCaseCSharpWatchdog.html#aec0bd04d618f691fdabea1b48dc531f8',1,'CodeWatchdog::CamelCaseCSharpWatchdog::CamelCaseCSharpWatchdog']]],
+  ['checkcommentdelimiters',['CheckCommentDelimiters',['../classCodeWatchdog_1_1Watchdog.html#a45c199d8f38e212fb2e579203cebdf41',1,'CodeWatchdog::Watchdog']]],
+  ['checkedfiles',['checkedFiles',['../classCodeWatchdog_1_1Watchdog.html#a74a2e9cbb6b40e6c95bcb42555f04c45',1,'CodeWatchdog::Watchdog']]],
+  ['checkedlinesthisfile',['checkedLinesThisFile',['../classCodeWatchdog_1_1Watchdog.html#a6294aa989438c7aeeff9cc343765856c',1,'CodeWatchdog::Watchdog']]],
+  ['checkstartblock',['CheckStartBlock',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog_1_1CamelCaseCSharpWatchdog.html#ab67ca2910ea7ca89810345a2dc848d22',1,'CodeWatchdog::CamelCaseCSharpWatchdog::CamelCaseCSharpWatchdog']]],
+  ['checkstatement',['CheckStatement',['../classCodeWatchdog_1_1CamelCaseCSharpWatchdog_1_1CamelCaseCSharpWatchdog.html#a18b86aadf8b4191d68eb53bd9ffa1532',1,'CodeWatchdog::CamelCaseCSharpWatchdog::CamelCaseCSharpWatchdog']]],
+  ['classnotdocumentederror',['ClassNotDocumentedError',['../namespaceCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#af9f4d2dae6ba6dcb93b7d62e64fef27aa5085c50757dc535578ee06c131179671',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
+  ['codewatchdog',['CodeWatchdog',['../namespaceCodeWatchdog.html',1,'']]],
+  ['commenthandler',['commentHandler',['../classCodeWatchdog_1_1Watchdog.html#abe0d378d2f0f4117996f2e870fb0ce25',1,'CodeWatchdog::Watchdog']]],
+  ['commentlines',['commentLines',['../classCodeWatchdog_1_1Watchdog.html#a043f209cbbef3674761a6e11bdf8f95e',1,'CodeWatchdog::Watchdog']]],
+  ['commentnospaceerror',['CommentNoSpaceError',['../namespaceCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#af9f4d2dae6ba6dcb93b7d62e64fef27aac313937f1e2e2e07624117aaae0ccabc',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
+  ['commentonsamelineerror',['CommentOnSameLineError',['../namespaceCodeWatchdog_1_1CamelCaseCSharpWatchdog.html#af9f4d2dae6ba6dcb93b7d62e64fef27aad102c6cd34da45db5a8ca7646a94a03f',1,'CodeWatchdog::CamelCaseCSharpWatchdog']]],
+  ['commentrunning',['commentRunning',['../classCodeWatchdog_1_1Watchdog.html#a44e6c10b968b16cc16cd1f5dacd73571',1,'CodeWatchdog::Watchdog']]],
+  ['commentsb',['commentSb',['../classCodeWatchdog_1_1Watchdog.html#ac872735c42a8527f981520814bbe4568',1,'CodeWatchdog::Watchdog']]]
+];
