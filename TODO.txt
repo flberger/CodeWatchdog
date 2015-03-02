@@ -6,7 +6,6 @@ See https://bitbucket.org/flberger/codewatchdog/issues for the issue tracker.
 
 ## Watchdog
 
-TODO: Refactor Watchdog to be more modular
 TODO: Errors should have a severity.
 TODO: Most, if not all delimiters should be strings, and be parsed for accordingly.
 TODO: Probably use a state machine instead of `stringRunning` etc. flags.

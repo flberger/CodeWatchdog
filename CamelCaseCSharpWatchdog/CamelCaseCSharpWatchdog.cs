@@ -59,6 +59,8 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             errorCodeStrings[(int)ErrorCodes.MethodNotDocumentedError] = "Public method not documented";
             errorCodeStrings[(int)ErrorCodes.InterfaceNamingError] = "Interface name does not begin with an I";
             
+            statementHandler += Checks.TabError.Check;
+            
             statementHandler += CheckStatement;
             commentHandler += CheckComment;
             startBlockHandler += CheckStartBlock;
@@ -68,30 +70,8 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
         /// Check a single statement.
         /// </summary>
         /// <param name="statement">A string containing a statement, possibly multi-line.</param>
-        void CheckStatement(string statement)
+        void CheckStatement(string statement, Watchdog wd)
         {
-            // TabError
-            //
-            if (statement.Contains("\t"))
-            {
-                if (errorCodeCount.ContainsKey((int)ErrorCodes.TabError))
-                {
-                    errorCodeCount[(int)ErrorCodes.TabError] += 1;
-                }
-                else
-                {
-                    errorCodeCount[(int)ErrorCodes.TabError] = 1;
-                }
-                
-                // TODO: The line report is inaccurate, as several lines may have passed.
-                // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                //
-                if (woff != null)
-                {
-                    woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.TabError], checkedLinesThisFile + 1));
-                }
-            }
-            
             // MultipleStatementError
             //
             // Trim leading spaces before check.

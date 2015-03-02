@@ -43,9 +43,11 @@
     <Compile Include="CamelCaseCSharpWatchdog\CamelCaseCSharpWatchdog.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\ParsingParameters.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\ErrorCodes.cs" />
+    <Compile Include="CamelCaseCSharpWatchdog\Checks\TabError.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="CamelCaseCSharpWatchdog\" />
+    <Folder Include="CamelCaseCSharpWatchdog\Checks\" />
   </ItemGroup>
 </Project>

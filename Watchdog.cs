@@ -44,6 +44,7 @@ namespace CodeWatchdog
         protected ParsingParameters parsingParameters;
         
         public delegate void SingleStringHandler(string input);
+        public delegate void InjectedSingleStringHandler(string input, Watchdog wd);
         public delegate void DoubleStringHandler(string firstInput, string secondInput);
 
         #region Delegates
@@ -52,7 +53,7 @@ namespace CodeWatchdog
         /// Called when a statement is encountered.
         /// Add callbacks for statement handling here.
         /// </summary>
-        protected SingleStringHandler statementHandler;        
+        protected InjectedSingleStringHandler statementHandler;        
         
         /// <summary>
         /// Called when the beginning of a block is encountered.
@@ -79,13 +80,13 @@ namespace CodeWatchdog
         /// Translate error codes to human readable complaints.
         /// This is meant to be filled by subclasses implementing specific parsers.
         /// </summary>
-        protected Dictionary<int, string> errorCodeStrings;
+        public Dictionary<int, string> errorCodeStrings;
         
         #region Variables for processing a project
 
         protected int totalCheckedLines;
         protected int commentLines;
-        protected Dictionary<int, int> errorCodeCount;
+        public Dictionary<int, int> errorCodeCount;
         protected int checkedFiles;
         
         const double MaxCodeScore = 10.0;
@@ -94,7 +95,7 @@ namespace CodeWatchdog
 
         #region Class-accessible variables for each run
 
-        protected int checkedLinesThisFile;
+        public int checkedLinesThisFile;
         protected string previousToken;
 
         StreamReader sr;
@@ -448,7 +449,7 @@ namespace CodeWatchdog
             
             if (statementHandler != null)
             {
-                statementHandler(sb.ToString());
+                statementHandler(sb.ToString(), this);
             }
             
             // NOTE: Set after handler call
@@ -516,6 +517,20 @@ namespace CodeWatchdog
             }
             
             sb.Append(character);
+            
+            return;
+        }
+        
+        public void IncreaseCount(int errorCode)
+        {
+            if (errorCodeCount.ContainsKey(errorCode))
+            {
+                errorCodeCount[errorCode] += 1;
+            }
+            else
+            {
+                errorCodeCount[errorCode] = 1;
+            }
             
             return;
         }
