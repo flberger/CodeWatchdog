@@ -45,6 +45,7 @@
     <Compile Include="CamelCaseCSharpWatchdog\ErrorCodes.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\TabError.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\MultipleStatements.cs" />
+    <Compile Include="CamelCaseCSharpWatchdog\Checks\MissingBraces.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -61,6 +61,8 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             
             statementHandler += Checks.TabError.Check;
             statementHandler += Checks.MultipleStatements.Check;
+            // NOTE: With braces missing, the token is being reported as a statement.
+            statementHandler += Checks.MissingBraces.Check;
             
             statementHandler += CheckStatement;
             commentHandler += CheckComment;
@@ -74,7 +76,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
         void CheckStatement(string statement, Watchdog wd)
         {
             // Identifiers
-            //
+
             string possibleIdentifier = "";
             
             Match firstMatch = Regex.Match(statement,
@@ -187,34 +189,6 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                             }
                         }
                     }
-                }
-            }
-            
-            // MissingBracesError
-            // Check for closing brace, indicating the statement is complete.
-            //
-            if ((statement.Trim().StartsWith("if")
-                || statement.Trim().StartsWith("else")
-                || statement.Trim().StartsWith("while")
-                || statement.Trim().StartsWith("foreach")
-                || statement.Trim().StartsWith("for"))
-                && statement.Contains(")"))
-            {
-                if (errorCodeCount.ContainsKey((int)ErrorCodes.MissingBracesError))
-                {
-                    errorCodeCount[(int)ErrorCodes.MissingBracesError] += 1;
-                }
-                else
-                {
-                    errorCodeCount[(int)ErrorCodes.MissingBracesError] = 1;
-                }
-                
-                // TODO: The line report is inaccurate, as several lines may have passed.
-                // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                //
-                if (woff != null)
-                {
-                    woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.MissingBracesError], checkedLinesThisFile + 1));
                 }
             }
             
