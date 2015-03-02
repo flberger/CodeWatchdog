@@ -60,6 +60,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             errorCodeStrings[(int)ErrorCodes.InterfaceNamingError] = "Interface name does not begin with an I";
             
             statementHandler += Checks.TabError.Check;
+            statementHandler += Checks.MultipleStatements.Check;
             
             statementHandler += CheckStatement;
             commentHandler += CheckComment;
@@ -72,38 +73,6 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
         /// <param name="statement">A string containing a statement, possibly multi-line.</param>
         void CheckStatement(string statement, Watchdog wd)
         {
-            // MultipleStatementError
-            //
-            // Trim leading spaces before check.
-            // Ignore empty statements, e.g. inline 'new' statements.
-            // Ignore comparison operators, as they most probably are part of a 'for' loop.
-            // Ignore single closing braces, mosrt probably closing inline lambdas.
-            // Ignore 'get' and 'set': Properties are OK in a single line.
-            //
-            if (checkedLinesThisFile > 1
-                && statement.Length > 0
-                && !statement.TrimStart(char.Parse(" "), char.Parse("\r"), char.Parse("\t")).StartsWith("\n")
-                && !statement.Contains("<")
-                && !statement.Contains(">")
-                && statement != ")"
-                && !statement.Contains("get")
-                && !statement.Contains("set"))
-            {
-                if (errorCodeCount.ContainsKey((int)ErrorCodes.MultipleStatementError))
-                {
-                    errorCodeCount[(int)ErrorCodes.MultipleStatementError] += 1;
-                }
-                else
-                {
-                    errorCodeCount[(int)ErrorCodes.MultipleStatementError] = 1;
-                }
-                
-                if (woff != null)
-                {
-                    woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.MultipleStatementError], checkedLinesThisFile + 1));
-                }
-            }
-            
             // Identifiers
             //
             string possibleIdentifier = "";
