@@ -29,32 +29,44 @@ using System;
 
 namespace CodeWatchdog.CamelCaseCSharpWatchdog.Checks
 {
-    public static class MissingBraces
+    public static class SpecialCharacter
     {
         public static void Check(string statement, Watchdog wd)
         {
-            // Check for closing brace, indicating the statement is complete.
-            //
-            if ((statement.Trim().StartsWith("if")
-                 || statement.Trim().StartsWith("else")
-                 || statement.Trim().StartsWith("while")
-                 || statement.Trim().StartsWith("foreach")
-                 || statement.Trim().StartsWith("for"))
-                && statement.Contains(")"))
+            var possibleIdentifier = ((CamelCaseCSharpWatchdog)wd).GetPossibleIdentifier(statement);
+            
+            if (possibleIdentifier != ""
+                && possibleIdentifier != "if"
+                && possibleIdentifier != "else"
+                && possibleIdentifier != "while"
+                && possibleIdentifier != "foreach"
+                && possibleIdentifier != "for"
+                && !statement.Contains("using")
+                && possibleIdentifier != "get"
+                && possibleIdentifier != "set"
+                && possibleIdentifier != "try"
+                && possibleIdentifier != "catch"
+                && possibleIdentifier != "delegate"
+                && possibleIdentifier != "public"
+                && possibleIdentifier != "switch")
             {
-                wd.IncreaseCount((int)ErrorCodes.MissingBracesError);
-                
-                // TODO: The line report is inaccurate, as several lines may have passed.
-                // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                //
-                if (wd.woff != null)
+                if (possibleIdentifier.Contains("_"))
                 {
-                    wd.woff(string.Format("{0} (line {1})",
-                                          wd.errorCodeStrings[(int)ErrorCodes.MissingBracesError],
-                                          wd.checkedLinesThisFile + 1));
+                    wd.IncreaseCount((int)ErrorCodes.SpecialCharacterError);
+                    
+                    // TODO: The line report is inaccurate, as several lines may have passed.
+                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                    //
+                    if (wd.woff != null)
+                    {
+                        wd.woff(string.Format("{0}: '{1}' (line {2})",
+                                              wd.errorCodeStrings[(int)ErrorCodes.SpecialCharacterError],
+                                              possibleIdentifier,
+                                              wd.checkedLinesThisFile + 1));
+                    }
                 }
             }
-            
+                    
             return;
         }
     }
