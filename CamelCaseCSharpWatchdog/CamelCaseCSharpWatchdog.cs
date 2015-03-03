@@ -38,6 +38,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
     {
         /// <summary>
         /// Initialise the underlying Watchdog for C#.
+        /// Register new error checks here by adding them to the appropriate delegate.
         /// </summary>
         public override void Init()
         {
@@ -67,6 +68,8 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             statementHandler += Checks.PascalCase.Check;
             statementHandler += Checks.CamelCase.Check;
             
+            commentHandler += Checks.CommentOnSameLine.Check;
+            
             commentHandler += CheckComment;
             startBlockHandler += CheckStartBlock;
         }
@@ -75,27 +78,8 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
         /// Check a single comment.
         /// </summary>
         /// <param name="comment">A string containing a comment, possibly multi-line.</param>
-        void CheckComment(string comment, string precedingInput)
+        void CheckComment(string comment, string precedingInput, Watchdog wd)
         {
-            // CommentOnSameLineError
-            //
-            if (checkedLinesThisFile > 1 && !precedingInput.Contains("\n"))
-            {
-                if (errorCodeCount.ContainsKey((int)ErrorCodes.CommentOnSameLineError))
-                {
-                    errorCodeCount[(int)ErrorCodes.CommentOnSameLineError] += 1;
-                }
-                else
-                {
-                    errorCodeCount[(int)ErrorCodes.CommentOnSameLineError] = 1;
-                }
-                
-                if (woff != null)
-                {
-                    woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.CommentOnSameLineError], checkedLinesThisFile));
-                }
-            }
-            
             // CommentNoSpaceError
             // Also include /// doc comments.
             // Ignore empty comments.

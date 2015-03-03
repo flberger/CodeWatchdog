@@ -46,7 +46,8 @@ namespace CodeWatchdog
         public delegate void SingleStringHandler(string input);
         public delegate void InjectedSingleStringHandler(string input, Watchdog wd);
         public delegate void DoubleStringHandler(string firstInput, string secondInput);
-
+        public delegate void InjectedDoubleStringHandler(string firstInput, string secondInput, Watchdog wd);
+        
         #region Delegates
                         
         /// <summary>
@@ -66,7 +67,7 @@ namespace CodeWatchdog
         /// and the current parse buffer which contains preceding text.
         /// Add callbacks for comment handling here.
         /// </summary>
-        protected DoubleStringHandler commentHandler;
+        protected InjectedDoubleStringHandler commentHandler;
         
         /// <summary>
         /// Called when an error is to be output for human consideration.
@@ -361,16 +362,16 @@ namespace CodeWatchdog
                             removedChar = parsingParameters.startCommentDelimiter.Substring (0, 1);
                         }
                         
-                        Logging.Info (string.Format ("Comment complete in: '{0}'", removedChar + commentSb.ToString () + ((char)character).ToString ()));
+                        Logging.Info (string.Format ("Comment complete in: '{0}'", removedChar + commentSb.ToString() + ((char)character).ToString()));
                         
                         if (commentHandler != null)
                         {
-                            commentHandler (removedChar + commentSb.ToString (), sb.ToString ());
+                            commentHandler(removedChar + commentSb.ToString(), sb.ToString(), this);
                         }
                         
                         // NOTE: Set after handler call
                         //
-                        previousToken = removedChar + commentSb.ToString ();
+                        previousToken = removedChar + commentSb.ToString();
                         
                         commentSb.Length = 0;
                         
@@ -410,7 +411,7 @@ namespace CodeWatchdog
                         
                         if (commentHandler != null)
                         {
-                            commentHandler(removedChar + commentSb.ToString(), sb.ToString());
+                            commentHandler(removedChar + commentSb.ToString(), sb.ToString(), this);
                         }
                         
                         // NOTE: Set after handler call

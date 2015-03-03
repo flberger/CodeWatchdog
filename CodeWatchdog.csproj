@@ -49,6 +49,7 @@
     <Compile Include="CamelCaseCSharpWatchdog\Checks\SpecialCharacter.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\PascalCase.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\CamelCase.cs" />
+    <Compile Include="CamelCaseCSharpWatchdog\Checks\CommentOnSameLine.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
