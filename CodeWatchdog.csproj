@@ -51,6 +51,7 @@
     <Compile Include="CamelCaseCSharpWatchdog\Checks\CamelCase.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\CommentOnSameLine.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\CommentNoSpace.cs" />
+    <Compile Include="CamelCaseCSharpWatchdog\Checks\ClassNotDocumented.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

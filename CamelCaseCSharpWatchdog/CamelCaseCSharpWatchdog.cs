@@ -71,6 +71,8 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             commentHandler += Checks.CommentOnSameLine.Check;
             commentHandler += Checks.CommentNoSpace.Check;
             
+            startBlockHandler += Checks.ClassNotDocumented.Check;
+            
             startBlockHandler += CheckStartBlock;
         }
         
@@ -78,31 +80,10 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
         /// Checks the beginning of a block.
         /// </summary>
         /// <param name="startBlock">A string containing the start block.</param>
-        void CheckStartBlock(string startBlock)
+        void CheckStartBlock(string startBlock, Watchdog wd)
         {
             if (startBlock.Contains("class "))
             {
-                // ClassNotDocumentedError
-                //
-                if (startBlock.Contains("public ")
-                    && !previousToken.Contains(parsingParameters.startCommentDelimiter + "/")
-                    && !previousToken.Contains("</summary>"))
-                {
-                    if (errorCodeCount.ContainsKey((int)ErrorCodes.ClassNotDocumentedError))
-                    {
-                        errorCodeCount[(int)ErrorCodes.ClassNotDocumentedError] += 1;
-                    }
-                    else
-                    {
-                        errorCodeCount[(int)ErrorCodes.ClassNotDocumentedError] = 1;
-                    }
-                    
-                    if (woff != null)
-                    {
-                        woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.ClassNotDocumentedError], checkedLinesThisFile));
-                    }
-                }
-                
                 string className = "";
                 
                 Match classNameMatch = Regex.Match(startBlock, @"\Wclass\s+(\w+)");

@@ -60,7 +60,7 @@ namespace CodeWatchdog
         /// Called when the beginning of a block is encountered.
         /// Add callbacks for start block handling here.
         /// </summary>
-        protected SingleStringHandler startBlockHandler;
+        protected InjectedSingleStringHandler startBlockHandler;
         
         /// <summary>
         /// Called when a comment is encountered, called with the comment
@@ -97,7 +97,7 @@ namespace CodeWatchdog
         #region Class-accessible variables for each run
 
         public int checkedLinesThisFile;
-        protected string previousToken;
+        public string previousToken;
 
         StreamReader sr;
         StringBuilder sb;
@@ -470,7 +470,7 @@ namespace CodeWatchdog
             
             if (startBlockHandler != null)
             {
-                startBlockHandler(sb.ToString());
+                startBlockHandler(sb.ToString(), this);
             }
             
             // TODO: Set active block to block type (stack)
