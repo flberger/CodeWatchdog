@@ -69,41 +69,9 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             statementHandler += Checks.CamelCase.Check;
             
             commentHandler += Checks.CommentOnSameLine.Check;
+            commentHandler += Checks.CommentNoSpace.Check;
             
-            commentHandler += CheckComment;
             startBlockHandler += CheckStartBlock;
-        }
-        
-        /// <summary>
-        /// Check a single comment.
-        /// </summary>
-        /// <param name="comment">A string containing a comment, possibly multi-line.</param>
-        void CheckComment(string comment, string precedingInput, Watchdog wd)
-        {
-            // CommentNoSpaceError
-            // Also include /// doc comments.
-            // Ignore empty comments.
-            // Ignore comments starting with "--", these are most probably auto-generated decorative lines.
-            //
-            if (!comment.Trim().EndsWith(parsingParameters.startCommentDelimiter)
-                && !(comment.StartsWith(parsingParameters.startCommentDelimiter + " ")
-                     || comment.StartsWith(parsingParameters.startCommentDelimiter + "/ "))
-                && !comment.StartsWith(parsingParameters.startCommentDelimiter + "--"))
-            {
-                if (errorCodeCount.ContainsKey((int)ErrorCodes.CommentNoSpaceError))
-                {
-                    errorCodeCount[(int)ErrorCodes.CommentNoSpaceError] += 1;
-                }
-                else
-                {
-                    errorCodeCount[(int)ErrorCodes.CommentNoSpaceError] = 1;
-                }
-                
-                if (woff != null)
-                {
-                    woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.CommentNoSpaceError], checkedLinesThisFile));
-                }
-            }
         }
         
         /// <summary>

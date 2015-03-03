@@ -41,7 +41,7 @@ namespace CodeWatchdog
     /// </summary>
     public class Watchdog
     {
-        protected ParsingParameters parsingParameters;
+        public ParsingParameters parsingParameters;
         
         public delegate void SingleStringHandler(string input);
         public delegate void InjectedSingleStringHandler(string input, Watchdog wd);
