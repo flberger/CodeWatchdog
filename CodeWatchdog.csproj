@@ -48,6 +48,7 @@
     <Compile Include="CamelCaseCSharpWatchdog\Checks\MissingBraces.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\SpecialCharacter.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\PascalCase.cs" />
+    <Compile Include="CamelCaseCSharpWatchdog\Checks\CamelCase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

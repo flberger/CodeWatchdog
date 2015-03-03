@@ -4,3 +4,4 @@ syntax: glob
 ./AssemblyInfo.cs
 ./CodeWatchdog.userprefs
 Makefile
+*.log

@@ -65,61 +65,10 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             statementHandler += Checks.MissingBraces.Check;
             statementHandler += Checks.SpecialCharacter.Check;
             statementHandler += Checks.PascalCase.Check;
+            statementHandler += Checks.CamelCase.Check;
             
-            statementHandler += CheckStatement;
             commentHandler += CheckComment;
             startBlockHandler += CheckStartBlock;
-        }
-        
-        /// <summary>
-        /// Check a single statement.
-        /// </summary>
-        /// <param name="statement">A string containing a statement, possibly multi-line.</param>
-        void CheckStatement(string statement, Watchdog wd)
-        {
-            // Identifiers
-
-            var possibleIdentifier = GetPossibleIdentifier(statement);
-            
-            if (possibleIdentifier != ""
-                && possibleIdentifier != "if"
-                && possibleIdentifier != "else"
-                && possibleIdentifier != "while"
-                && possibleIdentifier != "foreach"
-                && possibleIdentifier != "for"
-                && !statement.Contains("using")
-                && possibleIdentifier != "get"
-                && possibleIdentifier != "set"
-                && possibleIdentifier != "try"
-                && possibleIdentifier != "catch"
-                && possibleIdentifier != "delegate"
-                && possibleIdentifier != "public"
-                && possibleIdentifier != "switch")
-            {
-                // CamelCaseError
-                //
-                if (possibleIdentifier.Length > 2 && char.IsUpper(possibleIdentifier, 0))
-                {
-                    if (errorCodeCount.ContainsKey((int)ErrorCodes.CamelCaseError))
-                    {
-                        errorCodeCount[(int)ErrorCodes.CamelCaseError] += 1;
-                    }
-                    else
-                    {
-                        errorCodeCount[(int)ErrorCodes.CamelCaseError] = 1;
-                    }
-                    
-                    // TODO: The line report is inaccurate, as several lines may have passed.
-                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                    //
-                    if (woff != null)
-                    {
-                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.CamelCaseError], possibleIdentifier, checkedLinesThisFile + 1));
-                    }
-                }
-            }
-            
-            return;
         }
         
         /// <summary>
