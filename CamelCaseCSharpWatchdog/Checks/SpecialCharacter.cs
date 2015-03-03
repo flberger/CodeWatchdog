@@ -33,7 +33,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog.Checks
     {
         public static void Check(string statement, Watchdog wd)
         {
-            var possibleIdentifier = ((CamelCaseCSharpWatchdog)wd).GetPossibleIdentifier(statement);
+            var possibleIdentifier = CamelCaseCSharpWatchdog.GetPossibleIdentifier(statement);
             
             if (possibleIdentifier != ""
                 && possibleIdentifier != "if"

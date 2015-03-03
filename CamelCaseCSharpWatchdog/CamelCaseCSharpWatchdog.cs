@@ -64,6 +64,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             // NOTE: With braces missing, the token is being reported as a statement.
             statementHandler += Checks.MissingBraces.Check;
             statementHandler += Checks.SpecialCharacter.Check;
+            statementHandler += Checks.PascalCase.Check;
             
             statementHandler += CheckStatement;
             commentHandler += CheckComment;
@@ -95,52 +96,25 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                 && possibleIdentifier != "public"
                 && possibleIdentifier != "switch")
             {
-                if (statement.Contains("const "))
+                // CamelCaseError
+                //
+                if (possibleIdentifier.Length > 2 && char.IsUpper(possibleIdentifier, 0))
                 {
-                    // PascalCaseError
-                    //
-                    if (possibleIdentifier.Length > 2 && char.IsLower(possibleIdentifier, 0))
+                    if (errorCodeCount.ContainsKey((int)ErrorCodes.CamelCaseError))
                     {
-                        if (errorCodeCount.ContainsKey((int)ErrorCodes.PascalCaseError))
-                        {
-                            errorCodeCount[(int)ErrorCodes.PascalCaseError] += 1;
-                        }
-                        else
-                        {
-                            errorCodeCount[(int)ErrorCodes.PascalCaseError] = 1;
-                        }
-                        
-                        // TODO: The line report is inaccurate, as several lines may have passed.
-                        // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                        //
-                        if (woff != null)
-                        {
-                            woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.PascalCaseError], possibleIdentifier, checkedLinesThisFile + 1));
-                        }
+                        errorCodeCount[(int)ErrorCodes.CamelCaseError] += 1;
                     }
-                }
-                else
-                {
-                    // CamelCaseError
-                    //
-                    if (possibleIdentifier.Length > 2 && char.IsUpper(possibleIdentifier, 0))
+                    else
                     {
-                        if (errorCodeCount.ContainsKey((int)ErrorCodes.CamelCaseError))
-                        {
-                            errorCodeCount[(int)ErrorCodes.CamelCaseError] += 1;
-                        }
-                        else
-                        {
-                            errorCodeCount[(int)ErrorCodes.CamelCaseError] = 1;
-                        }
-                        
-                        // TODO: The line report is inaccurate, as several lines may have passed.
-                        // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                        //
-                        if (woff != null)
-                        {
-                            woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.CamelCaseError], possibleIdentifier, checkedLinesThisFile + 1));
-                        }
+                        errorCodeCount[(int)ErrorCodes.CamelCaseError] = 1;
+                    }
+                    
+                    // TODO: The line report is inaccurate, as several lines may have passed.
+                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
+                    //
+                    if (woff != null)
+                    {
+                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.CamelCaseError], possibleIdentifier, checkedLinesThisFile + 1));
                     }
                 }
             }
@@ -461,7 +435,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
         /// Gets a possible identifier from a statement.
         /// </summary>
         /// <returns>The possible identifier, or an empty string.</returns>
-        public string GetPossibleIdentifier(string statement)
+        public static string GetPossibleIdentifier(string statement)
         {
             string possibleIdentifier = "";
             
