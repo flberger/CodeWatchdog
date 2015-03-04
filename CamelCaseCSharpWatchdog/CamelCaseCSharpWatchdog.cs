@@ -73,6 +73,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             
             startBlockHandler += Checks.ClassNotDocumented.Check;
             startBlockHandler += Checks.ClassPascalCase.Check;
+            startBlockHandler += Checks.EnumPascalCase.Check;
             
             startBlockHandler += CheckStartBlock;
         }
@@ -83,42 +84,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
         /// <param name="startBlock">A string containing the start block.</param>
         void CheckStartBlock(string startBlock, Watchdog wd)
         {
-            if (startBlock.Contains("enum "))
-            {
-                string enumName = "";
-                
-                Match enumNameMatch = Regex.Match(startBlock, @"enum\s+(\w+)");
-                
-                if (enumNameMatch.Success)
-                {
-                    enumName = enumNameMatch.Groups[1].Value;
-                    
-                    Logging.Debug("Enum name: " + enumName);
-                }
-                
-                // PascalCaseError
-                //
-                if (enumName.Length > 2 && char.IsLower(enumName, 0))
-                {
-                    if (errorCodeCount.ContainsKey((int)ErrorCodes.PascalCaseError))
-                    {
-                        errorCodeCount[(int)ErrorCodes.PascalCaseError] += 1;
-                    }
-                    else
-                    {
-                        errorCodeCount[(int)ErrorCodes.PascalCaseError] = 1;
-                    }
-                    
-                    // TODO: The line report is inaccurate, as several lines may have passed.
-                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                    //
-                    if (woff != null)
-                    {
-                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.PascalCaseError], enumName, checkedLinesThisFile));
-                    }
-                }
-            }
-            else if (startBlock.Contains("interface "))
+            if (startBlock.Contains("interface "))
             {
                 string interfaceName = "";
                 
@@ -311,23 +277,23 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             return possibleIdentifier;
         }
 
-        public static string GetPossibleClassName(string startBlock)
+        public static string GetPossibleBlockIdentifier(string blockType, string startBlock)
         {
-            string className = "";
+            string blockIdentifier = "";
             
-            if (startBlock.Contains("class "))
+            if (startBlock.Contains(blockType))
             {
-                Match classNameMatch = Regex.Match(startBlock, @"\Wclass\s+(\w+)");
+                Match blockTypeNameMatch = Regex.Match(startBlock, @"\W" + blockType + @"\s+(\w+)");
                 
-                if (classNameMatch.Success)
+                if (blockTypeNameMatch.Success)
                 {
-                    className = classNameMatch.Groups[1].Value;
+                    blockIdentifier = blockTypeNameMatch.Groups[1].Value;
                     
-                    Logging.Debug("Class name: " + className);
+                    Logging.Debug(blockType + " name: " + blockIdentifier);
                 }
             }
             
-            return className;
+            return blockIdentifier;
         }
     }
 }

@@ -29,16 +29,16 @@ using System;
 
 namespace CodeWatchdog.CamelCaseCSharpWatchdog.Checks
 {
-    public static class ClassPascalCase
+    public static class EnumPascalCase
     {
         public static void Check(string startBlock, Watchdog wd)
         {
-            if (startBlock.Contains("class "))
+            if (startBlock.Contains("enum "))
             {
-                var className = CamelCaseCSharpWatchdog.GetPossibleBlockIdentifier("class", startBlock);
+                var enumName = CamelCaseCSharpWatchdog.GetPossibleBlockIdentifier("enum", startBlock);
                 
-                if (className.Length > 2
-                    && char.IsLower(className, 0))
+                if (enumName.Length > 2
+                    && char.IsLower(enumName, 0))
                 {
                     wd.IncreaseCount((int)ErrorCodes.PascalCaseError);
                     
@@ -49,12 +49,12 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog.Checks
                     {
                         wd.woff(string.Format("{0}: '{1}' (line {2})",
                                               wd.errorCodeStrings[(int)ErrorCodes.PascalCaseError],
-                                              className,
+                                              enumName,
                                               wd.checkedLinesThisFile));
                     }
                 }
             }
-
+            
             return;
         }
     }

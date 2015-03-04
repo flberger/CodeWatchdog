@@ -53,6 +53,7 @@
     <Compile Include="CamelCaseCSharpWatchdog\Checks\ClassNotDocumented.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\IdentifierPascalCase.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\ClassPascalCase.cs" />
+    <Compile Include="CamelCaseCSharpWatchdog\Checks\EnumPascalCase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
