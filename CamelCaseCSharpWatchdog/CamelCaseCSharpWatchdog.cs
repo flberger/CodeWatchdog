@@ -72,6 +72,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             commentHandler += Checks.CommentNoSpace.Check;
             
             startBlockHandler += Checks.ClassNotDocumented.Check;
+            startBlockHandler += Checks.ClassPascalCase.Check;
             
             startBlockHandler += CheckStartBlock;
         }
@@ -82,43 +83,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
         /// <param name="startBlock">A string containing the start block.</param>
         void CheckStartBlock(string startBlock, Watchdog wd)
         {
-            if (startBlock.Contains("class "))
-            {
-                string className = "";
-                
-                Match classNameMatch = Regex.Match(startBlock, @"\Wclass\s+(\w+)");
-                
-                if (classNameMatch.Success)
-                {
-                    className = classNameMatch.Groups[1].Value;
-                    
-                    Logging.Debug("Class name: " + className);
-                }
-                
-                // PascalCaseError
-                //
-                if (className.Length > 2
-                    && char.IsLower(className, 0))
-                {
-                    if (errorCodeCount.ContainsKey((int)ErrorCodes.PascalCaseError))
-                    {
-                        errorCodeCount[(int)ErrorCodes.PascalCaseError] += 1;
-                    }
-                    else
-                    {
-                        errorCodeCount[(int)ErrorCodes.PascalCaseError] = 1;
-                    }
-                    
-                    // TODO: The line report is inaccurate, as several lines may have passed.
-                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                    //
-                    if (woff != null)
-                    {
-                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.PascalCaseError], className, checkedLinesThisFile));
-                    }
-                }
-            }
-            else if (startBlock.Contains("enum "))
+            if (startBlock.Contains("enum "))
             {
                 string enumName = "";
                 
@@ -344,6 +309,25 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             }
             
             return possibleIdentifier;
+        }
+
+        public static string GetPossibleClassName(string startBlock)
+        {
+            string className = "";
+            
+            if (startBlock.Contains("class "))
+            {
+                Match classNameMatch = Regex.Match(startBlock, @"\Wclass\s+(\w+)");
+                
+                if (classNameMatch.Success)
+                {
+                    className = classNameMatch.Groups[1].Value;
+                    
+                    Logging.Debug("Class name: " + className);
+                }
+            }
+            
+            return className;
         }
     }
 }
