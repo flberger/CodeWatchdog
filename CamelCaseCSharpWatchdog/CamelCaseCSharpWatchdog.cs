@@ -65,7 +65,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             // NOTE: With braces missing, the token is being reported as a statement.
             statementHandler += Checks.MissingBraces.Check;
             statementHandler += Checks.SpecialCharacter.Check;
-            statementHandler += Checks.PascalCase.Check;
+            statementHandler += Checks.IdentifierPascalCase.Check;
             statementHandler += Checks.CamelCase.Check;
             
             commentHandler += Checks.CommentOnSameLine.Check;

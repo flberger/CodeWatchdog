@@ -29,7 +29,7 @@ using System;
 
 namespace CodeWatchdog.CamelCaseCSharpWatchdog.Checks
 {
-    public static class PascalCase
+    public static class IdentifierPascalCase
     {
         public static void Check(string statement, Watchdog wd)
         {

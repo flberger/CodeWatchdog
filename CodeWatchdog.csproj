@@ -47,11 +47,11 @@
     <Compile Include="CamelCaseCSharpWatchdog\Checks\MultipleStatements.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\MissingBraces.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\SpecialCharacter.cs" />
-    <Compile Include="CamelCaseCSharpWatchdog\Checks\PascalCase.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\CamelCase.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\CommentOnSameLine.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\CommentNoSpace.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\ClassNotDocumented.cs" />
+    <Compile Include="CamelCaseCSharpWatchdog\Checks\IdentifierPascalCase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
