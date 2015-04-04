@@ -74,6 +74,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             startBlockHandler += Checks.ClassNotDocumented.Check;
             startBlockHandler += Checks.ClassPascalCase.Check;
             startBlockHandler += Checks.EnumPascalCase.Check;
+            startBlockHandler += Checks.InterfaceNaming.Check;
             
             startBlockHandler += CheckStartBlock;
         }
@@ -84,43 +85,10 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
         /// <param name="startBlock">A string containing the start block.</param>
         void CheckStartBlock(string startBlock, Watchdog wd)
         {
-            if (startBlock.Contains("interface "))
+            if (startBlock.Contains("(") && startBlock.Contains(")"))
             {
-                string interfaceName = "";
-                
-                Match interfaceNameMatch = Regex.Match(startBlock, @"interface\s+(\w+)");
-                
-                if (interfaceNameMatch.Success)
-                {
-                    interfaceName = interfaceNameMatch.Groups[1].Value;
-                    
-                    Logging.Debug("Interface name: " + interfaceName);
-                }
-                
-                // InterfaceNamingError
-                //
-                if (interfaceName.Length > 2 && !interfaceName.StartsWith("I"))
-                {
-                    if (errorCodeCount.ContainsKey((int)ErrorCodes.InterfaceNamingError))
-                    {
-                        errorCodeCount[(int)ErrorCodes.InterfaceNamingError] += 1;
-                    }
-                    else
-                    {
-                        errorCodeCount[(int)ErrorCodes.InterfaceNamingError] = 1;
-                    }
-                    
-                    // TODO: The line report is inaccurate, as several lines may have passed.
-                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                    //
-                    if (woff != null)
-                    {
-                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.InterfaceNamingError], interfaceName, checkedLinesThisFile));
-                    }
-                }
-            }
-            else if (startBlock.Contains("(") && startBlock.Contains(")"))
-            {
+                // Excluded:             if (startBlock.Contains("interface "))
+
                 // MethodNotDocumentedError
                 //
                 // Make sure 'public' is before the first brace.
@@ -205,6 +173,8 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
                      && !startBlock.Contains("public")
                      && !startBlock.Contains("switch"))
             {
+                // Excluded:             if (startBlock.Contains("interface "))
+                // Ecluded: else if (startBlock.Contains("(") && startBlock.Contains(")"))
                 // Assuming it's a property
                 
                 string propertyName = "";
