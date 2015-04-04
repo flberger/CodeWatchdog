@@ -75,6 +75,7 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             startBlockHandler += Checks.ClassPascalCase.Check;
             startBlockHandler += Checks.EnumPascalCase.Check;
             startBlockHandler += Checks.InterfaceNaming.Check;
+            startBlockHandler += Checks.MethodNotDocumented.Check;
             
             startBlockHandler += CheckStartBlock;
         }
@@ -87,31 +88,6 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
         {
             if (startBlock.Contains("(") && startBlock.Contains(")"))
             {
-                // Excluded:             if (startBlock.Contains("interface "))
-
-                // MethodNotDocumentedError
-                //
-                // Make sure 'public' is before the first brace.
-                //
-                if (startBlock.Split(Char.Parse("("))[0].Contains("public ")
-                    && !previousToken.Contains(parsingParameters.startCommentDelimiter + "/")
-                    && !previousToken.Contains("</summary>"))
-                {
-                    if (errorCodeCount.ContainsKey((int)ErrorCodes.MethodNotDocumentedError))
-                    {
-                        errorCodeCount[(int)ErrorCodes.MethodNotDocumentedError] += 1;
-                    }
-                    else
-                    {
-                        errorCodeCount[(int)ErrorCodes.MethodNotDocumentedError] = 1;
-                    }
-                    
-                    if (woff != null)
-                    {
-                        woff(string.Format("{0} (line {1})", errorCodeStrings[(int)ErrorCodes.MethodNotDocumentedError], checkedLinesThisFile));
-                    }
-                }
-                
                 string methodName = "";
                 
                 Match methodNameMatch = Regex.Match(startBlock, @"\w+\s+(\w+)\s*\(");
