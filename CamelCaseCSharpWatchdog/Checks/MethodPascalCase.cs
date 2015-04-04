@@ -29,46 +29,32 @@ using System;
 
 namespace CodeWatchdog.CamelCaseCSharpWatchdog.Checks
 {
-    public static class SpecialCharacter
+    public class MethodPascalCase
     {
-        public static void Check(string statement, Watchdog wd)
+        public static void Check(string startBlock, Watchdog wd)
         {
-            var possibleIdentifier = CamelCaseCSharpWatchdog.GetPossibleIdentifier(statement);
-            
-            // TODO: Use central reserved words list.
-            //
-            if (possibleIdentifier != ""
-                && possibleIdentifier != "if"
-                && possibleIdentifier != "else"
-                && possibleIdentifier != "while"
-                && possibleIdentifier != "foreach"
-                && possibleIdentifier != "for"
-                && !statement.Contains("using")
-                && possibleIdentifier != "get"
-                && possibleIdentifier != "set"
-                && possibleIdentifier != "try"
-                && possibleIdentifier != "catch"
-                && possibleIdentifier != "delegate"
-                && possibleIdentifier != "public"
-                && possibleIdentifier != "switch")
+            if (startBlock.Contains("(") && startBlock.Contains(")"))
             {
-                if (possibleIdentifier.Contains("_"))
+                string methodName = CamelCaseCSharpWatchdog.GetPossibleMethodName(startBlock);
+
+                if (methodName.Length > 2
+                    && char.IsLower(methodName, 0))
                 {
-                    wd.IncreaseCount((int)ErrorCodes.SpecialCharacterError);
-                    
+                    wd.IncreaseCount((int)ErrorCodes.PascalCaseError);
+
                     // TODO: The line report is inaccurate, as several lines may have passed.
                     // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
                     //
                     if (wd.woff != null)
                     {
                         wd.woff(string.Format("{0}: '{1}' (line {2})",
-                                              wd.errorCodeStrings[(int)ErrorCodes.SpecialCharacterError],
-                                              possibleIdentifier,
-                                              wd.checkedLinesThisFile + 1));
+                                              wd.errorCodeStrings[(int)ErrorCodes.PascalCaseError],
+                                              methodName,
+                                              wd.checkedLinesThisFile));
                     }
                 }
             }
-                    
+
             return;
         }
     }

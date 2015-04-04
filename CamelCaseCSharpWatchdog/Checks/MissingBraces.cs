@@ -35,6 +35,8 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog.Checks
         {
             // Check for closing brace, indicating the statement is complete.
             //
+            // TODO: Use central reserved words list.
+            //
             if ((statement.Trim().StartsWith("if")
                  || statement.Trim().StartsWith("else")
                  || statement.Trim().StartsWith("while")

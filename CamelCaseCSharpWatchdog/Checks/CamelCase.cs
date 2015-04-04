@@ -35,6 +35,8 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog.Checks
         {
             var possibleIdentifier = CamelCaseCSharpWatchdog.GetPossibleIdentifier(statement);
             
+            // TODO: Use central reserved words list.
+            //
             if (possibleIdentifier != ""
                 && possibleIdentifier != "if"
                 && possibleIdentifier != "else"

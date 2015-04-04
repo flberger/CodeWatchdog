@@ -76,66 +76,20 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             startBlockHandler += Checks.EnumPascalCase.Check;
             startBlockHandler += Checks.InterfaceNaming.Check;
             startBlockHandler += Checks.MethodNotDocumented.Check;
+            startBlockHandler += Checks.MethodPascalCase.Check;
             
             startBlockHandler += CheckStartBlock;
         }
-        
+
         /// <summary>
         /// Checks the beginning of a block.
         /// </summary>
         /// <param name="startBlock">A string containing the start block.</param>
         void CheckStartBlock(string startBlock, Watchdog wd)
         {
-            if (startBlock.Contains("(") && startBlock.Contains(")"))
-            {
-                string methodName = "";
-                
-                Match methodNameMatch = Regex.Match(startBlock, @"\w+\s+(\w+)\s*\(");
-                
-                if (methodNameMatch.Success)
-                {
-                    methodName = methodNameMatch.Groups[1].Value;
-                    
-                    Logging.Debug("Method name: " + methodName);
-                }
-                
-                // PascalCaseError
-                //
-                if (methodName.Length > 2
-                    && char.IsLower(methodName, 0)
-                    && methodName != "if"
-                    && methodName != "else"
-                    && methodName != "while"
-                    && methodName != "foreach"
-                    && methodName != "for"
-                    && methodName != "get"
-                    && methodName != "set"
-                    && methodName != "try"
-                    && methodName != "catch"
-                    && methodName != "delegate"
-                    && methodName != "using"
-                    && methodName != "public"
-                    && methodName != "switch")
-                {
-                    if (errorCodeCount.ContainsKey((int)ErrorCodes.PascalCaseError))
-                    {
-                        errorCodeCount[(int)ErrorCodes.PascalCaseError] += 1;
-                    }
-                    else
-                    {
-                        errorCodeCount[(int)ErrorCodes.PascalCaseError] = 1;
-                    }
-                    
-                    // TODO: The line report is inaccurate, as several lines may have passed.
-                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                    //
-                    if (woff != null)
-                    {
-                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.PascalCaseError], methodName, checkedLinesThisFile));
-                    }
-                }
-            }
-            else if (!startBlock.Contains("if")
+            // TODO: Use central reserved words list.
+            //
+            if (!startBlock.Contains("if")
                      && !startBlock.Contains("else")
                      && !startBlock.Contains("while")
                      && !startBlock.Contains("foreach")
@@ -241,6 +195,53 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             
             return blockIdentifier;
         }
+
+        public static string GetPossibleMethodName(string startBlock)
+        {
+            string methodName = "";
+            
+            // Guards
+            
+            if (!(startBlock.Contains("(")
+                  && startBlock.Contains(")")))
+            {
+                return methodName;
+            }
+            
+            // Work
+            
+            Match methodNameMatch = Regex.Match(startBlock, @"\w+\s+(\w+)\s*\(");
+
+            if (methodNameMatch.Success)
+            {
+                methodName = methodNameMatch.Groups[1].Value;
+            }
+
+            // TODO: Use central reserved words list.
+            //
+            if (methodName == "if"
+                || methodName == "else"
+                || methodName == "while"
+                || methodName == "foreach"
+                || methodName == "for"
+                || methodName == "get"
+                || methodName == "set"
+                || methodName == "try"
+                || methodName == "catch"
+                || methodName == "delegate"
+                || methodName == "using"
+                || methodName == "public"
+                || methodName == "switch")
+            {
+                methodName = "";
+            }
+
+            if (methodName != "")
+            {
+                Logging.Debug("Method name: " + methodName);
+            }
+
+            return methodName;
+        }        
     }
 }
-
