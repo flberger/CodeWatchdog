@@ -1,0 +1,226 @@
+[INFO] Checking file Test.cs
+[INFO] Found statement: 'using~System'
+[INFO] Found statement: '\n
+using~System.Collections.Generic'
+[INFO] Found start block: '\n
+\n
+public~class~Test\n
+'
+[ERROR] Public class not documented (line 4)
+[INFO] Found statement: '\n
+~~~~int~i~=~2'
+[INFO] Comment complete in: '// Tab-indented line:
+'
+[INFO] Found statement: '\n
+\n
+~~~~\n
+	int~j~=~3'
+[ERROR] Tabs instead of spaces used for indentation (line 9)
+[INFO] Found statement: '\n
+~~~~\n
+~~~~string~IdentifierInPascalCase~=~"default"'
+[ERROR] Identifier is not in camelCase: 'IdentifierInPascalCase' (line 11)
+[INFO] Found statement: '\n
+~~~~public~List<string>~identifierInCamelCase'
+[INFO] Found statement: '\n
+~~~~protected~Dictionary<int,~string>~Disallowed_Character'
+[ERROR] Disallowed character used in identifier: 'Disallowed_Character' (line 13)
+[ERROR] Identifier is not in camelCase: 'Disallowed_Character' (line 13)
+[INFO] Found statement: '\n
+~~~~\n
+~~~~const~int~anotherCamelCase~=~42'
+[ERROR] Identifier is not in PascalCase: 'anotherCamelCase' (line 15)
+[INFO] Found statement: '\n
+~~~~const~string~ThisTimeInPascal~=~"The~answer"'
+[INFO] Found start block: '\n
+~~~~~~~~\n
+~~~~public~void~TestMethod()\n
+~~~~'
+[ERROR] Public method not documented (line 18)
+[INFO] Found start block: '\n
+~~~~~~~~if~(i~==~j)\n
+~~~~~~~~'
+[INFO] Found statement: '\n
+~~~~~~~~~~~~Console.WriteLine("42")'
+[INFO] Found statement: '\n
+~~~~~~~~~~~~\n
+~~~~~~~~~~~~Console.WriteLine("Multiple~statement~on~single~line")'
+[INFO] Found statement: '~Console.WriteLine("Multiple~statement~on~single~line")'
+[ERROR] Multiple statements on a single line (line 24)
+[INFO] Ending block
+[INFO] Ending block
+[INFO] Comment complete in: '/// <summary>
+'
+[INFO] Comment complete in: '/// Properly documented method
+'
+[INFO] Comment complete in: '/// </summary>
+'
+[INFO] Comment complete in: '//  {
+'
+[INFO] Found start block: '\n
+\n
+~~~~\n
+~~~~\n
+~~~~\n
+~~~~public~void~anotherTest~()\n
+\n
+~~~~'
+[ERROR] Public method not documented (line 32)
+[ERROR] Identifier is not in PascalCase: 'anotherTest' (line 32)
+[INFO] Comment complete in: '// Console.Writeline("Commented");
+'
+[INFO] Found statement: '\n
+~~~~~~~~\n
+\n
+~~~~~~~~i~+=~1'
+[INFO] Comment complete in: '// Comment on statement line
+'
+[ERROR] Comment not on a separate line (line 36)
+[INFO] Found statement: '~\n
+~~~~~~~~j~+=~1'
+[INFO] Comment complete in: '// Another comment on statement line
+'
+[ERROR] Comment not on a separate line (line 37)
+[INFO] Found statement: '~\n
+~~~~~~~~\n
+~~~~~~~~if~(1~!=~0)\n
+~~~~~~~~~~~~Console.WriteLine("Woops,~forgot~curly~braces.")'
+[ERROR] Missing curly braces in if / while / foreach / for (line 40)
+[INFO] Found statement: '\n
+~~~~~~~~\n
+~~~~~~~~while~(false)\n
+~~~~~~~~~~~~Console.WriteLine("Woops,~forgot~curly~braces.")'
+[ERROR] Missing curly braces in if / while / foreach / for (line 43)
+[INFO] Found statement: '\n
+~~~~~~~~~~~~\n
+~~~~~~~~i~+=~1'
+[INFO] Found statement: '~~~~Console.WriteLine("Another~attempt~"\n
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~"at~multiple~statements")'
+[ERROR] Multiple statements on a single line (line 46)
+[INFO] Comment complete in: '//I might have forgotten a space here.
+'
+[ERROR] No space between comment delimiter and comment text (line 48)
+[INFO] Found statement: '\n
+~~~~~~~~\n
+~~~~~~~~\n
+~~~~~~~~\n
+~~~~~~~~return'
+[INFO] Ending block
+[INFO] Ending block
+[INFO] Comment complete in: '// This does not suffice as a class documentation
+'
+[INFO] Found start block: '\n
+\n
+\n
+public~class~NotWellDocumented:~Object\n
+'
+[ERROR] Public class not documented (line 55)
+[INFO] Found statement: '\n
+~~~~public~static~int~k~=~0'
+[INFO] Ending block
+[INFO] Comment complete in: '/// <summary>
+'
+[INFO] Comment complete in: '/// Now this is really nice.
+'
+[INFO] Comment complete in: '/// </summary>
+'
+[INFO] Found start block: '\n
+\n
+\n
+\n
+\n
+public~class~properlyDocumented~:~Object\n
+'
+[ERROR] Identifier is not in PascalCase: 'properlyDocumented' (line 63)
+[INFO] Found statement: '\n
+~~~~string~thisClassHasBeen~=~"properly~documented."'
+[INFO] Found start block: '\n
+~~~~\n
+~~~~public~string~getterProperty\n
+~~~~'
+[INFO] Found statement: '\n
+~~~~~~~~get'
+[INFO] Found statement: '\n
+~~~~~~~~private~set'
+[INFO] Ending block
+[INFO] Found start block: '\n
+~~~~\n
+~~~~public~string~SetterProperty\n
+~~~~'
+[INFO] Found statement: '\n
+~~~~~~~~private~get'
+[INFO] Found statement: '\n
+~~~~~~~~set'
+[INFO] Ending block
+[INFO] Comment complete in: '// Neither is this a proper method documentation.
+'
+[INFO] Found start block: '\n
+~~~~\n
+~~~~\n
+~~~~public~int~Main()\n
+~~~~'
+[ERROR] Public method not documented (line 80)
+[INFO] Found statement: '\n
+~~~~~~~~return~12345'
+[INFO] Ending block
+[INFO] Found start block: '\n
+~~~~\n
+~~~~string~ReturnString()\n
+~~~~'
+[INFO] Found statement: '\n
+~~~~~~~~return~"I~went~to~the~public~library()"'
+[INFO] Ending block
+[INFO] Ending block
+[INFO] Found start block: '\n
+\n
+public~enum~firstEnumeration\n
+'
+[ERROR] Identifier is not in PascalCase: 'firstEnumeration' (line 91)
+[INFO] Ending block
+[INFO] Found start block: '\n
+\n
+enum~SecondEnumeration\n
+'
+[INFO] Ending block
+[INFO] Found start block: '\n
+\n
+interface~ITestThingy\n
+'
+[INFO] Found statement: '\n
+~~~~void~Pass()'
+[INFO] Ending block
+[INFO] Found start block: '\n
+\n
+interface~HardlyRecognisable\n
+'
+[ERROR] Interface name does not begin with an I: 'HardlyRecognisable' (line 108)
+[INFO] Found statement: '\n
+~~~~void~Noop()'
+[INFO] Ending block
+
+SUMMARY
+=======
+
+Checked 1 file(s).
+Checked 111 line(s) of code.
+Processing time: 00:00.137
+Found 14 comment lines.
+
+------------------------------------------------------------------
+ Count    Error type
+------------------------------------------------------------------
+     4    Identifier is not in PascalCase                         
+     3    Public method not documented                            
+     2    Multiple statements on a single line                    
+     2    Comment not on a separate line                          
+     2    Missing curly braces in if / while / foreach / for      
+     2    Public class not documented                             
+     2    Identifier is not in camelCase                          
+     1    No space between comment delimiter and comment text     
+     1    Interface name does not begin with an I                 
+     1    Disallowed character used in identifier                 
+     1    Tabs instead of spaces used for indentation             
+------------------------------------------------------------------
+
+Found 21 error(s).
+Your code is rated 6,57 / 10.
