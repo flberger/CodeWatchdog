@@ -77,70 +77,8 @@ namespace CodeWatchdog.CamelCaseCSharpWatchdog
             startBlockHandler += Checks.InterfaceNaming.Check;
             startBlockHandler += Checks.MethodNotDocumented.Check;
             startBlockHandler += Checks.MethodPascalCase.Check;
-            
-            startBlockHandler += CheckStartBlock;
-        }
+            startBlockHandler += Checks.PropertyPascalCase.Check;
 
-        /// <summary>
-        /// Checks the beginning of a block.
-        /// </summary>
-        /// <param name="startBlock">A string containing the start block.</param>
-        void CheckStartBlock(string startBlock, Watchdog wd)
-        {
-            // TODO: Use central reserved words list.
-            //
-            if (!startBlock.Contains("if")
-                     && !startBlock.Contains("else")
-                     && !startBlock.Contains("while")
-                     && !startBlock.Contains("foreach")
-                     && !startBlock.Contains("for")
-                     && !startBlock.Contains("get")
-                     && !startBlock.Contains("set")
-                     && !startBlock.Contains("try")
-                     && !startBlock.Contains("catch")
-                     && !startBlock.Contains("delegate")
-                     && !startBlock.Contains("using")
-                     && !startBlock.Contains("public")
-                     && !startBlock.Contains("switch"))
-            {
-                // Excluded:             if (startBlock.Contains("interface "))
-                // Ecluded: else if (startBlock.Contains("(") && startBlock.Contains(")"))
-                // Assuming it's a property
-                
-                string propertyName = "";
-                
-                Match propertyNameMatch = Regex.Match(startBlock, @"\s+(\w+)\s*$");
-                
-                if (propertyNameMatch.Success)
-                {
-                    propertyName = propertyNameMatch.Groups[1].Value;
-                    
-                    Logging.Debug("Property name: " + propertyName);
-                }
-                
-                // PascalCaseError
-                //
-                if (propertyName.Length > 2 && char.IsLower(propertyName, 0))
-                {
-                    if (errorCodeCount.ContainsKey((int)ErrorCodes.PascalCaseError))
-                    {
-                        errorCodeCount[(int)ErrorCodes.PascalCaseError] += 1;
-                    }
-                    else
-                    {
-                        errorCodeCount[(int)ErrorCodes.PascalCaseError] = 1;
-                    }
-                    
-                    // TODO: The line report is inaccurate, as several lines may have passed.
-                    // HACK: Assuming the next line and using CheckedLinesOfCode + 1.
-                    //
-                    if (woff != null)
-                    {
-                        woff(string.Format("{0}: '{1}' (line {2})", errorCodeStrings[(int)ErrorCodes.PascalCaseError], propertyName, checkedLinesThisFile));
-                    }
-                }
-            }
-            
             return;
         }
 

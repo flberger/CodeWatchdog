@@ -138,6 +138,7 @@ public~class~properlyDocumented~:~Object\n
 ~~~~\n
 ~~~~public~string~getterProperty\n
 ~~~~'
+[ERROR] Identifier is not in PascalCase: 'getterProperty' (line 67)
 [INFO] Found statement: '\n
 ~~~~~~~~get'
 [INFO] Found statement: '\n
@@ -152,6 +153,19 @@ public~class~properlyDocumented~:~Object\n
 [INFO] Found statement: '\n
 ~~~~~~~~set'
 [INFO] Ending block
+[INFO] Comment complete in: '// This must pass as a property
+'
+[INFO] Found start block: '\n
+\n
+~~~~\n
+~~~~public~string~classinterfaceenumifelsewhileforeachgetsettrycatchdelegateusingswitch\n
+~~~~'
+[ERROR] Identifier is not in PascalCase: 'classinterfaceenumifelsewhileforeachgetsettrycatchdelegateusingswitch' (line 80)
+[INFO] Found statement: '\n
+~~~~~~~~get'
+[INFO] Found statement: '\n
+~~~~~~~~set'
+[INFO] Ending block
 [INFO] Comment complete in: '// Neither is this a proper method documentation.
 '
 [INFO] Found start block: '\n
@@ -159,7 +173,7 @@ public~class~properlyDocumented~:~Object\n
 ~~~~\n
 ~~~~public~int~Main()\n
 ~~~~'
-[ERROR] Public method not documented (line 80)
+[ERROR] Public method not documented (line 87)
 [INFO] Found statement: '\n
 ~~~~~~~~return~12345'
 [INFO] Ending block
@@ -175,7 +189,7 @@ public~class~properlyDocumented~:~Object\n
 \n
 public~enum~firstEnumeration\n
 '
-[ERROR] Identifier is not in PascalCase: 'firstEnumeration' (line 91)
+[ERROR] Identifier is not in PascalCase: 'firstEnumeration' (line 98)
 [INFO] Ending block
 [INFO] Found start block: '\n
 \n
@@ -193,7 +207,7 @@ interface~ITestThingy\n
 \n
 interface~HardlyRecognisable\n
 '
-[ERROR] Interface name does not begin with an I: 'HardlyRecognisable' (line 108)
+[ERROR] Interface name does not begin with an I: 'HardlyRecognisable' (line 115)
 [INFO] Found statement: '\n
 ~~~~void~Noop()'
 [INFO] Ending block
@@ -202,14 +216,14 @@ SUMMARY
 =======
 
 Checked 1 file(s).
-Checked 111 line(s) of code.
-Processing time: 00:00.137
-Found 14 comment lines.
+Checked 118 line(s) of code.
+Processing time: 00:00.203
+Found 15 comment lines.
 
 ------------------------------------------------------------------
  Count    Error type
 ------------------------------------------------------------------
-     4    Identifier is not in PascalCase                         
+     6    Identifier is not in PascalCase                         
      3    Public method not documented                            
      2    Multiple statements on a single line                    
      2    Comment not on a separate line                          
@@ -222,5 +236,5 @@ Found 14 comment lines.
      1    Tabs instead of spaces used for indentation             
 ------------------------------------------------------------------
 
-Found 21 error(s).
-Your code is rated 6,57 / 10.
+Found 23 error(s).
+Your code is rated 6,48 / 10.

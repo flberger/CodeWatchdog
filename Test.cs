@@ -75,6 +75,13 @@ public class properlyDocumented : Object
         private get;
         set;
     }
+
+    // This must pass as a property
+    public string classinterfaceenumifelsewhileforeachgetsettrycatchdelegateusingswitch
+    {
+        get;
+        set;
+    }
     
     // Neither is this a proper method documentation.
     public int Main()

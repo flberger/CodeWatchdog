@@ -57,6 +57,7 @@
     <Compile Include="CamelCaseCSharpWatchdog\Checks\InterfaceNaming.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\MethodNotDocumented.cs" />
     <Compile Include="CamelCaseCSharpWatchdog\Checks\MethodPascalCase.cs" />
+    <Compile Include="CamelCaseCSharpWatchdog\Checks\PropertyPascalCase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
